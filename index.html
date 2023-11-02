@@ -6,16 +6,10 @@
     <title>동행: 같이타요</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-<<<<<<< HEAD
     <style>
-        #tooltip{
-            visibility: hidden;
-            color: rgb(227, 130, 20);
-        }
+
     </style>
     <script src="main.js" ></script>
-=======
->>>>>>> parent of f9d8332 (사용자 입력 저장 체크 , 아이디 말풍선 js)
 </head>
 <body>
     <div class="wrap">
@@ -25,10 +19,11 @@
             </div>
             <div class="login_id">
                 <h4></h4>
-                <input type="email" name="" id="" placeholder="example@dongguk.ac.kr">
+                <input type="email" name="email" id="" placeholder="동국 이메일로 작성" onkeyup="checkEmail()" onmouseover="checkEmail()" onfocus="checkEmail()" onblur="checkEmail()">
+                <p id="tooltip">아이디는 반드시 동국 이메일로 작성.</p>
             </div>
             <div class="login_pw">
-                <input type="password" name="" id="" placeholder="비밀번호">
+                <input type="password" name="" id="password" placeholder="비밀번호">
             </div>
             <div class="login_etc">
                 <div class="checkbox">
@@ -39,9 +34,7 @@
                 </div>
             </div>
             <div class="submit">
-                <input type="submit" value="로그인">
-                
-                
+                <input id="loginBtn" type="submit" value="로그인">
             </div>
         </div>
     </div>
