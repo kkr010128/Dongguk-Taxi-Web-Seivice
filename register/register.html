@@ -6,6 +6,13 @@
     <title>동행: 같이타요</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./registerStyle.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("my4l42CtKwG_KuOVH");
+        })();
+    </script>
 </head>
 <body>
     <div class="wrap">
@@ -19,18 +26,18 @@
             </div>
             <div class="register_email">
                 <h4></h4>
-                <input type="text" id="email" placeholder="본인 학번을 입력해주세요" required autofocus onclick=""> 
+                <input type="text" id="email" placeholder="본인 학번을 입력해주세요" required autofocus> 
                 
             </div>
-            <div class="register_num">
-                <input type="text" id="number" placeholder="">
+            <div class="register_code">
+                <input type="text" id="code" placeholder="">
             </div>
             <div class="register_pw">
-                <input type="password" name="" id="" placeholder="비밀번호">
+                <input type="password" name="password" id="" placeholder="비밀번호">
             </div>
             <div class="submit">
-                <input type="submit" id="numComfirm" value="인증 확인">
-                <input type="submit" id="registerComfirm" value="가입">
+                <input type="submit" id="codeComfirm" value="인증 확인">
+                <input type="button" id="registerComfirm" value="가입">
                 
             </div>
             <div class="numSubmit">
