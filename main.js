@@ -26,20 +26,37 @@ function checkEmail() {
     var tooltip = document.getElementById('tooltip');
     var pattern = /^[a-zA-Z0-9._%+-]+@dongguk\.edu$/;
 
-    if (!pattern.test(emailInput.value)) { 
-        tooltip.style.visibility = "visible";
+    if (!pattern.test(emailInput.value)) { //이메일 패턴 일치하지 않을 때
+
+        LoginBtn.disabled = true;
+        tooltip.style.visibility = "visible"; //툴팁 보이기
+        LoginBtn.style.cursor = "default";//입력 안됬을 때는 못 누르게
+        LoginBtn.style.background = "#d3d3d3"; //배경
+        LoginBtn.style.color = "white"; //글자
 
     } else { //이메일 형식이 일치할 때만 로그인버튼 활성화
 
         LoginBtn.style.color= "white"; // 글자색
         var lcolor = "rgb(194, 68, 46)"; // 버튼 좌측 색깔
         var rcolor = "rgb(255, 155, 47)"; // 버튼 우측 색깔
+
+        LoginBtn.style.cursor = "pointer"; //커서 변환
         LoginBtn.style.background = `linear-gradient(to left, ${lcolor}, ${rcolor})`;
         LoginBtn.disabled = false; //버튼 클릭 불가 해제
         tooltip.style.visibility = "hidden"; // 툴팁 숨기기
     }
 }
 
+
+/**체크박스 체크 시 TODO: 로그인 정보 저장 어떻게 할 건지 구현*/
+function isChecked(){ 
+    var checkBox = document.getElementById("checkBox");
+    checkBox.addEventListener("change", e =>{
+        if(e.target.checked){
+
+        }
+    });
+}
 /*document.addEventListener("click",function(e){
     var tooltip = document.getElementById('tooltip');
     var emailInput = document.querySelector('input[type="email"]');
