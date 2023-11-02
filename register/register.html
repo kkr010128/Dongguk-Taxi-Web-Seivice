@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>회원가입</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동행: 같이타요</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./registerStyle.css">
 </head>
@@ -11,7 +12,9 @@
         <div class="register">
             <h2>회원가입</h2>
             <span class="timer">00:00</span>
-            <button id="send" type="button">전송</button>
+            <div class="email">
+                <button id="send" type="button">전송</button>
+            </div>
             <div class="register_margin">
             </div>
             <div class="register_email">
@@ -26,7 +29,11 @@
                 <input type="password" name="" id="" placeholder="비밀번호">
             </div>
             <div class="submit">
-                <input type="submit" value="가입">
+                <input type="submit" id="numComfirm" value="인증 확인">
+                <input type="submit" id="registerComfirm" value="가입">
+                
+            </div>
+            <div class="numSubmit">
             </div>
         </div>
     </div>
