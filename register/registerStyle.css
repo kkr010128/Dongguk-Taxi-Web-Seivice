@@ -18,11 +18,16 @@
 	width: 100%;
 	height: 100vh;
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: center;
 	background: rgba(196, 29, 29, 0.493);
   }
-  
+
+  .register_margin {
+	padding: 20px;
+	display: flex;
+  }
+
   .register {
 	width: 100%;
 	height: 100%;
@@ -38,26 +43,20 @@
 	color: tomato;
 	font-size: 2em;
   }
-  .register_margin {
-	padding: 20px;
-	display: flex;
+  
+  .register_email {
+	margin-top: 20px;
+	width: 80%;
   }
   
-  .register_sns li {
-	padding: 0px 15px;
-  }
-  
-  .register_sns a {
-	width: 50px;
+  .register_email input {
+	width: 100%;
 	height: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 10px;
-	border-radius: 50px;
-	background: white;
-	font-size: 20px;
-	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4), -3px -3px 5px rgba(0, 0, 0, 0.1);
+	border-radius: 30px;
+	margin-top: 10px;
+	padding: 0px 20px;
+	border: 1px solid lightgray;
+	outline: none;
   }
   
   .register_num {
@@ -66,7 +65,7 @@
   }
   
   .register_num input {
-	width: 95%;
+	width: 100%;
 	height: 50px;
 	border-radius: 30px;
 	margin-top: 10px;
@@ -75,21 +74,6 @@
 	outline: none;
     display: none;
   }
-  
-  .register_email {
-	margin-top: 20px;
-	width: 80%;
-  }
-  
-  .register_email input {
-	width: 95%;
-	height: 50px;
-	border-radius: 30px;
-	margin-top: 10px;
-	padding: 0px 20px;
-	border: 1px solid lightgray;
-	outline: none;
-  }
 
   .register_pw {
 	margin-top: 20px;
@@ -97,7 +81,7 @@
   }
   
   .register_pw input {
-	width: 95%;
+	width: 100%;
 	height: 50px;
 	border-radius: 30px;
 	margin-top: 10px;
@@ -108,6 +92,7 @@
   }
   
   .register_etc {
+	color: rgb(227, 130, 20);
 	padding: 10px;
 	width: 80%;
 	font-size: 14px;
@@ -115,14 +100,17 @@
 	justify-content: space-between;
 	align-items: center;
 	font-weight: bold;
+	text-decoration: none;
+	cursor: pointer;
   }
   
   .submit {
-	margin-top: 50px;
+	margin-top: 40px;
 	width: 80%;
   }
+
   .submit input {
-	width: 95%;
+	width: 100%;
 	height: 50px;
 	border: 0;
 	outline: none;
@@ -131,33 +119,24 @@
 	color: white;
 	font-size: 1.2em;
 	letter-spacing: 2px;
+    display: none;
   }
-
-  .register_head {
-	width: 100%;
-	height: 100%;
-	margin-left: 50%;
-	margin-top: 10%;
-  }
-  .register button {
+  
+  .email button {
     position: absolute;
     width: 30px;
 	height: 30px;
 	border: 1px solid white;
     background: white;
 	outline: 0;
-    top: 46%;
-    right: 17%;
+    top: 50%;
+    right: 13%;
     color: tomato;
   }
   .timer {
     position: absolute;
     color: lightgray;
-    top: 49%;
+    top: 50%;
     right: 16%;
     display: none;
 }
-
-  /* .email_send {
-	
-  } */
