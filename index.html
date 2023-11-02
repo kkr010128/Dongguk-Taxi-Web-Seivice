@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>동행: 같이타요</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <script src="main.js" ></script>
@@ -11,7 +11,7 @@
 <body>
     <div class="wrap">
         <div class="login">
-            <h2>동행</h2>
+            <h2>로그인</h2>
             <div class="login_margin">
             </div>
             <div class="login_id">
@@ -25,14 +25,17 @@
                 <div class="checkbox">
                 <input type="checkbox" name="" id=""> 로그인 정보 기억
                 </div>
-                <div class="new_member">
-                <a onclick href="">처음이신가요?</a>
-            </div>
+                <div>
+                <a class="new_member" onclick=gotoSignUp();>처음이신가요?</a>
+                </div>
             </div>
             <div class="submit">
                 <input type="submit" value="로그인">
+                
+                
             </div>
         </div>
     </div>
+    <script src="./main.js"></script>
 </body>
 </html>
