@@ -133,10 +133,15 @@
 	cursor: pointer;
   }
   
+
+  .tooltip{
+	visibility: hidden;
+	color: rgb(227, 130, 20);
+	}
+
   .new_member {
 	color: rgb(227, 130, 20);
 	text-decoration: underline;
-<<<<<<< HEAD
 	cursor: pointer;  }
 
 	.checkbox{
@@ -146,6 +151,3 @@
   /* .email_send {
 	
   } */
-=======
-	cursor: pointer;  }
->>>>>>> parent of f9d8332 (사용자 입력 저장 체크 , 아이디 말풍선 js)
