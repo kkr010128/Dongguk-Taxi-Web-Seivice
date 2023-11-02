@@ -1,6 +1,7 @@
 /**회원가입 페이지로 이동시키는 함수*/
 function gotoSignUp(){
     window.location.href="register.html"
+<<<<<<< HEAD
 }
 function checkEmail() {
     var emailInput = document.querySelector('input[type="email"]');
@@ -25,3 +26,6 @@ document.addEventListener("click",function(e){
 }
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 console.log(isMobile);
+=======
+}
+>>>>>>> parent of f9d8332 (사용자 입력 저장 체크 , 아이디 말풍선 js)
