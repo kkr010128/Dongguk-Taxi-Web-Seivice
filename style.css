@@ -100,7 +100,6 @@
 	align-items: center;
 	font-weight: bold;
 	text-decoration: none;
-	cursor: pointer;
   }
   
   .submit {
@@ -137,3 +136,8 @@
 	color: rgb(227, 130, 20);
 	text-decoration: underline;
 	cursor: pointer;  }
+
+	.checkbox{
+		text-decoration: underline;
+		cursor: pointer;
+	}
