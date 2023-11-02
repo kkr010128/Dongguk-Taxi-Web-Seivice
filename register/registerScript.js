@@ -1,25 +1,25 @@
 const email_sendButton = document.getElementById("send"); 
+const register_codeSubmit = document.querySelector("#codeComfirm"); 
 let code = null;
 let time_thred;
 let timeOver = false;
 
 email_sendButton.addEventListener("click", function() {
     const email = document.querySelector("#email");
-    if(email.value == "") { 
+    let emailNum = parseInt(email.value);
+    if(!Number.isInteger(emailNum)) { 
         return;
     }
     email.style.display = "none";
     email_sendButton.style.display = "none";
     let time = 120;
     code = randomCode();
-    const register_num = document.querySelector(".register_num input");
+    // sendEmail(code, email + "@dongguk.ac.kr");
+    const register_code = document.querySelector(".register_code input");
     const timer = document.querySelector(".timer");
-    const register_numSubmit = document.querySelector("#numComfirm");
-    // const register_pw = document.querySelector(".register_pw input");
-    register_num.style.display = "flex";
+    register_code.style.display = "flex";
     timer.style.display = "flex";
-    register_numSubmit.style.display ="flex";
-    // register_pw.style.display = "flex";
+    register_codeSubmit.style.display = "inline";
     time_thred = setInterval(function () {
                 
         minutes = parseInt(time / 60, 10);
@@ -32,10 +32,30 @@ email_sendButton.addEventListener("click", function() {
 
         if (--time < 0) {
             timeStop();
-            timer.textContent = "시간초과"
+            timer.textContent = "인증만료"
         }
     }, 1000);
 });
+
+register_codeSubmit.addEventListener("click", function() {
+    const register_code = document.querySelector("#code");
+    if(timeOver) {
+        return;
+    }
+    if(register_code != code) {
+        return;
+    }
+    const register_pw = document.querySelector("#password");
+    register_pw.style.display = "flex";
+});
+
+function sendEmail(msg, e) {
+    var parmas = {
+        message: msg,
+        email: e
+    }
+    emailjs.send("service_btnzqmc", "template_ou4xc6d", parmas);
+}
 
 function timeStop() {
     clearInterval(time_thred);
@@ -45,7 +65,7 @@ function timeStop() {
 function randomCode() {
     const alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     let code = "";
-    for(let i = 0; i < 3; i++) {
+    for(let i = 0; i < 4; i++) {
         let random = parseInt(Math.random() * alpha.length);
         code += alpha[random];
     }
