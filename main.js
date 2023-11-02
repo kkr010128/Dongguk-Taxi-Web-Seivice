@@ -21,3 +21,7 @@ document.addEventListener("click",function(e){
         tooltip.style.visibility = "hidden";
     }
 });
+    window.location.href="./register/register.html"
+}
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+console.log(isMobile);
