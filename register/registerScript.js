@@ -1,26 +1,25 @@
+// import { timeOver, code, setCode, setTimeOver } from "./registerData";
 const email_sendButton = document.getElementById("send"); 
-const register_codeSubmit = document.querySelector("#codeComfirm"); 
+const register_codeButton = document.querySelector("#codeComfirm"); 
+const register_comfirmButton= document.querySelector("#registerComfirm");
 let code = null;
-let time_thred;
 let timeOver = false;
+let time_thred = null;
 
-email_sendButton.addEventListener("click", function() {
+// 이벤트
+email_sendButton.addEventListener("click", function() { //이메일 전송 버튼 이벤트
     const email = document.querySelector("#email");
     let emailNum = parseInt(email.value);
-    if(!Number.isInteger(emailNum)) { 
+    if(!Number.isInteger(emailNum)) { //입력 값이 정수인지 여부
         return;
     }
-    email.style.display = "none";
-    email_sendButton.style.display = "none";
-    let time = 120;
+    let time = 120; //인증 가능한 시간
     code = randomCode();
-    // sendEmail(code, email + "@dongguk.ac.kr");
-    const register_code = document.querySelector(".register_code input");
+    // setCode(randomCode()); //유효 코드를 생성하여 저장
+    // sendEmail(code, emailNum + "@dongguk.ac.kr");
+    inputCodeUserInterfaceActivity();
     const timer = document.querySelector(".timer");
-    register_code.style.display = "flex";
-    timer.style.display = "flex";
-    register_codeSubmit.style.display = "inline";
-    time_thred = setInterval(function () {
+    time_thred = setInterval(function () { //타이머
                 
         minutes = parseInt(time / 60, 10);
         seconds = parseInt(time % 60, 10);
@@ -37,17 +36,39 @@ email_sendButton.addEventListener("click", function() {
     }, 1000);
 });
 
-register_codeSubmit.addEventListener("click", function() {
+register_codeButton.addEventListener("click", function() {
     const register_code = document.querySelector("#code");
     if(timeOver) {
         return;
     }
-    if(register_code != code) {
+    if(register_code.value != code) {
         return;
     }
-    const register_pw = document.querySelector("#password");
-    register_pw.style.display = "flex";
+    registerInformationUserInterfaceActivity();
 });
+
+// 이벤트
+
+function inputCodeUserInterfaceActivity() {
+    const register_email = document.querySelector(".register_email");
+    register_email.style.display = "none";
+    const register_codeInput = document.querySelector(".register_code");
+    register_codeInput.style.display = "flex";
+    const submitDiv = document.querySelector(".submit");
+    submitDiv.style.display = "flex";
+    register_codeButton.style.display = "inline";
+}
+
+function registerInformationUserInterfaceActivity() {
+    const register_codeInput = document.querySelector(".register_code");
+    register_codeInput.style.display = "none";
+    register_codeButton.style.display = "none";
+    register_comfirmButton.style.display = "inline";
+    const register_pw = document.querySelector(".register_pw");
+    register_pw.style.display = "flex";
+    const register_gender = document.querySelector(".register_gender");
+    register_gender.style.display = "flex";
+}
 
 function sendEmail(msg, e) {
     var parmas = {
@@ -59,6 +80,7 @@ function sendEmail(msg, e) {
 
 function timeStop() {
     clearInterval(time_thred);
+    // setTimeOver(true);
     timeOver = true;
 }
 
