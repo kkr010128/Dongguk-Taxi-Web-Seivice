@@ -28,9 +28,14 @@
                 <input type="text" id="code" placeholder="유효 코드 입력">
                 <span class="timer">00:00</span>
             </div>
+            <div class="register_name">
+                <input type="text" id="username" placeholder="유효 코드 입력">
+            </div>
             <div class="register_gender">
-                <input type="radio" id="male" value="남자"><h5>남자</h5>
-                <input type="radio" id="Female" value="여자">여자
+                <form>
+                    <input type="radio" id="male" name="gender" value="남자"><label class="gender_font">남자</label>
+                    <input type="radio" id="female" name="gender" value="여자"><label class="gender_font">여자</label>
+                </form>
             </div>
             <div class="register_pw">
                 <input type="password" id="password" placeholder="비밀번호">
