@@ -1,4 +1,12 @@
 let code = null;
-let time_thred;
 let timeOver = false;
-export { code };
+
+function setCode(tempCode) {
+    code = tempCode;
+}
+
+function setTimeOver(boolean) {
+    timeOver = boolean;
+}
+
+export { timeOver, code, setCode, setTimeOver };
