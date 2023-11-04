@@ -21,24 +21,31 @@
             <div class="register_margin">
             </div>
             <div class="register_email">
-                <input type="text" id="email" placeholder="본인 학번을 입력해주세요." required autofocus> 
+                <input type="text" id="email" placeholder="본인 학번 입력" required autofocus> 
                 <button id="send" type="button">전송</button>
+                
             </div>
             <div class="register_code">
                 <input type="text" id="code" placeholder="유효 코드 입력">
-                <span class="timer">00:00</span>
+                <button id="resend" type="button">재전송</button>
+                <p class="timer">00:00</p>
+                <p class="code_margin"></p>
+                
             </div>
             <div class="register_name">
-                <input type="text" id="username" placeholder="유효 코드 입력">
+                <input type="text" id="username" placeholder="본인 이름">
             </div>
             <div class="register_gender">
                 <form>
-                    <input type="radio" id="male" name="gender" value="남자"><label class="gender_font">남자</label>
-                    <input type="radio" id="female" name="gender" value="여자"><label class="gender_font">여자</label>
+                    <input type="button" id="male" name="gender" value="남자">
+                    <input type="button" id="female" name="gender" value="여자">
                 </form>
             </div>
             <div class="register_pw">
                 <input type="password" id="password" placeholder="비밀번호">
+            </div>
+            <div class="register_error">
+                <p id="error_message"></p>
             </div>
             <div class="submit">
                 <input type="button" id="codeComfirm" value="인증 확인">
