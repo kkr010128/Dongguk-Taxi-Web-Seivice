@@ -19,7 +19,7 @@ email_ResendButton.addEventListener("click", function() { //이메일 재전송 
     sendButtonFunction();
 }); 
 
-register_codeButton.addEventListener("click", function() { //코드 확인 이벤트
+register_codeButton.addEventListener("click", function() { //유효 코드 확인 이벤트
     const register_code = document.querySelector("#code");
     if(timeOver) {
         errorMessage.innerHTML = "인증 시간이 만료되었습니다."
@@ -96,7 +96,6 @@ function sendButtonFunction() { //전송 버튼 함수
     const email = document.querySelector("#email");
     let emailNum = parseInt(email.value);
     if(!Number.isInteger(emailNum) || emailNum < 1000000000 || emailNum > 9999999999) { //들어온 값이 정수인지, 10자리인지 확인 여부
-        
         errorMessage.innerHTML = "학번이 올바르지 않습니다."
         errorMessage.style.display = "flex";
         return;
@@ -164,7 +163,7 @@ function randomCode() {
             numCount ++;
         }
         else {
-             random = alpha[parseInt(Math.random() * alpha.length)];
+            random = alpha[parseInt(Math.random() * alpha.length)];
         }
         code += random;
     }
