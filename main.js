@@ -6,14 +6,17 @@ LoginBtn.addEventListener("click", function(){
     var getPw = document.getElementById("password");
 
     //TODO:로그인 데이터 DB에서 체크해서 적용하기
-    if(getEmail.value==getPw.value){ 
-        
-        //window.location.href = "127.0.0.1:5500"; //임시
+    if(getEmail.value==getPw.value){ //임시
+        if(isChecked()){
+            //console.log(isChecked()); 확인용
+            setCookie(getEmail.value, getPw.value, 1);
+            window.location.href = "http://127.0.0.1:5500/main_page.html"; //임시
+        } 
     }else{ //안 맞으면 경고창 띄우고 새로고침
         alert("이메일 혹은 비밀번호를 다시 확인하세요");
         location.replace(location.href); 
     }
-    //console.log(getEmail.value);
+
 });
 
 /**회원가입 페이지로 이동시키는 함수*/
@@ -25,7 +28,7 @@ function gotoSignUp(){
 function checkEmail() {
     var emailInput = document.querySelector('input[type="email"]');
     var tooltip = document.getElementById('tooltip');
-    var pattern = /^[a-zA-Z0-9._%+-]+@dongguk\.edu$/;
+    var pattern = /^[a-zA-Z0-9._%+-]+@dongguk\.ac.kr$/;
 
     if (!pattern.test(emailInput.value)) { //이메일 패턴 일치하지 않을 때
 
@@ -48,43 +51,62 @@ function checkEmail() {
     }
 }
 
-
 /**체크박스 체크 시 TODO: 로그인 정보 저장 어떻게 할 건지 구현*/
 function isChecked(){ 
-    var getEmail = document.getElementById("email");
-    var getPw = document.getElementById("password");
     var checkBox = document.getElementById("checkBox");
-
-    checkBox.addEventListener("change", function(){
-        console.log("ㅎㅇㅇㅎㅇㅎㅇ");
-    });
-    
+    var checker = false;
+    if(checkBox.checked){
+        checker = true;
+    }
+    /*checkBox.addEventListener("change", function(){
+        if(this.checked) {
+            checker = true;
+        }else{
+            checker = false;
+        }
+    });*/
+    return checker;
 }
 
+
 /**쿠키값을 세팅*/
-const setCookie = (cookieName, cookieValue, expiresHour) => {
+function setCookie (cookieName, cookieValue, expiresHour) {
     const expired = new Date();
-    expired.setTime(expired.getTime() + expiresHour * 24 * 60 * 60 * 1000);
+    expired.setTime(expired.getTime() + expiresHour * 24 * 60 * 60 * 1000); 
     document.cookie = `${cookieName}=${cookieValue}; path=/; Expires=${expired};`;
 }
 
 /**쿠키 조회 */
-const getCookie = (cookieName) => {
-    let result = '';
+function getCookie (cookieName){
+    var name = cookieName + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+    
+    /*let result = '';
     //1. 쿠키 가져와서 분리
     document.cookie.split(';').map((item) => {
         // 2. 분리한 값의 앞뒤 공백 제거
         const cookieItem = item.trim();
         // 3. 키 값과 매칭이 되는 값을 반환
         if(item.includes(cookieName)) {
-            result = cookieItem.split('=')[1];
+            result = cookieItem.split('=')[1]; 
         }
     });
-    return result;
+    return result;*/
 }
 
 /**쿠키 삭제 */
-const deleteCookie = (cookieName) => {
+function deleteCookie (cookieName) {
     document.cookie = `${cookieName}=0; max-age=0;`;
 };
 
