@@ -1,7 +1,6 @@
 * {
 	margin: 0;
 	padding: 0;
-	font-family: "Noto Sans KR", sans-serif;
 }
 
 .lower_bar {
@@ -11,7 +10,7 @@
     position: absolute;
     bottom: 0%;
     align-items: center;
-    
+    background:  rgb(255, 155, 47);
 }
 .home {
     width: 20%;
@@ -19,10 +18,12 @@
     align-items: center;
 	justify-content: center;
     display: flex;
-    border: 1px solid lightgray;
+    flex-direction: column;
 }
 
 .home p {
+    color: white;
+    margin-top: 5px;
     font: 12px sans-serif;
 }
 
@@ -31,11 +32,13 @@
     height: 100%;
 	align-items: center;
 	justify-content: center;
+    flex-direction: column;
     display: flex;
-    border: 1px solid lightgray;
 }
 
 .matching p {
+    color: white;
+    margin-top: 5px;
     font: 12px sans-serif;
 }
 
@@ -43,12 +46,16 @@
     width: 20%;
     height: 100%;
     align-items: center;
+    flex-direction: column;
 	justify-content: center;
     display: flex;
-    border: 1px solid lightgray;
 }
 
+
+
 .matching_room p {
+    color: white;
+    margin-top: 5px;
     font: 12px sans-serif;
 }
 
@@ -57,11 +64,14 @@
     height: 100%;
     align-items: center;
 	justify-content: center;
+    flex-direction: column;
     display: flex;
-    border: 1px solid lightgray;
+    
 }
 
 .chatting p {
+    color: white;
+    margin-top: 5px;
     font: 12px sans-serif;
 }
 
@@ -70,10 +80,12 @@
     height: 100%;
     align-items: center;
 	justify-content: center;
+    flex-direction: column;
     display: flex;
-    border: 1px solid lightgray;
 }
 
 .setting p {
+    color: white;
+    margin-top: 5px;
     font: 12px sans-serif;
 }
