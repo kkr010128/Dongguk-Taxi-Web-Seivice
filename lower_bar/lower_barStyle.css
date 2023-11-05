@@ -1,0 +1,79 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+.lower_bar {
+    width: 100%;
+	height: 10vh;
+	display: flex;
+    position: absolute;
+    bottom: 0%;
+    align-items: center;
+    
+}
+.home {
+    width: 20%;
+    height: 100%;
+    align-items: center;
+	justify-content: center;
+    display: flex;
+    border: 1px solid lightgray;
+}
+
+.home p {
+    font: 12px sans-serif;
+}
+
+.matching {
+    width: 20%;
+    height: 100%;
+	align-items: center;
+	justify-content: center;
+    display: flex;
+    border: 1px solid lightgray;
+}
+
+.matching p {
+    font: 12px sans-serif;
+}
+
+.matching_room {
+    width: 20%;
+    height: 100%;
+    align-items: center;
+	justify-content: center;
+    display: flex;
+    border: 1px solid lightgray;
+}
+
+.matching_room p {
+    font: 12px sans-serif;
+}
+
+.chatting {
+    width: 20%;
+    height: 100%;
+    align-items: center;
+	justify-content: center;
+    display: flex;
+    border: 1px solid lightgray;
+}
+
+.chatting p {
+    font: 12px sans-serif;
+}
+
+.setting {
+    width: 20%;
+    height: 100%;
+    align-items: center;
+	justify-content: center;
+    display: flex;
+    border: 1px solid lightgray;
+}
+
+.setting p {
+    font: 12px sans-serif;
+}
