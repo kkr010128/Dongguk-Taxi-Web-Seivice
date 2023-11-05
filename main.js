@@ -1,3 +1,5 @@
+//import
+
 const LoginBtn = document.getElementById("loginBtn");
 
 /**로그인 누를 시  */
@@ -105,19 +107,7 @@ function getCookie (cookieName){
     return result;*/
 }
 
-/**쿠키 삭제 */
+/**쿠키 삭제 - 로그아웃 시*/
 function deleteCookie (cookieName) {
     document.cookie = `${cookieName}=0; max-age=0;`;
 };
-
-/*document.addEventListener("click",function(e){
-    var tooltip = document.getElementById('tooltip');
-    var emailInput = document.querySelector('input[type="email"]');
-    if (e.target !== emailInput) {
-        tooltip.style.visibility = "hidden";
-    }
-});
-    window.location.href="./register/register.html"
-}
-var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-console.log(isMobile);*/
