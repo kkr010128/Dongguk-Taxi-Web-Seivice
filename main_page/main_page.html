@@ -23,26 +23,23 @@
     <div class="map" id="map"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing"></script>
 	<script>
-        /*
+        
 		var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(35.862192, 129.195048),
 			level: 3
 		};
 		var map = new kakao.maps.Map(container, options);
-        */
-       generateMap();
+        
+       //generateMap();
 	</script>
         <!--TODO: 슬라이딩 드로어 구현하기 -->
         <div class="sliding_drawer">
             <button id="handle">매칭 준비하기</button>
             <div id="drawer" class="drawer_close">
-                <h2>메뉴</h2>
-                <ul>
-                    <li>ㅎㅇ요</li>
-                    <li>남잔데ㅛㅇ</li>
-                    <li>여잔데ㅇ</li>  
-                </ul>
+                <h3>같은 성별끼리 합승하기</h3>
+                
+                <button id="setBtn">완료 버튼스</button>
             </div>
         </div>
     </div>
@@ -66,5 +63,6 @@
     </div>
     </div>
     <script src="./main_pageScript.js"></script>
+    <script src="../lower_bar/lower_barScript.js"></script>
 </body>
 </html>
