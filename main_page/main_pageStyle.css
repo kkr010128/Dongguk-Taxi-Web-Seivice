@@ -1,3 +1,7 @@
+* {
+	font-family: "Noto Sans KR", sans-serif;
+}
+
 html, body{
     width: 100%;
     height: 100%;
@@ -5,22 +9,59 @@ html, body{
 
 header {
     width: 100%;
-    height:20%;
+    height:10%;
     color: rgb(227, 130, 20);
     background: white;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position:fixed;
+    position: relative;
   }
 
+#drawer {
+    position : fixed;
+    z-index: 2;
+    top : 0;
+    right : 0;
+    width: 250px;
+    height: 80%;
+    background: #f4f4f4;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0px 0px 10px gray;
+}
+
+#handle {
+    position : fixed;
+    top : 70%;
+    left: 25%;
+    width: 50%;
+    height: 5%;
+    background: linear-gradient(to left, rgb(194, 68, 46), rgb(255, 155, 47));
+    border-radius: 30px;
+    border : 0;
+    z-index: 2;
+    color : white;
+}
+
+.drawer_close{
+    /*transform: translateY(100%);*/
+    display: none;
+}
+
+.drawer_open{
+    /*transform: translateY(0);*/
+    display: inline;
+}
+
 .lower_bar{
+    position: absolute;
     width: 20%;
-    height: 20%;
+    height: 30%;
 }
 
 .map{
+    position: absolute;
     width: 100%;
-    height: 90%;
+    height: 85%;
 }

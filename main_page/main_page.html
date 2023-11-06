@@ -3,14 +3,27 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>합승 등록하기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./main_pageStyle.css">
 	<link rel="stylesheet" href="../lower_bar/lower_barStyle.css">
 </head>
 <body>
+    <div class="wrap">
+    <div class="setLocation">
+        <header>
+            <h2>ㅎㅇㅎㅇ</h2>
+            <nav>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span> 
+            </nav>
+        </header>
+
     <div class="map" id="map"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing"></script>
 	<script>
+        
 		var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(35.862192, 129.195048),
@@ -18,16 +31,21 @@
 		};
 
 		var map = new kakao.maps.Map(container, options);
+        
 	</script>
-
-    <header>
-        <h1>합승 등록하기</h1>
-        <nav>
-            <span>기능1</span>
-            <span>기능2</span>
-            <span>기능3</span>
-        </nav>
-    </header>
+        <!--TODO: 슬라이딩 드로어 구현하기 -->
+        <div class="sliding_drawer">
+            <button id="handle">매칭 준비하기</button>
+            <div id="drawer" class="drawer_close">
+                <h2>메뉴</h2>
+                <ul>
+                    <li>ㅎㅇ요</li>
+                    <li>남잔데ㅛㅇ</li>
+                    <li>여잔데ㅇ</li>  
+                </ul>
+            </div>
+        </div>
+    </div>
 
 	<div class="lower_bar">
         <div class="home" onclick="">
@@ -46,5 +64,6 @@
             <img src="../assets/main/settings.png" width="40%" height="40%">
         </div>
    </div>
+</div>
 </body>
 </html>
