@@ -11,58 +11,41 @@
 <body>
     <div class="wrap">
     <div class="setLocation">
-        <header>
-            <h2>ㅎㅇㅎㅇ</h2>
-            <nav>
-                <span>1</span>
-                <span>2</span>
-                <span>3</span> 
-            </nav>
-        </header>
-
+        <h2>ㅎㅇ여</h2>
+        <h2>ㅇㅇ ㅎㅇ</h2>
+        <h2>뭐가 없으니 허전해보이는것 뿐</h2>
+    </div>
     <div class="map" id="map"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing"></script>
 	<script>
-        
 		var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(35.862192, 129.195048),
 			level: 3
 		};
 		var map = new kakao.maps.Map(container, options);
-        
        //generateMap();
 	</script>
-        <!--TODO: 슬라이딩 드로어 구현하기 -->
+
         <div class="sliding_drawer">
             <button id="handle">매칭 준비하기</button>
             <div id="drawer" class="drawer_close">
-                <h3>같은 성별끼리 합승하기</h3>
-                
+                <h4 id="Questions">같은 성별끼리 합승하기</h4>
+                <div class="sex_switch">
+                    <input type="checkbox" id="switch">
+                    <label for="switch" class="switch_label">
+                    <span class="onf_btn"></span>
+                    </label>
+                </div>
+
                 <button id="setBtn">완료 버튼스</button>
             </div>
         </div>
-    </div>
 
-	<div class="lower_bar">
-        <div class="home" onclick="">
-            <img src="../assets/main/home.png" width="40%" height="40%">
-        </div>
-        <div class="matching" onclick="">
-            <img src="../assets/main/search.png" width="40%" height="40%">
-        </div>
-        <div class="matching_room" onclick="">
-            <img src="../assets/main/list.png" width="40%" height="40%">
-        </div>
-        <div class="chatting" onclick="">
-            <img src="../assets/main/chats.png" width="40%" height="40%">
-        </div>
-        <div class="setting" onclick="">
-            <img src="../assets/main/settings.png" width="40%" height="40%">
-        </div>
+    <div class="lower_bar">
+        <script src="../lower_bar/lower_barScript.js"></script>
     </div>
     </div>
     <script src="./main_pageScript.js"></script>
-    <script src="../lower_bar/lower_barScript.js"></script>
 </body>
 </html>
