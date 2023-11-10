@@ -137,9 +137,11 @@
   
 
   #tooltip{
-	visibility: hidden;
+	display: none;
 	font-weight: bold;
 	color: rgb(227, 130, 20);
+	padding: 5px;
+	margin: 5px;
 	}
 
   .new_member {

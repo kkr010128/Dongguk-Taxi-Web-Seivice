@@ -10,8 +10,9 @@ html, body{
 
 .setLocation{
     position: absolute;
+    align-self: center;
     height: 15%;
-    width: 87%;
+    width: 90%;
     background: rgb(255, 255, 255);
     border-radius: 12px;
     padding:10px;
@@ -19,25 +20,14 @@ html, body{
     box-shadow: 0px 2px 9px rgb(171, 171, 171);
     z-index: 3;
 }
-header {
-    width: 100%;
-    height:10%;
-    color: rgb(227, 130, 20);
-    background: white;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-  }
 
 #drawer {
     position : fixed;
     z-index: 2;
-    top : 50%;
-    right : 10%;
-    width: 80%;
-    height: 70%;
+    top : 58%;
+    right : 2%;
+    width: 96%;
+    height: 60%;
     background: rgb(255,255,255);
     transition: transform 0.7s ease-in-out;
     box-shadow: 0px 2px 9px rgb(171,171,171);
@@ -57,12 +47,25 @@ header {
     color : white;
 }
 
+#cancelBtn {
+    position : absolute;
+    width : 25%;
+    height : 7%;
+    left : 18%;
+    bottom: 54%;
+    background : linear-gradient(to left, rgb(194, 68, 46), rgb(255, 155, 47));
+    border : 0;
+    border-radius : 16px;
+    z-index: 2;
+    color : white;
+}
+
 #setBtn {
     position : absolute;
-    width : 50%;
-    height : 5%;
-    left : 25%;
-    bottom: 45%;
+    width : 25%;
+    height : 7%;
+    left : 60%;
+    bottom: 54%;
     background : linear-gradient(to left, rgb(194, 68, 46), rgb(255, 155, 47));
     border : 0;
     border-radius : 16px;
@@ -71,18 +74,26 @@ header {
 }
 
 .sex_switch{
-    padding: 10px;
-    margin-top: 7px;
+    padding: 5%;
+    float: right;
 }
 
-#Questions{
-    padding: 10px;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 30px;
+.personCount{
+    padding: 5%;
+    left:0%;
+    bottom: 1%;
+    float: right;
+}
+
+/*#Questions{
+    padding: 5%;
+    margin-top: 1%;
+    margin-left: 7%;
+    margin-right: 10%;
+    margin-bottom: 1%;
     Color: rgb(255, 155, 47);
     float: left;
-}
+}*/
 
 #switch {
     display: flex;
@@ -136,6 +147,8 @@ header {
     transition: 0.2s;
 }
 
+
+
 .drawer_close{
     transform: translateY(100%);
     /*display: none;*/
@@ -147,14 +160,14 @@ header {
 }
 
 .lower_bar{
-    position: fixed;
-    height: 20%;
-    z-index:4;
-    top: 90%;
+    /*position: fixed;*/
+    /*height: 1%;*/
+    z-index:3;
+    /*top: 90%;*/
 }
 
 .map{
     position: absolute;
     width: 100%;
-    height: 90%;
+    height: 100%;
 }

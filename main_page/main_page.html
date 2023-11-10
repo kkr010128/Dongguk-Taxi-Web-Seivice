@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>합승 등록하기</title>
+	<title>같이 가요 - 합승 등록하기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./main_pageStyle.css">
@@ -37,8 +37,18 @@
                     <span class="onf_btn"></span>
                     </label>
                 </div>
-
-                <button id="setBtn">완료 버튼스</button>
+                <h4 id="Questions">최대 인원수</h4>
+                <div class="personCount">
+                    <button id="minus" onclick="changingPerson('-');">-</button>
+                    <span id="maxPerson">3</span>
+                    <button id="plus" onclick="changingPerson('+');">+</button>
+                </div>
+                <h4 id="Questions">출발 시간</h4>
+                <h4 id="Questions">짐이 많아요(캐리어 등)</h4>
+                <div class="buttons">
+                    <button id="cancelBtn">취소</button>
+                    <button id="setBtn">매칭 시작</button>
+                </div>
             </div>
         </div>
 
