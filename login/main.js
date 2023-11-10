@@ -1,6 +1,9 @@
-//import
-
 const LoginBtn = document.getElementById("loginBtn");
+
+/**html 로드 시 쿠키 남아있으면 자동 로그인 이벤트 - 미구현 */
+document.addEventListener("DOMContentLoaded", function(){
+
+});
 
 /**로그인 누를 시  */
 LoginBtn.addEventListener("click", function(){
@@ -12,7 +15,7 @@ LoginBtn.addEventListener("click", function(){
         if(isChecked()){
             //console.log(isChecked()); 확인용
             setCookie(getEmail.value, getPw.value, 1);
-            window.location.href = "http://127.0.0.1:5500/main_page.html"; //임시
+            window.location.href = "http://127.0.0.1:5500/../main_page/main_page.html"; //임시
         } 
     }else{ //안 맞으면 경고창 띄우고 새로고침
         alert("이메일 혹은 비밀번호를 다시 확인하세요");
@@ -35,7 +38,7 @@ function checkEmail() {
     if (!pattern.test(emailInput.value)) { //이메일 패턴 일치하지 않을 때
 
         LoginBtn.disabled = true;
-        tooltip.style.visibility = "visible"; //툴팁 보이기
+        tooltip.style.display = "inline"; //툴팁 보이기
         LoginBtn.style.cursor = "default";//입력 안됬을 때는 못 누르게
         LoginBtn.style.background = "#d3d3d3"; //배경
         LoginBtn.style.color = "white"; //글자
@@ -49,7 +52,7 @@ function checkEmail() {
         LoginBtn.style.cursor = "pointer"; //커서 변환
         LoginBtn.style.background = `linear-gradient(to left, ${lcolor}, ${rcolor})`;
         LoginBtn.disabled = false; //버튼 클릭 불가 해제
-        tooltip.style.visibility = "hidden"; // 툴팁 숨기기
+        tooltip.style.display = "none"; // 툴팁 숨기기
     }
 }
 
