@@ -1,3 +1,5 @@
+
+
 const homeBar = document.querySelector(".home");
 homeBar.addEventListener("click", function() {
    
@@ -21,3 +23,4 @@ document.documentElement.addEventListener('touchend', function (event) {
          event.preventDefault(); 
        } lastTouchEnd = now; 
 }, false);
+
