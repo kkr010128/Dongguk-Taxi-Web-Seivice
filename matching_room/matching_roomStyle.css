@@ -1,14 +1,46 @@
-.matching_check {
-	position: relative;
-    width: 100%;
+@font-face {
+    src: url("../assets/font/NanumFont/NanumGothic/NanumFontSetup_OTF_GOTHIC/NanumGothicBold.otf");
+    font-family: "NanumGothic";
+}
+
+p {
+	font-family: "NanumGothic";
+	font-size: 15px;
+}
+
+.matching_room_check_wrap {
+	width: 100%;
 	height: 10vh;
-	background-color: rgba(227, 130, 20,0.8);
-	border-radius: 50px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	flex-direction: column;
-	top: 8vh;
+}
+.matching_check {
+	position: relative;
+    width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	top: 3.5em;
+	display: none;
+}
+
+.matching_check p {
+	font-family: "NanumGothic";
+	font-size: 20px;
+}
+
+.matching_room_myroom {
+	position: relative;
+    width: 80%;
+	height: 100%;
+	border-radius: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 3.5em;
+	border: 1px solid lightgray;
+	box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
 
 .wrap {
@@ -17,7 +49,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	display: none;
+	display: flex;
 	/* background: url("../assets/img.png") no-repeat; */
 }
 
@@ -34,9 +66,11 @@
 	height: 60%;
 	display: flex;
 	align-items: center;
-    border-radius: 20px;
     border: 2px solid lightgray;
 	flex-direction: column;
+	border-radius: 16px;
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
 
 .matching_next_room {
@@ -51,6 +85,19 @@
 	width: 100%;
 	height: 20%;
 	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.matching_room_div h1{
+	font-size: 20px;
+}
+
+.matching_room_gender {
+	width: 100%;
+	height: 20%;
+	display: flex;
+	align-items: center;
 	justify-content: center;
 }
 
@@ -61,6 +108,14 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+}
+
+.matching_room_button button{
+	border: 1px solid lightgray;
+	border-radius: 16px;
+	background-color: rgb(236, 236, 236);
+	font-family: "NanumGothic";
+	font-size: 13px;
 }
 
 .matching_room_sign {
