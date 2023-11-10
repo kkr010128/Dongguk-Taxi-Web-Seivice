@@ -3,11 +3,18 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>합승 등록하기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./main_pageStyle.css">
 	<link rel="stylesheet" href="../lower_bar/lower_barStyle.css">
 </head>
 <body>
+    <div class="wrap">
+    <div class="setLocation">
+        <h2>ㅎㅇ여</h2>
+        <h2>ㅇㅇ ㅎㅇ</h2>
+        <h2>뭐가 없으니 허전해보이는것 뿐</h2>
+    </div>
     <div class="map" id="map"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing"></script>
 	<script>
@@ -16,35 +23,29 @@
 			center: new kakao.maps.LatLng(35.862192, 129.195048),
 			level: 3
 		};
-
 		var map = new kakao.maps.Map(container, options);
+       //generateMap();
 	</script>
 
-    <header>
-        <h1>합승 등록하기</h1>
-        <nav>
-            <span>기능1</span>
-            <span>기능2</span>
-            <span>기능3</span>
-        </nav>
-    </header>
+        <div class="sliding_drawer">
+            <button id="handle">매칭 준비하기</button>
+            <div id="drawer" class="drawer_close">
+                <h4 id="Questions">같은 성별끼리 합승하기</h4>
+                <div class="sex_switch">
+                    <input type="checkbox" id="switch">
+                    <label for="switch" class="switch_label">
+                    <span class="onf_btn"></span>
+                    </label>
+                </div>
 
-	<div class="lower_bar">
-        <div class="home" onclick="">
-            <img src="../assets/main/home.png" width="40%" height="40%">
+                <button id="setBtn">완료 버튼스</button>
+            </div>
         </div>
-        <div class="matching" onclick="">
-            <img src="../assets/main/search.png" width="40%" height="40%">
-        </div>
-        <div class="matching_room" onclick="">
-            <img src="../assets/main/list.png" width="40%" height="40%">
-        </div>
-        <div class="chatting" onclick="">
-            <img src="../assets/main/chats.png" width="40%" height="40%">
-        </div>
-        <div class="setting" onclick="">
-            <img src="../assets/main/settings.png" width="40%" height="40%">
-        </div>
-   </div>
+
+    <div class="lower_bar">
+        <script src="../lower_bar/lower_barScript.js"></script>
+    </div>
+    </div>
+    <script src="./main_pageScript.js"></script>
 </body>
 </html>
