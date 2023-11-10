@@ -13,7 +13,7 @@ function showLowerBar() {
   const lowerBarElement = document.createElement("div");
   lowerBarElement.setAttribute("class", "lower_bar");
 
-  const tagInformation = [ ["home", "home", ""], // 각종 태그들의 정보를 보관함
+  const tagInformation = [ ["home", "home", ""], // 각종 태그들의 속성 정보를 보관함
                       ["matching", "search", ""],
                       ["matching_room", "list", ""],
                       ["chatting", "chats", ""],
