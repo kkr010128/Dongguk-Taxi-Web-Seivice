@@ -53,7 +53,8 @@ register_comfirmButton.addEventListener("click", function() { //가입 완료 �
         errorMessage.style.display = "flex";
         return;
     }
-    console.log("가입에 성공하였습니다.")
+    location.href = "./registerAction.jsp?userName=" + userName.value +"&password=" + password.value + "&gender=" + gender;
+    location.href = "./register.html";
 })
 
 for(let i = 0; i < register_genderSelectButton.length; i++) { //성별 선택 이벤트
@@ -72,32 +73,22 @@ function inputCodeUserInterfaceActivity() { //이메일 전송 후 유효 코드
         return;
     }
     register_email.style.display = "none";
-    const register_codeInput = document.querySelector(".register_code");
-    register_codeInput.style.display = "flex";
-    const submitDiv = document.querySelector(".submit");
-    submitDiv.style.display = "flex";
-    register_codeButton.style.display = "inline";
+    const register_code_wrap = document.querySelector(".register_code_wrap");
+    register_code_wrap.style.display = "flex";
 }
 
 function registerInformationUserInterfaceActivity() { //유효 코드 인증 후 가입 정보 입력 인터페이스 활성화
-    const register_codeInput = document.querySelector(".register_code");
-    register_codeInput.style.display = "none";
-    register_codeButton.style.display = "none";
-    register_comfirmButton.style.display = "inline";
-    const register_pw = document.querySelector(".register_pw");
-    register_pw.style.display = "flex";
-    const register_gender = document.querySelector(".register_gender");
-    register_gender.style.display = "flex";
-    const register_name = document.querySelector(".register_name");
-    register_name.style.display = "flex";
+    const register_code_wrap = document.querySelector(".register_code_wrap");
+    register_code_wrap.style.display = "none";
+    const form = document.getElementsByTagName("form");
+    form[0].style.display = "flex";
 }
 
 function sendButtonFunction() { //전송 버튼 함수
     const email = document.querySelector("#email");
-    let emailNum = parseInt(email.value);
-    if(!Number.isInteger(emailNum) || emailNum < 1000000000 || emailNum > 9999999999) { //들어온 값이 정수인지, 10자리인지 확인 여부
-        errorMessage.innerHTML = "학번이 올바르지 않습니다."
-        errorMessage.style.display = "flex";
+    if(email.value.includes("@dongguk.ac.kr")) { 
+        errorMessage.innerHTML = "@dongguk.ac.kr 형식으로 작성해주세요."
+        console.log(errorMessage);
         return;
     }
     errorMessage.style.display = "none";

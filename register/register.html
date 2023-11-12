@@ -17,40 +17,47 @@
 <body>
     <div class="wrap">
         <div class="register">
-            <h2>회원가입</h2>
+            <div class="register_title">
+                <h2>회원가입</h2>
+            </div>
             <div class="register_margin">
+                <div class="register_error">
+                    <p id="error_message"></p>
+                </div>
             </div>
             <div class="register_email">
                 <input type="text" id="email" placeholder="본인 학번 입력" required autofocus> 
                 <button id="send" type="button">전송</button>
-                
             </div>
-            <div class="register_code">
-                <input type="text" id="code" placeholder="유효 코드 입력">
-                <button id="resend" type="button">재전송</button>
-                <p class="timer">00:00</p>
-                <p class="code_margin"></p>
-                
+            <div class="register_code_wrap">
+                <div class="register_code">
+                    <input type="text" id="code" placeholder="유효 코드 입력">
+                    <button id="resend" type="button">재전송</button>
+                    <p class="timer">00:00</p>
+                </div>
+                <div class="register_code_button">
+                    <input type="button" id="codeComfirm" value="인증 확인">
+                </div>
             </div>
-            <div class="register_name">
-                <input type="text" id="username" placeholder="본인 이름">
-            </div>
-            <div class="register_gender">
-                <form>
+            <form>
+                <div class="register_name">
+                    <input type="text" id="username" placeholder="본인 이름">
+                </div>
+                <div class="register_gender">
                     <input type="button" id="male" name="gender" value="남자">
                     <input type="button" id="female" name="gender" value="여자">
-                </form>
-            </div>
-            <div class="register_pw">
-                <input type="password" id="password" placeholder="비밀번호">
-            </div>
-            <div class="register_error">
-                <p id="error_message"></p>
-            </div>
-            <div class="submit">
-                <input type="button" id="codeComfirm" value="인증 확인">
-                <input type="submit" id="registerComfirm" value="가입">
-            </div>
+                </div>
+                <div class="register_pw">
+                    <input type="password" id="password" placeholder="비밀번호">
+                </div>
+                <div class="register_error">
+                    <p id="error_message"></p>
+                </div>
+                <div class="submit">
+                    <input type="submit" id="registerComfirm" value="가입">
+                </div>
+            </form>
+            
         </div>
     </div>
     <script src="./registerScript.js" ></script>

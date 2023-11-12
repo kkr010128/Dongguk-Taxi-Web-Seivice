@@ -26,28 +26,41 @@
 	border-radius: 20px;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	flex-direction: column;
   }
-  
-  h2 {
+
+  .register form {
+	width: 100%;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+  }
+
+  .register_title {
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+  }
+  .register_title h2 {
 	color: tomato;
 	font-size: 2em;
-	margin-top: 20vh;
-	margin-bottom: 5vh;
   }
   
   .register_email {
-	margin-top: 20px;
 	width: 80%;
-	margin-left: 15%;
-	display: inline;
+	display: flex;
+	align-items: center;
+	justify-content: center;
   }
   
   .register_email input {
 	width: 80%;
 	height: 50px;
 	border-radius: 30px;
-	margin-top: 10px;
+	margin-left: 30px;
 	padding: 0px 20px;
 	border: 1px solid lightgray;
 	outline: none;
@@ -60,22 +73,31 @@
 	border: 1px solid white;
     background: white;
 	outline: 0;
-	right: 50px;
+	right: 45px;
+	bottom: 2px;
     color: tomato;
   }
   
-  .register_code {
-	margin-top: 20px;
-	width: 80%;
-	margin-left: 15%;
+  .register_code_wrap {
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 	display: none;
+  }
+
+  .register_code {
+	width: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
   }
   
   .register_code input {
 	width: 80%;
 	height: 50px;
 	border-radius: 30px;
-	margin-top: 10px;
+	margin-left: 50px;
 	padding: 0px 20px;
 	border: 1px solid lightgray;
 	outline: none;
@@ -83,29 +105,48 @@
 
   .register_code button {
 	position: relative;
-    width: 40px;
+    width: 46px;
 	height: 30px;
 	border: 1px solid white;
     background: white;
 	outline: 0;
 	right: 50px;
-	top: 20px;
+	top: 2px;
     color: tomato;
 	display: none;
+  }
+
+  .register_code_button {
+	padding: 30px;
+	width: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+
+  .register_code_button input{
+	width: 80%;
+	height: 50px;
+	border: 0;
+	outline: none;
+	border-radius: 40px;
+	background: linear-gradient(to left, rgb(255, 77, 46), rgb(255, 155, 47));
+	color: white;
+	font-size: 1.2em;
+	letter-spacing: 2px;
   }
 
   .timer {
     position: relative;
     color: lightgray;
 	right: 50px;
-	top: 20px;
+	bottom: 2px;
   }
 
   .register_pw {
 	margin-top: 20px;
 	margin-left: 15%;
 	width: 80%;
-	display: none;
   }
   
   .register_pw input {
@@ -122,7 +163,6 @@
 	margin-top: 40px;
 	margin-left: 15%;
 	width: 80%;
-	display: none;
   }
 
   .submit input {
@@ -130,7 +170,6 @@
 	height: 50px;
 	border: 0;
 	outline: none;
-	display: none;
 	border-radius: 40px;
 	background: linear-gradient(to left, rgb(255, 77, 46), rgb(255, 155, 47));
 	color: white;
@@ -142,7 +181,6 @@
 	width: 50%;
 	align-items: center;
 	justify-content: center;
-	display: none;
   }
 
   .register_gender input {
@@ -175,7 +213,6 @@
   .register_name {
 	margin-left: 15%;
 	width: 80%;
-	display: none;
   }
 
   .register_name input {
