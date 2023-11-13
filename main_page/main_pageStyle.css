@@ -21,6 +21,50 @@ html, body{
     z-index: 3;
 }
 
+#start{
+    font-weight: bold;
+    position: absolute;
+    color: rgb(255, 155, 47);
+    padding: 1%;
+}
+
+#arrive{
+    font-weight: bold;
+    position: absolute;
+    padding: 1%;
+    top: 50%;
+    color: rgb(255, 155, 47);
+}
+
+#setStart{
+    position: absolute;
+    width: 70%;
+    height: 25%;
+    left: 25%;
+    outline: 0;
+    border-radius: 12px;
+    box-shadow: rgb(171, 171, 171);
+    background: rgb(255, 255, 255);
+    padding: 4px;
+}
+
+#setArrive{
+    position: absolute;
+    width: 70%;
+    height: 25%;
+    left: 25%;
+    outline: 0;
+    border-radius: 12px;
+    box-shadow: rgb(171, 171, 171);
+    background: rgb(255, 255, 255);
+    padding: 4px;
+    top: 50%;
+}
+
+#locations{
+    position: relative;
+}
+
 #drawer {
     position : fixed;
     z-index: 2;
@@ -52,7 +96,7 @@ html, body{
     width : 25%;
     height : 7%;
     left : 18%;
-    bottom: 54%;
+    bottom: 52%;
     background : linear-gradient(to left, rgb(194, 68, 46), rgb(255, 155, 47));
     border : 0;
     border-radius : 16px;
@@ -65,7 +109,7 @@ html, body{
     width : 25%;
     height : 7%;
     left : 60%;
-    bottom: 54%;
+    bottom: 52%;
     background : linear-gradient(to left, rgb(194, 68, 46), rgb(255, 155, 47));
     border : 0;
     border-radius : 16px;
@@ -73,27 +117,55 @@ html, body{
     color : white;
 }
 
+.lines{
+
+}
+
 .sex_switch{
-    padding: 5%;
-    float: right;
+    position: absolute;
+    padding: 3%;
+    bottom: 84%;
+    left: 72%;
+    top: 0%;
 }
 
 .personCount{
-    padding: 5%;
-    left:0%;
-    bottom: 1%;
-    float: right;
+    position: absolute;
+    border: 0;
+    padding: 3%;
+    left:75%;
+    bottom: 77%;
 }
 
-/*#Questions{
-    padding: 5%;
-    margin-top: 1%;
-    margin-left: 7%;
-    margin-right: 10%;
-    margin-bottom: 1%;
+.bag_switch{
+    position: absolute;
+    padding: 3%;
+    bottom: 60%;
+    left: 72%;
+}
+
+#Questions{
+    position: absolute;
     Color: rgb(255, 155, 47);
+    padding: 3%;
     float: left;
-}*/
+}
+
+.q1{
+    top: 0%; 
+}
+
+.q2{
+    top: 9%;
+}
+
+.q3{
+    top: 18%;
+}
+
+.q4{
+    top: 27%;
+}
 
 #switch {
     display: flex;
@@ -125,7 +197,7 @@ html, body{
     display: inline-block;
     width: 58px;
     height: 28px;
-    background: rgb(255,255,255);
+    background: #efefef;
     border: 2px solid gray;
     border-radius: 16px;
     transition: 0.2s;
@@ -146,8 +218,6 @@ html, body{
     background: rgb(255,255,255);
     transition: 0.2s;
 }
-
-
 
 .drawer_close{
     transform: translateY(100%);
