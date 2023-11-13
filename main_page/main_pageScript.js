@@ -7,10 +7,11 @@ const minusBtn = document.getElementById("minus");
 const plusBtn = document.getElementById("plus");
 const cancelBtn = document.getElementById("cancelBtn");
 const setBtn = document.getElementById("setBtn");
+const changeBtn = document.getElementById("change");
 
-export {generateMap};
 
-script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=your_app_key&autoload=false";
+
+script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=?appkey=7bf82169a53be4c855eca8f52959e97e&autoload=false";
 script.onload = () => {
     kakao.maps.load(() => {
        console.assert(kakao.maps.Map); 
@@ -18,8 +19,55 @@ script.onload = () => {
 };
 document.head.appendChild(script);
 
+document.getElementById("setStart").addEventListener("change", function(){
+    
+    var markerPosition = new kakao.maps.LatLng(35.863694, 129.191178);
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    switch(setStart.value){
+        case "entrance":
+            setLocations("entrance");
+            break;
+        case "schoolyard":
+            setLocations();
+            break;
+        case "dorm":
+            setLocations();
+            break;
+        case "suckjang":
+            setLocations();
+            break;
+        case "army":
+            setLocations();
+            break;
+        case "station":
+            setLocations();
+            break;
+        case "terminal":
+            setLocations();
+            break;
+    }
+    /*var markerPosition  = new kakao.maps.LatLng(35.8625, 129.1945); */
+
+});
+
+function setLocations(){
+    
+}
+
+/** 출발, 도착 위치 바꾸기 - 완 */
+changeBtn.addEventListener("click", function(){
+    let start = document.getElementById("setStart");
+    let arrive = document.getElementById("setArrive");
+    let temp = start.value;
+    start.value = arrive.value;
+    arrive.value = temp;
+});
+
 /**슬라이딩 드로어 이벤트*/
-handle.addEventListener('click', function(){
+handle.addEventListener("click", function(){
     if (drawer.classList.contains("drawer_open")) {
         drawer.classList.remove("drawer_open");
         drawer.classList.add("drawer_close");
@@ -70,17 +118,22 @@ minusBtn.addEventListener("click", function(){
     window.location.href="../matching_room/matching_room.html"; //임시
  });
 
-/*마커 테스트용
-function startMarker(){
-    var marker = new kakao.maps.Marker
-}*/
 
-/**지도 생성하기❤️ */
-function generateMap(){
+/**지도 생성하기❤️ 
+export function generateMap(){
     var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(35.862192, 129.195048),
 			level: 3
 		};
 		var map = new kakao.maps.Map(container, options);
-}
+}*/
+
+/*var markerPosition  = new kakao.maps.LatLng(35.8625, 129.1945); 
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);*/
