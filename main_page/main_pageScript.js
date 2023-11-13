@@ -2,8 +2,13 @@
 const script = document.createElement('script');
 const handle = document.getElementById("handle");
 const drawer = document.getElementById("drawer");
+const personCnt = document.getElementById("maxPerson");
+const minusBtn = document.getElementById("minus");
+const plusBtn = document.getElementById("plus");
 const cancelBtn = document.getElementById("cancelBtn");
 const setBtn = document.getElementById("setBtn");
+
+export {generateMap};
 
 script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=your_app_key&autoload=false";
 script.onload = () => {
@@ -25,38 +30,35 @@ handle.addEventListener('click', function(){
     }
 });
 
-function changingPerson(sign){
-    let personCnt = document.getElementById("maxPerson");
-    let temp = 0;
-    let minusBtn = document.getElementById("minus");
-    let plusBtn = document.getElementById("plus");
-    console.log("  ", personCnt.innerText, temp);
-    if(sign=='+'){
-        plusBtn.addEventListener("click", function(){
-            if(parseInt(personCnt.innerText) < 4){
-                minusBtn.disabled=false;
-                minusBtn.style.background="rgb(255, 155, 47)";
-                temp = parseInt(personCnt.innerText)+1;
-                personCnt.innerText = temp;
-            }else{
-                plusBtn.style.background="rgb(171, 171, 171)";
-                plusBtn.disabled=true;
-            }
-        });
-    }else{
-        minusBtn.addEventListener("click", function(){
-            if(parseInt(personCnt.innerText) > 2){
-                plusBtn.disabled=false;
-                plusBtn.style.background="rgb(255, 155, 47)";
-                temp = parseInt(personCnt.innerText)-1;
-                personCnt.innerText = temp;
-            }else{
-                minusBtn.style.background="rgb(171, 171, 171)";
-                minusBtn.disabled=true;
-            }
-        });
+/**사람 수 조정 +, - 버튼 */
+plusBtn.addEventListener("click", function(){
+    let temp=0;
+    if(parseInt(personCnt.innerText) < 4){
+        minusBtn.disabled=false;
+        minusBtn.style.background="rgb(255, 155, 47)";
+        temp = parseInt(personCnt.innerText)+1;
+        personCnt.innerText = temp;
+        if(personCnt.innerText==4){
+            plusBtn.style.background="rgb(171, 171, 171)";
+            plusBtn.disabled=true;
+        }
     }
-}
+});
+
+minusBtn.addEventListener("click", function(){
+    let temp=0;
+    if(parseInt(personCnt.innerText) > 2){
+        plusBtn.disabled=false;
+        plusBtn.style.background="rgb(255, 155, 47)";
+        temp = parseInt(personCnt.innerText)-1;
+        personCnt.innerText = temp;
+        if(personCnt.innerText==2){
+            minusBtn.style.background="rgb(171, 171, 171)";
+            minusBtn.disabled=true;
+        }
+    }
+});
+
 /**취소 버튼 이벤트 */
  cancelBtn.addEventListener('click', function(){
     drawer.classList.remove("drawer_open");
@@ -73,7 +75,7 @@ function startMarker(){
     var marker = new kakao.maps.Marker
 }*/
 
-/**지도 생성하기❤️ 
+/**지도 생성하기❤️ */
 function generateMap(){
     var container = document.getElementById('map');
 		var options = {
@@ -81,5 +83,4 @@ function generateMap(){
 			level: 3
 		};
 		var map = new kakao.maps.Map(container, options);
-        return map;
-}*/
+}

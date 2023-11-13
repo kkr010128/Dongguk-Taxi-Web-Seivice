@@ -11,43 +11,74 @@
 <body>
     <div class="wrap">
     <div class="setLocation">
-        <h2>ㅎㅇ여</h2>
-        <h2>ㅇㅇ ㅎㅇ</h2>
-        <h2>뭐가 없으니 허전해보이는것 뿐</h2>
+        <form action="#">
+            <label id="start" for="start">출발지</label>
+            <select name="start_location" id="setStart">
+                <option value="entrance">동국대 정문</option>
+                <option value="schoolYard">운동장</option>
+                <option value="dorm">기숙사</option>
+                <option value="suckjang">석장동</option>
+            </select>
+        </form>
+        <form action="#">
+            <label id="arrive" for="arrive">도착지</label>
+            <select name="arrive_location" id="setArrive">
+                <option id="locations" value="entrance">동국대 정문</option>
+                <option id="locations" value="schoolYard">운동장</option>
+                <option id="locations" value="dorm">기숙사</option>
+                <option id="locations" value="suckjang">석장동</option>
+            </select>
+        </form>
     </div>
     <div class="map" id="map"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing"></script>
 	<script>
 		var container = document.getElementById('map');
 		var options = {
-			center: new kakao.maps.LatLng(35.862192, 129.195048),
+			center: new kakao.maps.LatLng(35.8625, 129.1945),
 			level: 3
 		};
 		var map = new kakao.maps.Map(container, options);
-       //generateMap();
+        var markerPosition  = new kakao.maps.LatLng(35.8625, 129.1945); 
+
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
 	</script>
 
         <div class="sliding_drawer">
             <button id="handle">매칭 준비하기</button>
             <div id="drawer" class="drawer_close">
-                <h4 id="Questions">같은 성별끼리 합승하기</h4>
-                <div class="sex_switch">
+                <div class="lines">
+                    <h4 id="Questions" class="q1">같은 성별끼리 합승하기</h4>
+                    <div class="sex_switch">
+                        <input type="checkbox" id="switch">
+                        <label for="switch" class="switch_label">
+                        <span class="onf_btn"></span>
+                        </label>
+                    </div>
+                <h4 id="Questions" class="q2">최대 인원수</h4>
+                <div class="personCount">
+                    <button id="minus">-</button>
+                    <span id="maxPerson">3</span>
+                    <button id="plus">+</button>
+                </div>
+                <h4 id="Questions" class="q3">출발 시간</h4>
+                <h4 id="Questions" class="q4">짐이 많아요(캐리어 등)</h4>
+                <div class="bag_switch">
                     <input type="checkbox" id="switch">
                     <label for="switch" class="switch_label">
                     <span class="onf_btn"></span>
                     </label>
                 </div>
-                <h4 id="Questions">최대 인원수</h4>
-                <div class="personCount">
-                    <button id="minus" onclick="changingPerson('-');">-</button>
-                    <span id="maxPerson">3</span>
-                    <button id="plus" onclick="changingPerson('+');">+</button>
-                </div>
-                <h4 id="Questions">출발 시간</h4>
-                <h4 id="Questions">짐이 많아요(캐리어 등)</h4>
-                <div class="buttons">
-                    <button id="cancelBtn">취소</button>
-                    <button id="setBtn">매칭 시작</button>
+                    <div class="buttons">
+                        <button id="cancelBtn">취소</button>
+                        <button id="setBtn">매칭 시작</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,6 +87,6 @@
         <script src="../lower_bar/lower_barScript.js"></script>
     </div>
     </div>
-    <script src="./main_pageScript.js"></script>
+    <script src="./main_pageScript.js" type="module"></script>
 </body>
 </html>
