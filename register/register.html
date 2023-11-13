@@ -39,19 +39,19 @@
                     <input type="button" id="codeComfirm" value="인증 확인">
                 </div>
             </div>
-            <form>
+            <form method="post" id="register_form" action="../../registerAction">
                 <div class="register_name">
-                    <input type="text" id="username" placeholder="본인 이름">
+                    <input type="text" id="username" name="userName" placeholder="본인 이름">
+                </div>
+                <div class="register_student_id">
+                    <input type="text" id="studentId" name="studentId" placeholder="본인 학번">
                 </div>
                 <div class="register_gender">
                     <input type="button" id="male" name="gender" value="남자">
                     <input type="button" id="female" name="gender" value="여자">
                 </div>
                 <div class="register_pw">
-                    <input type="password" id="password" placeholder="비밀번호">
-                </div>
-                <div class="register_error">
-                    <p id="error_message"></p>
+                    <input type="password" id="password" name="password" placeholder="비밀번호">
                 </div>
                 <div class="submit">
                     <input type="submit" id="registerComfirm" value="가입">
