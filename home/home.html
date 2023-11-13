@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <title>동행: 같이타요</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../lower_bar/lower_barStyle.css" />
+
+    <link rel="stylesheet" href="./home.css" />
+  </head>
+
+  <body>
+    <div class="wrap">
+      <!--일정-->
+      <div class="user_schedule" onclick="">
+        <p class="schedule-title">오늘의 택시 일정</p>
+        <p class="schedule-coment">
+          <span id="schedule-text">??시 ??에서 택시 팟이 있어요</span>
+        </p>
+      </div>
+
+      <!--온도-->
+      <div class="user_degree" onclick="">
+        <div class="degree-textContainer">
+          <p class="degree-title">나의 매너온도는?</p>
+          <p></p>
+          <p class="degree-coment">
+            <span id="degree-value">??도. 훌륭해요~</span>
+          </p>
+        </div>
+        <div class="bg">
+          <div class="innerCircle">
+            <span class="pg_v">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!--이용내역-->
+      <div class="user_log" onclick="">
+        <p class="log-title">이용내역</p>
+        <p class="log-coment">최근 이용내역이에요</p>
+      </div>
+    </div>
+
+    <!--하단 바-->
+    <script src="../lower_bar/lower_barScript.js"></script>
+    <script src="./home.js"></script>
+  </body>
+</html>
