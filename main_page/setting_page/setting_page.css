@@ -37,7 +37,7 @@ body {
 
 .wrap1 {
     position: relative;
-    width: 105%;
+    width: 100%;
     height: 100%;
     background-color: #E38214;
     border-radius: 12px;
@@ -75,3 +75,55 @@ body {
 .user_name p{
     font-size: x-large;
 }
+
+.hr {
+    position: relative;
+    width : 22em;
+    height : 0.1em;
+    bottom: 1.8em;
+    background-color : rgb(202, 202, 202, 1);
+    margin-left : 0;
+    border : 0;
+  }
+  
+  .center-hr {
+    margin-left : auto;
+    margin-right : auto;
+  }
+  
+  .setting_title {
+    position: relative;
+    color: #ADADAD;
+    font-family: Rubik;
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 1.4em;
+    bottom: 2.2em;
+  }
+  .setting_title {
+    position: relative;
+    color: #ADADAD;
+    font-family: Rubik;
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 1.4em;
+    margin-top: 2.4em;
+    bottom: 2.2em;
+  }
+
+  .setting_detail1 {
+    position: relative;
+    color: #000000;
+    font-family: Rubik;
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 1.4em;
+    margin-top: 2.4em;
+    bottom: 2.2em;
+  }
