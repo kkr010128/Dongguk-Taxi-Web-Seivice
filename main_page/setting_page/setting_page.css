@@ -54,3 +54,24 @@ body {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
+
+.user_profile {
+    position: relative;
+    display: flex;
+    top: 2em;
+    left: 2em;
+}
+
+.user_profile img {
+    filter: drop-shadow(0px 0px 5px rgb(171, 171, 171))
+}
+
+.user_name {
+    position: relative;
+    display: flex;
+    left: 7em;
+    bottom: 2.2em;
+}
+.user_name p{
+    font-size: x-large;
+}
