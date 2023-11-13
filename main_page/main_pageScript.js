@@ -1,4 +1,3 @@
-/**테스트 */
 const script = document.createElement('script');
 const handle = document.getElementById("handle");
 const drawer = document.getElementById("drawer");
@@ -9,8 +8,6 @@ const cancelBtn = document.getElementById("cancelBtn");
 const setBtn = document.getElementById("setBtn");
 const changeBtn = document.getElementById("change");
 
-
-
 script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=?appkey=7bf82169a53be4c855eca8f52959e97e&autoload=false";
 script.onload = () => {
     kakao.maps.load(() => {
@@ -19,45 +16,97 @@ script.onload = () => {
 };
 document.head.appendChild(script);
 
-document.getElementById("setStart").addEventListener("change", function(){
-    
-    var markerPosition = new kakao.maps.LatLng(35.863694, 129.191178);
+/*
+    var markerPosition = new kakao.maps.LatLng(Lat, Lng);
     var marker = new kakao.maps.Marker({
         position: markerPosition
+    });
+    marker.setMap(map);*/
+
+/**값받기 TODO: 위도 경도 받아서 마커 생성 혹은 삭제하기*/
+document.querySelector("select").addEventListener("change", function(){
+    let temp = setLocations(setStart.value);
+    /**파라미터로 받은 위도 경도 값으로 마커확인하고  */
+    var marker;
+    var LatLng;
+    /**마커 삭제  - 작동안함..*/
+    if(marker){
+        marker.setMap(null);
+    }
+
+    marker= new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(temp[0], temp[1])
     });
 
     switch(setStart.value){
         case "entrance":
-            setLocations("entrance");
+            LatLng = setLocations("entrance");
             break;
         case "schoolyard":
-            setLocations();
+            LatLng = setLocations("schoolyard");
             break;
         case "dorm":
-            setLocations();
+            LatLng = setLocations("dorm");
             break;
         case "suckjang":
-            setLocations();
+            LatLng = setLocations("suckjang");
             break;
         case "army":
-            setLocations();
+            LatLng = setLocations("army");
             break;
         case "station":
-            setLocations();
+            LatLng = setLocations("station");
             break;
         case "terminal":
-            setLocations();
+            LatLng = setLocations("terminal");
             break;
     }
-    /*var markerPosition  = new kakao.maps.LatLng(35.8625, 129.1945); */
-
+    var marker = new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(LatLng[0], LatLng[1])
+    });
+    //console.log(Lat, " ", Lng);
+    marker.setMap(map);
 });
 
-function setLocations(){
-    
+/**위도 경도 반환 함수 */
+function setLocations(value){
+    let Lat = 0.0;
+    let Lng = 0.0;
+
+    switch(value){
+        case "entrance":
+            Lat = 35.8625;
+            Lng = 129.1945;
+            break;
+        case "schoolyard":
+            Lat = 35.860583;
+            Lng = 129.194609;
+            break;
+        case "dorm":
+            Lat = 35.8625;
+            Lng = 129.191178;
+            break;
+        case "suckjang":
+            Lat = 35.863694;
+            Lng = 129.191178;
+            break;
+        case "army":
+            Lat = 35.854379;
+            Lng = 129.237773;
+            break;
+        case "station":
+            Lat = 35.798296;
+            Lng = 129.138968;
+            break;
+        case "terminal":
+            Lat = 35.8397794; 
+            Lng = 129.202447;
+            break;
+    }
+    return [Lat, Lng];
 }
 
-/** 출발, 도착 위치 바꾸기 - 완 */
+/** 출발, 도착 위치 바꾸기 - 완 : 나중에 마커 바뀌는거도 구현해야댐 */
 changeBtn.addEventListener("click", function(){
     let start = document.getElementById("setStart");
     let arrive = document.getElementById("setArrive");
