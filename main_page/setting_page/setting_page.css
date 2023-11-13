@@ -1,6 +1,8 @@
 body {
-    height: 100%;
-    overflow: hidden;
+    /* height: 100%;
+    overflow: hidden; */
+    margin: 0px;
+    padding: 0px;
 }
 
 .wrap {
@@ -15,12 +17,15 @@ body {
 
 .main_title{
     position: relative;
-    left: 10%;
-    top: 15%;
+    bottom: 2em;
+    margin-right: 5em;
     font-size: 200%;
     font-style: bold;
     font-weight: 600;
     color: rgb(255, 255, 255);
+    display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 
@@ -37,17 +42,19 @@ body {
 
 .wrap1 {
     position: relative;
+    display: flex;
+	align-items: center;
+	justify-content: center;
     width: 100%;
     height: 100%;
     background-color: #E38214;
     border-radius: 12px;
     bottom: 10%;
-
 }
 
 .wrap2 {
     position: relative;
-    width: 95%;
+    width: 100%;
     height: 100%;
     border-radius: 16px;
     bottom: 23%;
@@ -59,36 +66,34 @@ body {
     position: relative;
     display: flex;
     top: 2em;
-    left: 2em;
-}
-
-.user_profile img {
+    left: 1em;
     filter: drop-shadow(0px 0px 5px rgb(171, 171, 171))
 }
 
 .user_name {
     position: relative;
     display: flex;
-    left: 7em;
+    left: 5.4em;
     bottom: 2.2em;
 }
 .user_name p{
+    width: 100%;
     font-size: x-large;
 }
 
-.hr {
+hr {
     position: relative;
-    width : 22em;
+    width : 90%;
     height : 0.1em;
     bottom: 1.8em;
     background-color : rgb(202, 202, 202, 1);
-    margin-left : 0;
     border : 0;
   }
   
   .center-hr {
-    margin-left : auto;
-    margin-right : auto;
+    display: flex;
+	align-items: center;
+	justify-content: center;
   }
   
   .setting_title {
