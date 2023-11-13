@@ -194,7 +194,7 @@ html, body{
     top: 27%;
 }
 
-#switch {
+#switch1, #switch2 {
     display: flex;
     position: absolute;
     z-index: 3;
@@ -203,22 +203,22 @@ html, body{
     -moz-appearance: none;
 }
 
-#switch:checked+.switch_label {
+#switch1:checked + .switch_label1, #switch2:checked + .switch_label2 {
     background: rgb(255, 155, 47);
     border: 2px solid rgb(255, 155, 47);
 }
   
-#switch:checked+.switch_label:hover {
+#switch1:checked + .switch_label1:hover, #switch2:checked + .switch_label2:hover{
     background: rgb(255, 155, 47);
 }
   
-#switch:checked+.switch_label .onf_btn {
+#switch1:checked + .switch_label1 .onf_btn1, #switch2:checked + .switch_label2 .onf_btn2 {
     left: 33px;
     background: #fff;
     box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
 
-.switch_label {
+.switch_label1, .switch_label2 {
     position: relative;
     cursor: pointer;
     display: inline-block;
@@ -230,11 +230,11 @@ html, body{
     transition: 0.2s;
 }
 
-.switch_label:hover {
+.switch_label1:hover, .switch_label2:hover {
     background: #efefef;
 }
 
-.onf_btn {
+.onf_btn1, .onf_btn2 {
     position: absolute;
     top: 5px;
     left: 5px;
