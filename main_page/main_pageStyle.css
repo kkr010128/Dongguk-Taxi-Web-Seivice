@@ -10,7 +10,6 @@ html, body{
 
 .setLocation{
     position: absolute;
-    align-self: center;
     height: 15%;
     width: 90%;
     background: rgb(255, 255, 255);
@@ -22,48 +21,73 @@ html, body{
 }
 
 #start{
+    font-size: 1em;
     font-weight: bold;
     position: absolute;
     color: rgb(255, 155, 47);
-    padding: 1%;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #arrive{
     font-weight: bold;
     position: absolute;
-    padding: 1%;
+    padding: 2%;
     top: 50%;
     color: rgb(255, 155, 47);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #setStart{
     position: absolute;
-    width: 70%;
+    width: 65%;
     height: 25%;
-    left: 25%;
+    left: 23%;
     outline: 0;
     border-radius: 12px;
     box-shadow: rgb(171, 171, 171);
     background: rgb(255, 255, 255);
     padding: 4px;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #setArrive{
     position: absolute;
-    width: 70%;
+    width: 65%;
     height: 25%;
-    left: 25%;
+    left: 23%;
     outline: 0;
     border-radius: 12px;
     box-shadow: rgb(171, 171, 171);
     background: rgb(255, 255, 255);
     padding: 4px;
+    margin-top: 2px;
     top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#locations{
-    position: relative;
+#change{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgb(255, 255, 255);
+    border: 0;
+    left: 90%;
+    top: 32%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 
 #drawer {
     position : fixed;
@@ -76,6 +100,9 @@ html, body{
     transition: transform 0.7s ease-in-out;
     box-shadow: 0px 2px 9px rgb(171,171,171);
     border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #handle {
@@ -148,7 +175,7 @@ html, body{
     position: absolute;
     Color: rgb(255, 155, 47);
     padding: 3%;
-    float: left;
+    right: 50%;
 }
 
 .q1{
@@ -167,7 +194,7 @@ html, body{
     top: 27%;
 }
 
-#switch {
+#switch1, #switch2 {
     display: flex;
     position: absolute;
     z-index: 3;
@@ -176,22 +203,22 @@ html, body{
     -moz-appearance: none;
 }
 
-#switch:checked+.switch_label {
+#switch1:checked + .switch_label1, #switch2:checked + .switch_label2 {
     background: rgb(255, 155, 47);
     border: 2px solid rgb(255, 155, 47);
 }
   
-#switch:checked+.switch_label:hover {
+#switch1:checked + .switch_label1:hover, #switch2:checked + .switch_label2:hover{
     background: rgb(255, 155, 47);
 }
   
-#switch:checked+.switch_label .onf_btn {
+#switch1:checked + .switch_label1 .onf_btn1, #switch2:checked + .switch_label2 .onf_btn2 {
     left: 33px;
     background: #fff;
     box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
 
-.switch_label {
+.switch_label1, .switch_label2 {
     position: relative;
     cursor: pointer;
     display: inline-block;
@@ -203,11 +230,11 @@ html, body{
     transition: 0.2s;
 }
 
-.switch_label:hover {
+.switch_label1:hover, .switch_label2:hover {
     background: #efefef;
 }
 
-.onf_btn {
+.onf_btn1, .onf_btn2 {
     position: absolute;
     top: 5px;
     left: 5px;

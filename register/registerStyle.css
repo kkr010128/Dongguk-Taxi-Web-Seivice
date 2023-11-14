@@ -224,6 +224,21 @@
 	border: 1px solid lightgray;
 	outline: none;
   }
+  
+  .register_student_id {
+	margin-left: 15%;
+	width: 80%;
+  }
+
+  .register_student_id input {
+	width: 80%;
+	height: 50px;
+	border-radius: 30px;
+	margin-bottom: 30px;
+	padding: 0px 20px;
+	border: 1px solid lightgray;
+	outline: none;
+  }
 
   .register_error {
 	color: red;

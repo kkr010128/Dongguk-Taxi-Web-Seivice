@@ -2,13 +2,14 @@
 const email_sendButton = document.getElementById("send"); 
 const email_ResendButton = document.querySelector("#resend");
 const register_codeButton = document.querySelector("#codeComfirm"); 
-const register_comfirmButton= document.querySelector("#registerComfirm");
+const register_comfirm= document.querySelector("#register_form");
 const register_genderSelectButton= document.getElementsByName("gender");
 const errorMessage = document.querySelector("#error_message");
 let code = null;
 let timeOver = false;
 let time_thred = null;
 let gender = null;
+let webMail = null;
 
 // 이벤트
 email_sendButton.addEventListener("click", function() { //이메일 전송 이벤트
@@ -35,9 +36,12 @@ register_codeButton.addEventListener("click", function() { //유효 코드 확�
     registerInformationUserInterfaceActivity();
 });
 
-register_comfirmButton.addEventListener("click", function() { //가입 완료 이벤트
+register_comfirm.addEventListener("submit", function(event) { //가입 완료 이벤트
+    const formData = new FormData(register_comfirm);
     const userName = document.querySelector("#username");
     const password = document.querySelector("#password");
+    const studentId = document.querySelector("#studentId");
+    event.preventDefault();
     if(userName.value == "") {
         errorMessage.innerHTML = "이름을 입력해주세요."
         errorMessage.style.display = "flex";
@@ -49,18 +53,31 @@ register_comfirmButton.addEventListener("click", function() { //가입 완료 �
         return;
     }
     else if(password.value == "") {
-        errorMessage.innerHTML = "비밀번호를 입력해주세요"
+        errorMessage.innerHTML = "비밀번호를 입력해주세요."
         errorMessage.style.display = "flex";
         return;
     }
-    location.href = "./registerAction.jsp?userName=" + userName.value +"&password=" + password.value + "&gender=" + gender;
-    location.href = "./register.html";
+    else if(studentId.value == "") {
+		errorMessage.innerHTML = "학번을 입력해주세요."
+        errorMessage.style.display = "flex";
+        return;
+	}
+    formData.append("gender", gender);
+    formData.append("webMail", webMail);
+    const payload = new URLSearchParams(formData);
+    fetch('../../registerAction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload,
+      })
 })
 
 for(let i = 0; i < register_genderSelectButton.length; i++) { //성별 선택 이벤트
     register_genderSelectButton[i].addEventListener("click", function() {
         register_genderSelectButton[i].style.border = "1px solid black";
-        gender = register_genderSelectButton[i].value;
+        gender = register_genderSelectButton[i].value=="남자" ? 1 : 0;
         let otherButton = (register_genderSelectButton.length -1) - i;
         register_genderSelectButton[otherButton].style.border = "1px solid lightgray";
     });
@@ -86,11 +103,11 @@ function registerInformationUserInterfaceActivity() { //유효 코드 인증 후
 
 function sendButtonFunction() { //전송 버튼 함수
     const email = document.querySelector("#email");
-    if(email.value.includes("@dongguk.ac.kr")) { 
+    if(!email.value.includes("@dongguk.ac.kr")) { 
         errorMessage.innerHTML = "@dongguk.ac.kr 형식으로 작성해주세요."
-        console.log(errorMessage);
         return;
     }
+    webMail = email.value;
     errorMessage.style.display = "none";
     let time = 180; //인증 가능한 시간
     code = randomCode();
