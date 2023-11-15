@@ -5,6 +5,7 @@ const register_codeButton = document.querySelector("#codeComfirm");
 const register_comfirm= document.querySelector("#register_form");
 const register_genderSelectButton= document.getElementsByName("gender");
 const errorMessage = document.querySelector("#error_message");
+const registerFinishButton = document.getElementById("confirm");
 let code = null;
 let timeOver = false;
 let time_thred = null;
@@ -18,6 +19,10 @@ email_sendButton.addEventListener("click", function() { //이메일 전송 이�
 
 email_ResendButton.addEventListener("click", function() { //이메일 재전송 이벤트
     sendButtonFunction();
+}); 
+
+registerFinishButton.addEventListener("click", function() { 
+    window.location.href="../login/index.html";
 }); 
 
 register_codeButton.addEventListener("click", function() { //유효 코드 확인 이벤트
@@ -72,6 +77,8 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
         },
         body: payload,
       })
+      const popup = document.querySelector("#popup");
+      popup.classList.add("open_popup")
 })
 
 for(let i = 0; i < register_genderSelectButton.length; i++) { //성별 선택 이벤트
