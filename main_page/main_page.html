@@ -26,13 +26,13 @@
         <form action="#">
             <label id="arrive" for="arrive">도착지</label>
             <select name="arrive_location" id="setArrive">
+                <option value="station">신경주역</option>
+                <option value="terminal">시외버스터미널</option>
+                <option value="army">경주 예비군 훈련장</option>
                 <option value="entrance">동국대 정문</option>
                 <option value="schoolYard">동국대 운동장</option>
                 <option value="dorm">동국대 기숙사</option>
                 <option value="suckjang">석장동</option>
-                <option value="army">경주 예비군 훈련장</option>
-                <option value="station">신경주역</option>
-                <option value="terminal">시외버스터미널</option>
             </select>
         </form>
         <button type="button" id="changeBtn">
@@ -40,19 +40,27 @@
         </button>
     </div>
     <div class="map" id="map"></div>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing"></script>
-    <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?autoload=false"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing?autoload=false"></script>
 	<script type="text/javascript">
-		var container = document.getElementById('map');
+		/*import {generateMap} from "./main_PageScript.js";
+        window.onload = function(){
+            generateMap(); 
+        }*/
+        
+        var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(35.8625, 129.1945),
 			level: 3
 		};
 		var map = new kakao.maps.Map(container, options);
-        kakao.maps.load(function() {
-        // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
-            var map = new kakao.maps.Map(node, options);
-        });
+    
+        var roadLine = new kakao.maps.Polyline({
+            strokeWeight: 5,                  //선 두께
+            strokeColor: "rgb(255, 155, 47)", //선 색깔
+            strokeOpacity: 0.7,               //선 불투명도
+            strokeStyle: "shortdashdot"       //선 종류
+        })
+        
 	</script>
 
         <div class="sliding_drawer">
