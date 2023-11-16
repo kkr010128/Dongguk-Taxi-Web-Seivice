@@ -73,12 +73,12 @@ body {
 .user_name {
     position: relative;
     display: flex;
-    left: 4em;
+    left: 5em;
     bottom: 2.2em;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 15em;
+    width: 12.5em;
     margin: 0px;
 }
 .user_name p{
@@ -96,8 +96,8 @@ hr {
   
   .center-hr {
     display: flex;
-	align-items: center;
-	justify-content: center;
+	  align-items: center;
+	  justify-content: center;
   }
   
   .setting_title {
