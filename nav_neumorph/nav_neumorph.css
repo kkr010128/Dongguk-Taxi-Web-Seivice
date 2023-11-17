@@ -7,7 +7,7 @@
 body {
   text-align: center;
   display: flex;
-  height: 100vh;
+  height: 200vh;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -18,21 +18,21 @@ body {
 
 .nav {
   display: inline-flex;
-  position: relative;
-  overflow: hidden;
-  width: 77vw;
-  height: 4.5vh;
+  /* overflow: hidden; */
+  width: 82vw;
+  height: 13.5vw;
   background: #e0e0e0;
   padding: 0 10px;
+  bottom: 5px;
   
-  border-radius: 40px;
+  border-radius: 100px;
   box-shadow:  20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
   
   text-align: center;
   justify-content: center;
   align-items: center;
 
-  position : absolute;
+  position : fixed;
   bottom : 3vw;
 }
 
@@ -41,11 +41,11 @@ body {
   padding: 20px;
   text-decoration: none;
   transition: 1s;
-  margin: 0 4px;
+  margin: 0 1vw;
   z-index: 1;
   font-family: 'DM Sans', sans-serif;
   font-weight: 500;
-  font-size: 2.5vw;
+  font-size: 4vw;
   position: relative;
   
   &:before {
