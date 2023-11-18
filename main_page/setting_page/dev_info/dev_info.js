@@ -1,5 +1,5 @@
 function redirectDevInfo() {
-    window.location.href = "http://dongguk-taxi.kro.kr/dongguk_dh/main_page/setting_page/dev_info/dev_info.html";
+    window.location.href = "http://dongguk-taxi.kro.kr/dongguk_dh/main_page/setting_page/setting_page.html";
   }
 
 // const homeBar = document.querySelector(".home");
