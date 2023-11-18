@@ -5,25 +5,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
-/**로그인 누를 시  */
-LoginBtn.addEventListener("click", function(){
-    var getEmail = document.getElementById("email");
-    var getPw = document.getElementById("password");
-
-    //TODO:로그인 데이터 DB에서 체크해서 적용하기
-    if(getEmail.value==getPw.value){ //임시
-        if(isChecked()){
-            //console.log(isChecked()); 확인용
-            setCookie(getEmail.value, getPw.value, 1);
-            window.location.href = "http://127.0.0.1:5500/../main_page/main_page.html"; //임시
-        } 
-    }else{ //안 맞으면 경고창 띄우고 새로고침
-        alert("이메일 혹은 비밀번호를 다시 확인하세요");
-        location.replace(location.href); 
-    }
-
-});
-
 /**회원가입 페이지로 이동시키는 함수*/
 function gotoSignUp(){
     window.location.href="./register/register.html";

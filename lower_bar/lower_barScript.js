@@ -2,7 +2,7 @@ function showLowerBar() {
   const head = document.getElementsByTagName("head"); //css 파일을 html과 연결시켜줌
   const cssLinkElement = document.createElement("link");
   cssLinkElement.setAttribute("rel", "stylesheet");
-  cssLinkElement.setAttribute("href", "./lower_barStyle.css");
+  cssLinkElement.setAttribute("href", "../lower_bar/lower_barStyle.css");
   head[0].appendChild(cssLinkElement); 
 
   const body = document.getElementsByTagName("body"); 
