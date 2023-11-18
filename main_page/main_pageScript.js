@@ -105,7 +105,7 @@ document.getElementById("change").addEventListener("click", function(){
     markers[0] = tmpMarker;
 });
 
-/**슬라이딩 드로어 이벤트*/
+/**슬라이딩 드로어 이벤트
 document.getElementById("handle").addEventListener("click", function(){
     if (drawer.classList.contains("drawer_open")) {
         drawer.classList.remove("drawer_open");
@@ -115,7 +115,7 @@ document.getElementById("handle").addEventListener("click", function(){
         drawer.classList.remove("drawer_close");
         drawer.classList.add("drawer_open");
     }
-});
+});*/
 
 /**사람 수 조정 +, - 버튼 */
 plusBtn.addEventListener("click", function(){
