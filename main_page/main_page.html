@@ -50,30 +50,20 @@
     <div class="mapBox">
         <div class="map" id="map"></div>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing?autoload=false"></script>
-        <script type="text/javascript">
-            /*import {generateMap} from "./main_PageScript.js";
+        <script type="module">
+            import {generateMap, setMarkers, moduleTest, buttonEvents} from "./main_PageScript.js";
             window.onload = function(){
-                generateMap(); 
-            }*/
-            var container = document.getElementById('map');
-            var options = {
-                center: new kakao.maps.LatLng(35.8625, 129.1945),
-                level: 3
-            };
-            var map = new kakao.maps.Map(container, options);
-        
-            var roadLine = new kakao.maps.Polyline({
-                strokeWeight: 5,                  //선 두께
-                strokeColor: "rgb(255, 155, 47)", //선 색깔
-                strokeOpacity: 0.7,               //선 불투명도
-                strokeStyle: "shortdashdot"       //선 종류
-            })
+                moduleTest();
+                buttonEvents();
+            }
+            var mapValue = generateMap();
+            var map = new kakao.maps.Map(mapValue[0], mapValue[1]);
             
         </script>
     </div>
         <div class="options">
             <div id="q1">
-                <h4 id="Questions">같은 성별끼리 합승하기</h4>
+                <h3 id="Questions">같은 성별끼리 합승하기</h3>
                 <div class="sex_switch">
                     <input type="checkbox" id="switch1">
                     <label for="switch1" class="switch_label1">
@@ -82,7 +72,7 @@
                 </div>
             </div>
             <div id="q2">
-                <h4 id="Questions" ">최대 인원수</h4>
+                <h3 id="Questions" ">최대 인원수</h3>
                 <div class="personCount">
                     <button id="minus">-</button>
                     <span id="maxPerson">3</span>
@@ -90,10 +80,10 @@
                 </div>
             </div>
             <div id="q3">
-                <h4 id="Questions">출발 시간</h4>
+                <h3 id="Questions">출발 시간</h3>
             </div>
             <div id="q4">
-                <h4 id="Questions" >짐이 많아요(캐리어 등)</h4>
+                <h3 id="Questions" >짐이 많아요(캐리어 등)</h3>
                 <div class="bag_switch">
                     <input type="checkbox" id="switch2">
                     <label for="switch2" class="switch_label2">
@@ -107,15 +97,6 @@
                 </div>
             </div>
         </div>
-        <!--
-        <nav class="nav">
-            <a href="#" class="nav-item is-active" active-color="orange">메인</a>
-            <a href="#" class="nav-item" active-color="green">매칭</a>
-            <a href="#" class="nav-item" active-color="blue">파티</a>
-            <a href="#" class="nav-item" active-color="red">채팅</a>
-            <a href="#" class="nav-item" active-color="rebeccapurple">설정</a>
-            <span class="nav-indicator"></span>
-          </nav>-->
     </div>
     <script src="./main_pageScript.js" type="module"></script>
     <script src="../nav_neumorph/nav_neumorph.js"></script>
