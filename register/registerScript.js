@@ -70,7 +70,7 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
     formData.append("gender", gender);
     formData.append("webMail", webMail);
     const payload = new URLSearchParams(formData);
-    fetch('../../../registerAction', {
+    fetch('../../DataBase/registerAction', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
