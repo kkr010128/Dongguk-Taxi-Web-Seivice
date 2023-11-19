@@ -12,7 +12,7 @@ login_form.addEventListener("submit", function(e) {
     const formData = new FormData(login_form);
     console.log(formData);
     const payload = new URLSearchParams(formData);
-    fetch('../../DataBase/login', {
+    fetch('../../../DataBase/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -43,7 +43,7 @@ confirmBtn.addEventListener('click', function() {
 
 /**회원가입 페이지로 이동시키는 함수*/
 function gotoSignUp(){
-    window.location.href="./register/register.html";
+    window.location.href="../register/register.html";
 }
 
 /**입력값 이메일인지 체크해서 툴팁 띄우기*/
