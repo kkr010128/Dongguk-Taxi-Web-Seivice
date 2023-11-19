@@ -6,8 +6,14 @@
 
 body{
     display: flex;
-    background-color: rgb(255,255,255);
+    background: #f0f0f0;
     justify-content: center;
+    align-items: center;
+}
+
+.wrap{
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -30,12 +36,16 @@ body{
 
 .lines{
     display: flex;
-    flex-wrap: nowrap;
     justify-content: center;
     flex-direction: column;
     width: 70vw;
+    height: 15vh;
 }
 
+#selecter1, #selecter2{
+    display: flex;
+    flex-direction: row;
+}
 #line1, #line2{
     display: flex;
     flex-direction: row;
@@ -43,13 +53,13 @@ body{
 }
 
 #line1{
-    margin-bottom: 10%;
+    margin-bottom: 5vh;
 }
-
 
 #start{
     font-size: 3.5vw;
     font-weight: bold;
+    width: 16vw;
     /*position: absolute;*/
     color: rgb(255, 155, 47);
 }
@@ -57,6 +67,7 @@ body{
 #arrive{
     font-size: 3.5vw;
     font-weight: bold;
+    width: 16vw;
     /*position: absolute;*/
     color: rgb(255, 155, 47);
 }
@@ -66,8 +77,10 @@ body{
     width: 55vw;
     height: 100%;
     outline: 0;
+    font-size: 3vw;
+    border: bold;
     border-radius: 12px;
-    margin-left: 24%;
+    border-color: rgb(255, 155, 47);
     box-shadow: rgb(171, 171, 171);
     background: rgb(255, 255, 255);
     /*display: flex;
@@ -80,8 +93,10 @@ body{
     width: 55vw;
     height: 100%;
     outline: 0;
+    font-size: 3vw;
+    border: bold;
     border-radius: 12px;
-    margin-left: 24%;
+    border-color: rgb(255, 155, 47);
     box-shadow: rgb(171, 171, 171);
     background: rgb(255, 255, 255);
     /*display: flex;
@@ -92,12 +107,14 @@ body{
 #btnBox{
     display: flex;
     justify-content: right;
+    width: 12vw;
 }
 
 #changeBtn{
     border: 0;
     background: rgb(255, 255, 255);
     justify-content: right;
+    border-radius: 50px;
 }
 
 #change{
@@ -121,24 +138,15 @@ body{
     justify-content: center;
 }
 
-#drawer {
-    width: 100%;
-    height: 100%;
-    background: rgb(255,255,255);
+.buttons{
     display: flex;
-    flex-direction: column;
-    border: 0;
-    border-radius: 16px;
-    /*align-items: center;
-    justify-content: center;*/
+    justify-content: center;
 }
 
 #cancelBtn {
-    /*position : absolute;*/
-    width : 25%;
-    height : 100%;
-    left : 18%;
-    bottom: 52%;
+    width: 20vw;
+    height: 5vh;
+    margin: 2%;
     background : linear-gradient(to left, rgb(194, 68, 46), rgb(255, 155, 47));
     border : 0;
     border-radius : 16px;
@@ -147,11 +155,9 @@ body{
 }
 
 #setBtn {
-    /*position : absolute;*/
-    width : 25%;
-    height : 100%;
-    left : 60%;
-    bottom: 52%;
+    width : 20vw;
+    height : 5vh;
+    margin: 2%;
     background : linear-gradient(to left, rgb(194, 68, 46), rgb(255, 155, 47));
     border : 0;
     border-radius : 16px;
@@ -160,34 +166,53 @@ body{
 }
 
 .sex_switch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 3%;
-    bottom: 84%;
-    left: 72%;
-    top: 0%;
 }
 
 .personCount{
+    display: flex;
     border: 0;
     align-items: center;
+    justify-content: space-between;
     padding: 3%;
 }
 
+#minus, #plus{
+    width: 10vw;
+    height: 5vh;
+    border: 0;
+    border-radius: 40px;
+}
+
+#maxPerson{
+    font-size: 6vw;
+    font-weight: bold;
+}
+
 .bag_switch{
+    display:flex;
+    align-items: center;
     padding: 3%;
     bottom: 60%;
     left: 72%;
 }
 
 #Questions{
-    font-size: 1em;
+    display: flex;
+    align-items: center;
+    font-size: 4vw;
     Color: rgb(255, 155, 47);
-    padding: 2%;
+    padding: 3%;
 }
 
 #q1, #q2, #q3, #q4{
     display: flex;
     flex-direction: row;
-    
+    justify-content: space-between;
+    height: 10vh;
 }
 
 #switch1, #switch2 {
@@ -209,7 +234,7 @@ body{
 }
   
 #switch1:checked + .switch_label1 .onf_btn1, #switch2:checked + .switch_label2 .onf_btn2 {
-    left: 33px;
+    left: 11vw;
     background: #fff;
     box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
@@ -218,8 +243,8 @@ body{
     position: relative;
     cursor: pointer;
     display: inline-block;
-    width: 58px;
-    height: 28px;
+    width: 17.4vw;
+    height: 5vh;
     background: #efefef;
     border: 2px solid gray;
     border-radius: 16px;
@@ -242,20 +267,6 @@ body{
     transition: 0.2s;
 }
 
-.drawer_close{
-    transform: translateY(100%);
-    /*display: none;*/
-}
-
-.drawer_open{
-    display: inline;
-    /*transform: translateY(0);*/
-}
-
-.lower_nav{
-    position: absolute;
-}
-
 .nav{
     z-index: 3;
 }
@@ -272,4 +283,8 @@ body{
     width: 100%;
     height: 100%;
     border-radius: 40px;
+}
+
+@media screen and (min-width: 450px) and (min-height: 700px){
+    
 }
