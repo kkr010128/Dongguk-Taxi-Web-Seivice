@@ -12,7 +12,7 @@ login_form.addEventListener("submit", function(e) {
     const formData = new FormData(login_form);
     console.log(formData);
     const payload = new URLSearchParams(formData);
-    fetch('../../../login', {
+    fetch('../../DataBase/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
