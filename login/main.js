@@ -1,8 +1,44 @@
-const LoginBtn = document.getElementById("loginBtn");
+const confirmBtn = document.querySelector('#confirm');
+const popup = document.querySelector('.login_popup');
+const login_form = document.querySelector("#login_form");
 
 /**html 로드 시 쿠키 남아있으면 자동 로그인 이벤트 - 미구현 */
 document.addEventListener("DOMContentLoaded", function(){
 
+});
+
+login_form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const formData = new FormData(login_form);
+    console.log(formData);
+    const payload = new URLSearchParams(formData);
+    fetch('../../../login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload,
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(json) {
+        const userJson = JSON.stringify(json);
+        const obj = JSON.parse(userJson);
+        console.log(obj.result);
+        if(obj.result == "failure") {
+            popup.classList.add('login_open_popup');
+        }
+        else { // 로그인 했을 때 로그인 정보를 어디에다가 저장할 건지 생각해야됨 jsp session 객체 사용 ?
+            location.href = "../home/home.html";
+        }
+    });
+
+	
+});
+
+confirmBtn.addEventListener('click', function() {
+    popup.classList.remove('login_open_popup');
 });
 
 /**회원가입 페이지로 이동시키는 함수*/

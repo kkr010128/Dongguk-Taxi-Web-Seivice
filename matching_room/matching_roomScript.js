@@ -128,7 +128,7 @@ for(let i = 0; i < dateArray.length; i++) {
                 setRoomPage();
                 const matchingRoomWrap = document.querySelector(".wrap");
                 matchingRoomWrap.style.display = "flex";
-            })
+            });
         }
     });
 }
