@@ -35,3 +35,9 @@ let departure = "경주역"; // 팟 출발지 변수
 let destination = "동국대"; // 팟 목적지 변수
 document.getElementById("schedule-text").textContent =
   scheduleTime + "시 " + departure + " - " + destination + " 팟이 있어요";
+
+window.onload = function() { //로그인 안했는데 홈 주소로 들어려고 할때 다시 로그인 화면으로 보내줌
+  // if(localStorage.getItem("test") == null) {
+  //   location.href = "../login/index.html";
+  // }
+}

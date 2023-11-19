@@ -144,15 +144,48 @@
 	margin: 5px;
 	}
 
-  .new_member {
+  	.new_member {
 	color: rgb(227, 130, 20);
 	text-decoration: underline;
-	cursor: pointer;  }
+	cursor: pointer;  
+	}
 
 	.checkbox{
-		text-decoration: underline;
-		cursor: pointer;
+	text-decoration: underline;
+	cursor: pointer;
 	}
-  /* .email_send {
 	
-  } */
+	.login form {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+	
+	.login_popup {
+		width: 15em;
+		position: absolute;
+		bottom: 0%;
+		left: 50%;
+		transform: translate(-50%, 50%) scale(0.1);
+		background-color: white;
+		text-align: center;
+		padding: 0px 20px 30px;
+		box-shadow: 0px 2px 9px rgb(171, 171, 171);
+		visibility: hidden;
+		transition: transform 0.4s, bottom 0.4s;
+		border-radius: 12px;
+	}
+	
+	.login_popup h2{
+		color: red;
+		font-size: 2em;
+	}
+
+	.login_open_popup {
+		visibility: visible;
+		bottom: 50%;
+		transform: translate(-50%, 50%) scale(1);
+	}
+	

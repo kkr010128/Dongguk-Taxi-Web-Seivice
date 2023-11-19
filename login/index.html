@@ -14,23 +14,30 @@
             <h2>로그인</h2>
             <div class="login_margin">
             </div>
-            <div class="login_id">
-                <input type="email" name="" id="email" placeholder="동국 이메일로 작성" onmouseup="checkEmail()" onkeyup="checkEmail()" onfocus="checkEmail()" onblur="checkEmail()">
-                <p id="tooltip">아이디는 반드시 동국 이메일로 작성.</p>
-            </div>
-            <div class="login_pw">
-                <input type="password" name="" id="password" placeholder="비밀번호">
-            </div>
-            <div class="login_etc">
-                <div class="checkbox">
-                <input onclick=isChecked(); type="checkbox" name="" id="checkBox"> 로그인 정보 기억
-                </div>
-                <div>
-                <a class="new_member" onclick=gotoSignUp();>처음이신가요?</a>
-                </div>
-            </div>
-            <div class="submit">
-                <input disabled="disabled" id="loginBtn" type="submit" value="로그인">
+            <form method="post" id="login_form" action="../../../login">
+				<div class="login_id">
+	                <input type="text" name="userId" id="email" placeholder="본인 학번">
+	                <p id="tooltip">아이디는 반드시 동국 이메일로 작성.</p>
+            	</div>
+            	<div class="login_pw">
+                <input type="password" name="password" id="password" placeholder="비밀번호">
+            	</div>
+            	<div class="login_etc">
+	                <div class="checkbox">
+	                	<input onclick=isChecked(); type="checkbox" id="checkBox"> 로그인 정보 기억
+	                </div>
+	                <div>
+	                	<a class="new_member" onclick=gotoSignUp();>처음이신가요?</a>
+                	</div>
+            	</div>
+            	<div class="submit">
+               	 	<input id="loginBtn" type="submit" value="로그인">
+            	</div>
+			</form>
+			<div class="login_popup">
+                <h2>로그인 실패</h2>
+                <p>아이디 혹은 비밀번호가 일치하지 않습니다.</p>
+                <button id="confirm" type="button">확인</button>
             </div>
         </div>
     </div>
