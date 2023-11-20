@@ -7,6 +7,9 @@ function showLowerNav() {
 
   const body = document.getElementsByTagName("body"); 
 
+  const wrapElemnt = document.createElement("div");
+  wrapElemnt.classList.add("nav_wrap");
+
   const navElement = document.createElement("nav"); 
   navElement.classList.add("nav");
 
@@ -37,7 +40,8 @@ function showLowerNav() {
   const navIndicatorElement = document.createElement("span");
   navIndicatorElement.setAttribute("class", "nav-indicator");
   navElement.appendChild(navIndicatorElement);
-  body[0].appendChild(navElement);
+  wrapElemnt.appendChild(navElement);
+  body[0].appendChild(wrapElemnt);
 }
 
 showLowerNav();

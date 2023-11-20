@@ -10,7 +10,12 @@ document.addEventListener("DOMContentLoaded", function(){
 login_form.addEventListener("submit", function(e) {
     e.preventDefault();
     const formData = new FormData(login_form);
-    console.log(formData);
+    let userId = formData.get("userId");
+    if(!Number.isInteger(parseInt(userId))) {
+        popup.children[1].innerHTML = "아이디는 본인 학번을 입력해주세요."
+        popup.classList.add('login_open_popup');
+        return; 
+    }
     const payload = new URLSearchParams(formData);
     fetch('../../../DataBase/login', {
         method: 'POST',
@@ -27,10 +32,12 @@ login_form.addEventListener("submit", function(e) {
         const obj = JSON.parse(userJson);
         console.log(obj.result);
         if(obj.result == "failure") {
+            popup.children[1].innerHTML = "아이디 혹은 비밀번호가 일치하지 않습니다."
             popup.classList.add('login_open_popup');
         }
         else { // 로그인 했을 때 로그인 정보를 어디에다가 저장할 건지 생각해야됨 jsp session 객체 사용 ?
             location.href = "../home/home.html";
+            sessionStorage.setItem(obj.result.studentID, obj.result.password);
         }
     });
 
