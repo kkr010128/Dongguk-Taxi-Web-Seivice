@@ -109,7 +109,7 @@ for(let i = 0; i < dateArray.length; i++) {
         formDate.append("date", dateNode.innerHTML);
         const payload = new URLSearchParams(formDate);
         if(dateNode.style.color != "lightgray") {
-            fetch('../../../MatchingRoomList', {
+            fetch('../../DataBase/MatchingRoomList', {
                 method: 'post',
                 headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
