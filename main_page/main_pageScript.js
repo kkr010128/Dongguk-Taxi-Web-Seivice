@@ -4,32 +4,30 @@ const minusBtn = document.getElementById("minus");
 const plusBtn = document.getElementById("plus");
 const markers = [null, null];
 
-/*script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=?appkey=7bf82169a53be4c855eca8f52959e97e&autoload=false";
+/*script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing?autoload=false";
 script.onload = () => {
     kakao.maps.load(() => {
-       console.assert(kakao.maps.Map); 
+        console.assert(kakao.maps.Map); 
     });
 };
-document.head.appendChild(script);*/
+document.body.appendChild(script);*/
+
 
 /**드롭다운 리스트 이벤트 */
-export function moduleTest(){
-    document.querySelectorAll("select").forEach(function(e) {
-        e.addEventListener("change", function(){
-            if(this.name=="start_location"){
-                setMarkers(this.value, "start");
-            }else if(this.name=="arrive_location"){
-                setMarkers(this.value, "arrive");
-            }
-        });
+document.querySelectorAll("select").forEach(function(e) {
+    e.addEventListener("change", function(){
+        if(this.name=="start_location"){
+            setMarkers(this.value, "start");
+        }else if(this.name=="arrive_location"){
+            setMarkers(this.value, "arrive");
+        }
     });
-}
+});
 
 /**값받기 - 선택한 값 받아서 마커 생성 TODO: 마커 두 개 올려질 시에 맵 크기 줄이며 경로 생성*/
-export function setMarkers(values, which){
+function setMarkers(values, which){
     var marker;
     var LatLng = [];
-
     switch(values){
         case "entrance":
             LatLng[0]=35.8625;
@@ -64,7 +62,7 @@ export function setMarkers(values, which){
         position: new kakao.maps.LatLng(LatLng[0], LatLng[1])
     });
 
-    /**이전 마커 삭제 */
+    //이전 마커 지우기
     if(which=="start" && markers[0]!=null){
         markers[0].setMap(null);
         markers[0] = marker;
@@ -75,24 +73,27 @@ export function setMarkers(values, which){
 
     which=="start" ? markers[0]=marker : markers[1]=marker;
     marker.setMap(map);
-    //map.panTo(marker); 부드럽게 이동
 
-    //선 그리기(임시) - 최단경로는 길찾기 api사용해야함.❤️❤️❤️
+    if(markers[0]==null || markers[1]==null){
+        map.panTo(new kakao.maps.LatLng(LatLng[0], LatLng[1]));
+    }else if(markers[0]!=null && markers[1]!=null) { 
+        map.setBounds(new kakao.maps.LatLngBounds(markers[0].getPosition(), markers[1].getPosition()));
+    }
+
     if(markers[0]!=null && markers[1]!=null){
         var roadLine = new kakao.maps.Polyline({
-            path: [markers[0].getPosition(), markers[1].getPosition()], //경로 지정
-            strokeWeight: 3,                  //선 두께
-            strokeColor: "rgb(255, 155, 47)", //선 색깔
-            strokeOpacity: 0.7,               //선 불투명도
-            strokeStyle: "shortdashdot"       //선 종류
+            path: [markers[0].getPosition(), markers[1].getPosition()], 
+            strokeWeight: 3,                  
+            strokeColor: "rgb(255, 155, 47)", 
+            strokeOpacity: 0.7,               
+            strokeStyle: "shortdashdot"       
         })
         roadLine.setMap(map);
     }
 
-} //setMarkers
+}
 
-
-/** 출발, 도착 위치 바꾸기 - 마커 바뀌는거까지 구현 완
+/** 출발, 도착 위치 바꾸기 - 마커 바뀌는거까지 구현 완*/
 document.getElementById("change").addEventListener("click", function(){
     let start = document.getElementById("setStart");
     let arrive = document.getElementById("setArrive");
@@ -105,88 +106,56 @@ document.getElementById("change").addEventListener("click", function(){
     tmpMarker = markers[0];
     markers[0] = markers[1];
     markers[0] = tmpMarker;
-});*/
+});
 
-/**슬라이딩 드로어 이벤트
-document.getElementById("handle").addEventListener("click", function(){
-    if (drawer.classList.contains("drawer_open")) {
-        drawer.classList.remove("drawer_open");
-        drawer.classList.add("drawer_close");
 
-    } else {
-        drawer.classList.remove("drawer_close");
-        drawer.classList.add("drawer_open");
+/**사람 수 조정 +, - 버튼 */
+plusBtn.addEventListener("click", function(){
+    let temp=0;
+    if(parseInt(personCnt.innerText) < 4){
+        minusBtn.disabled=false;
+        minusBtn.style.background="rgb(255, 155, 47)";
+        temp = parseInt(personCnt.innerText)+1;
+        personCnt.innerText = temp;
+        if(personCnt.innerText==4){
+            plusBtn.style.background="rgb(171, 171, 171)";
+            plusBtn.disabled=true;
+        }
     }
-});*/
+});
 
-
-/**버튼들 이벤트 모듈 */
-export function buttonEvents(){
-    /** 출발, 도착 위치 바꾸기 - 마커 바뀌는거까지 구현 완*/
-    document.getElementById("change").addEventListener("click", function(){
-        let start = document.getElementById("setStart");
-        let arrive = document.getElementById("setArrive");
-        let temp = start.value;
-        let tmpMarker;
-
-        start.value = arrive.value;
-        arrive.value = temp;
-        
-        tmpMarker = markers[0];
-        markers[0] = markers[1];
-        markers[0] = tmpMarker;
-    });
-
-    /**사람 수 조정 +, - 버튼 */
-    plusBtn.addEventListener("click", function(){
-        let temp=0;
-        if(parseInt(personCnt.innerText) < 4){
-            minusBtn.disabled=false;
-            minusBtn.style.background="rgb(255, 155, 47)";
-            temp = parseInt(personCnt.innerText)+1;
-            personCnt.innerText = temp;
-            if(personCnt.innerText==4){
-                plusBtn.style.background="rgb(171, 171, 171)";
-                plusBtn.disabled=true;
-            }
+minusBtn.addEventListener("click", function(){
+    let temp=0;
+    if(parseInt(personCnt.innerText) > 2){
+        plusBtn.disabled=false;
+        plusBtn.style.background="rgb(255, 155, 47)";
+        temp = parseInt(personCnt.innerText)-1;
+        personCnt.innerText = temp;
+    if(personCnt.innerText==2){
+        minusBtn.style.background="rgb(171, 171, 171)";
+        minusBtn.disabled=true;
         }
-    });
+    }
+});
 
-    minusBtn.addEventListener("click", function(){
-        let temp=0;
-        if(parseInt(personCnt.innerText) > 2){
-            plusBtn.disabled=false;
-            plusBtn.style.background="rgb(255, 155, 47)";
-            temp = parseInt(personCnt.innerText)-1;
-            personCnt.innerText = temp;
-            if(personCnt.innerText==2){
-                minusBtn.style.background="rgb(171, 171, 171)";
-                minusBtn.disabled=true;
-            }
-        }
-    });
+/**취소 버튼 이벤트 */
+document.getElementById("cancelBtn").addEventListener('click', function(){
 
-    /**취소 버튼 이벤트 */
-    document.getElementById("cancelBtn").addEventListener('click', function(){
-
-    });
+});
    
-   /**완료버튼 이벤트 TODO: 누를 시 매칭 + 정보를 넘겨주는 기능 추가 필요 */
-   document.getElementById("setBtn").addEventListener('click', function(){
-       window.location.href="../matching_room/matching_room.html"; //임시
-    });
+/**완료버튼 이벤트 TODO: 누를 시 매칭 + 정보를 넘겨주는 기능 추가 필요 */
+document.getElementById("setBtn").addEventListener('click', function(){
+    window.location.href="../matching_room/matching_room.html"; //임시
+});
    
-}
-
-
 /**지도 생성하기❤️ */
-export function generateMap(){
-    var container = document.getElementById('map');
-	var options = {
+function generateMap(){
+    var container = document.getElementById('map'),
+    options = {
 		center: new kakao.maps.LatLng(35.862192, 129.195048),
 		level: 3
 	};
-	//var map = new kakao.maps.Map(container, options);
+	var map = new kakao.maps.Map(container, options);
 
     var roadLine = new kakao.maps.Polyline({
         strokeWeight: 5,                  //선 두께
@@ -195,6 +164,5 @@ export function generateMap(){
         strokeStyle: "shortdashdot"       //선 종류
     });
 
-    return [container, options];
-    
+    return map;
 }
