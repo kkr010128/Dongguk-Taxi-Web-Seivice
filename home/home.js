@@ -2,7 +2,7 @@ let pg_v = document.querySelector(".pg_v");
 let pg = document.querySelector(".innerCircle");
 let c = 0;
 let c1 = -10; // 온도 그라데이션 표현을 위한것
-let degree = 256; // 이 값 수정하면 온도 바뀜 0~360
+let degree = 50; // 이 값 수정하면 온도 바뀜 0~360
 
 // 30~40 사이 값으로 변환해서 저장. toFixed(1)은 소수점 1자리까지
 let temper = (30 + (degree / 360) * 10).toFixed(1);

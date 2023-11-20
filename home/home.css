@@ -1,3 +1,8 @@
+@font-face {
+  font-family: NaNumGothic;
+  src: url("./assets/font/NanumGothic.otf") format("NanumGothic");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -65,14 +70,12 @@ p {
 .user_schedule,
 .user_log,
 .user_degree {
-  border: 2px solid lightgrey;
   width: 100%;
   height: 20%;
   border-radius: 16px;
   display: flex;
   margin-bottom: 10px;
-  box-shadow: 0px 2px 9px rgb(171, 171, 171);
-  background-color: rgb(114, 186, 13);
+  box-shadow: 4px 3px 9px rgb(220, 220, 220);
 }
 .user_schedule {
   flex-direction: column;
@@ -110,6 +113,11 @@ p {
 
 #degree-value {
   margin-top: 10%;
+  border: 0.01em solid rgb(193, 190, 190);
+  background-color: rgb(246, 243, 243);
+  border-radius: 8px;
+  text-align: center;
+  width: 90%;
 }
 
 .bg,
@@ -121,18 +129,16 @@ p {
 
 .bg {
   border-radius: 14px;
-  background-color: rgb(207, 183, 139);
   width: 50%;
   height: 100%;
   flex-direction: column;
   row-gap: 10px;
-  box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
 
 .innerCircle {
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   position: relative;
   background: conic-gradient(orange 120deg, white 125deg);
   box-shadow: 0px 2px 9px rgb(171, 171, 171);
@@ -153,15 +159,16 @@ p {
 }
 
 #temperature {
-  font-size: 30px;
+  font-size: 20px;
   z-index: 1;
   margin-bottom: 7%;
 }
 
 #schedule-text {
-  background-color: white;
+  border: 0.01em solid rgb(193, 190, 190);
+  background-color: rgb(246, 243, 243);
+
   border-radius: 14px;
-  box-shadow: 0px 2px 9px rgb(171, 171, 171);
   width: 90%;
   height: 50%;
   text-align: center;
