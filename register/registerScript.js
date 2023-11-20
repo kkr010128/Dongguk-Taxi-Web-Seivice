@@ -70,15 +70,15 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
     formData.append("gender", gender);
     formData.append("webMail", webMail);
     const payload = new URLSearchParams(formData);
-    fetch('../../registerAction', {
+    fetch('../../DataBase/registerAction', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: payload,
       })
-      const popup = document.querySelector("#popup");
-      popup.classList.add("open_popup")
+      const popup = document.querySelector(".popup");
+      popup.classList.add("open_popup");
 })
 
 for(let i = 0; i < register_genderSelectButton.length; i++) { //성별 선택 이벤트
