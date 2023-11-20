@@ -50,15 +50,21 @@
     <div class="mapBox">
         <div class="map" id="map"></div>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing?autoload=false"></script>
-        <script type="module">
-            import {generateMap, setMarkers, moduleTest, buttonEvents} from "./main_PageScript.js";
-            window.onload = function(){
-                moduleTest();
-                buttonEvents();
-            }
-            var mapValue = generateMap();
-            var map = new kakao.maps.Map(mapValue[0], mapValue[1]);
-            
+        <script type="text/javascript">
+           var container = document.getElementById("map"),
+            options = {
+                center: new kakao.maps.LatLng(35.862192, 129.195048),
+                level: 3
+            };
+            var map = new kakao.maps.Map(container, options);
+
+            var roadLine = new kakao.maps.Polyline({
+                strokeWeight: 5,                  //선 두께
+                strokeColor: "rgb(255, 155, 47)", //선 색깔
+                strokeOpacity: 0.7,               //선 불투명도
+                strokeStyle: "shortdashdot"       //선 종류
+            });
+
         </script>
     </div>
         <div class="options">
@@ -98,7 +104,7 @@
             </div>
         </div>
     </div>
-    <script src="./main_pageScript.js" type="module"></script>
+    <script src="./main_pageScript.js"></script>
     <script src="../nav_neumorph/nav_neumorph.js"></script>
 </body>
 </html>
