@@ -6,7 +6,7 @@
 
 body{
     display: flex;
-    background: #f0f0f0;
+    background: #f8f3ed;
     justify-content: center;
     align-items: center;
 }
@@ -22,12 +22,12 @@ body{
     display: flex;
     flex-direction: row;
     height: 15vh;
-    width: 85vw;
-    background: rgb(255, 255, 255);
+    width: 90vw;
+    background: #f8f3ed;
     border-radius: 40px;
     /*padding:3%;*/
     margin: 2%;
-    box-shadow: 0px 2px 9px rgb(171, 171, 171);
+    box-shadow:  8px 8px 16px #d3cfc9, -8px -8px 16px #ffffff;
     z-index: 3;
     justify-content: center;
     align-items: center;
@@ -61,7 +61,7 @@ body{
     font-weight: bold;
     width: 16vw;
     /*position: absolute;*/
-    color: rgb(255, 155, 47);
+    color: #444444;
 }
 
 #arrive{
@@ -69,7 +69,7 @@ body{
     font-weight: bold;
     width: 16vw;
     /*position: absolute;*/
-    color: rgb(255, 155, 47);
+    color: #444444;
 }
 
 #setStart{
@@ -82,7 +82,7 @@ body{
     border-radius: 12px;
     border-color: rgb(255, 155, 47);
     box-shadow: rgb(171, 171, 171);
-    background: rgb(255, 255, 255);
+    background: #ffffff;
     /*display: flex;
     align-items: center;
     justify-content: center;*/
@@ -112,7 +112,7 @@ body{
 
 #changeBtn{
     border: 0;
-    background: rgb(255, 255, 255);
+    background: #f8f3ed;
     justify-content: right;
     border-radius: 50px;
 }
@@ -124,7 +124,7 @@ body{
 }
 
 .options{
-    width: 80vw;
+    width: 90vw;
     height: 50vh;
     display: flex;
     flex-direction: column;
@@ -132,10 +132,11 @@ body{
     border-radius: 16px;
     padding: 2%;
     margin: 2%;
-    background: rgb(255,255,255);
+    background: #f8f3ed;
     box-shadow: 0px 2px 9px rgb(171,171,171);
     z-index: 3;
     justify-content: center;
+    box-shadow:  8px 8px 16px #d3cfc9, -8px -8px 16px #ffffff;
 }
 
 .buttons{
@@ -204,7 +205,7 @@ body{
     display: flex;
     align-items: center;
     font-size: 4vw;
-    Color: rgb(255, 155, 47);
+    Color: #444444;
     padding: 3%;
 }
 
@@ -212,7 +213,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 10vh;
+    height: 8vh;
 }
 
 #switch1, #switch2 {
@@ -276,7 +277,7 @@ body{
     height: 50vh;
     border-radius: 40px;
     margin: 2%;
-    box-shadow: 0px 2px 9px rgb(171, 171, 171);
+    box-shadow: 8px 8px 16px #d3cfc9, -8px -8px 16px #ffffff;
 }
 .map{
     /*position: absolute;*/

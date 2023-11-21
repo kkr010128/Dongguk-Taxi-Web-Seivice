@@ -109,7 +109,7 @@ for(let i = 0; i < dateArray.length; i++) {
         formDate.append("date", dateNode.innerHTML);
         const payload = new URLSearchParams(formDate);
         if(dateNode.style.color != "lightgray") {
-            fetch('../../../MatchingRoomList', {
+            fetch('../../DataBase/MatchingRoomList', {
                 method: 'post',
                 headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -172,4 +172,35 @@ function setRoomPage() {
         }
         peopleElement.appendChild(imgElement);
     }
+}
+
+window.onload = function() {
+    if(sessionStorage.key(0) == null) {
+        location.href = "../index.html";
+        return;
+    }
+    let formDate = new FormData();
+    formDate.append("studentID", sessionStorage.key(0));
+    formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+    const payload = new URLSearchParams(formDate);
+    fetch('../DataBase/loginCheck', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    })
+    .then(function(response) {
+    return response.json();
+    })
+    .then(function(json) {
+        const userJson = JSON.stringify(json);
+        const obj = JSON.parse(userJson);
+        if(obj.result == "failure") {
+            location.href = "../index.html";
+        }
+        else {
+
+        }
+    });
 }
