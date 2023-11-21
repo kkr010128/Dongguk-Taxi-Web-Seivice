@@ -1,4 +1,4 @@
-// import { timeOver, code, setCode, setTimeOver } from "./registerData";
+import { timeOver, code, webMail, setCode, setTimeOver, setWebMail } from "./registerData.js";
 const email_sendButton = document.getElementById("send"); 
 const email_ResendButton = document.querySelector("#resend");
 const register_codeButton = document.querySelector("#codeComfirm"); 
@@ -6,11 +6,11 @@ const register_comfirm= document.querySelector("#register_form");
 const register_genderSelectButton= document.getElementsByName("gender");
 const errorMessage = document.querySelector("#error_message");
 const registerFinishButton = document.getElementById("confirm");
-let code = null;
-let timeOver = false;
+// let code = null;
+let inputCode = null;
+// let timeOver = false;
 let time_thred = null;
 let gender = null;
-let webMail = null;
 
 // 이벤트
 email_sendButton.addEventListener("click", function() { //이메일 전송 이벤트
@@ -22,17 +22,18 @@ email_ResendButton.addEventListener("click", function() { //이메일 재전송 
 }); 
 
 registerFinishButton.addEventListener("click", function() { 
-    window.location.href="../login/index.html";
+    window.location.href="../index.html";
 }); 
 
 register_codeButton.addEventListener("click", function() { //유효 코드 확인 이벤트
     const register_code = document.querySelector("#code");
+    inputCode = register_code.value
     if(timeOver) {
         errorMessage.innerHTML = "인증 시간이 만료되었습니다."
         errorMessage.style.display = "flex";
         return;
     }
-    if(register_code.value != code) {
+    if(inputCode != code) {
         errorMessage.innerHTML = "코드가 일치하지 않습니다."
         errorMessage.style.display = "flex";
         return;
@@ -46,7 +47,11 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
     const userName = document.querySelector("#username");
     const password = document.querySelector("#password");
     const studentId = document.querySelector("#studentId");
+    const studentIdValue = parseInt(studentId.value);
     event.preventDefault();
+    if(webMail == null) {
+        return;
+    }
     if(userName.value == "") {
         errorMessage.innerHTML = "이름을 입력해주세요."
         errorMessage.style.display = "flex";
@@ -67,18 +72,37 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
         errorMessage.style.display = "flex";
         return;
 	}
+    else if(!Number.isInteger(studentIdValue) || studentIdValue < 1000000000 || studentIdValue > 9999999999) {
+        errorMessage.innerHTML = "학번이 올바르지 않습니다."
+        errorMessage.style.display = "flex";
+        return;
+    }
     formData.append("gender", gender);
     formData.append("webMail", webMail);
+    formData.append("inputCode", inputCode);
     const payload = new URLSearchParams(formData);
-    fetch('../../DataBase/registerAction', {
+    fetch('../DataBase/registerAction', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: payload,
-      })
-      const popup = document.querySelector(".popup");
-      popup.classList.add("open_popup");
+    })
+    .then(function(response){
+        return response.text();
+    })
+    .then(function(txt) {
+        if(txt == "성공") {
+            const popup = document.querySelector(".popup");
+            popup.classList.add("open_popup");
+        }
+        else {
+            errorMessage.innerHTML = "이미 가입되어있습니다."
+            errorMessage.style.display = "flex";
+        }
+    });
+
+      
 })
 
 for(let i = 0; i < register_genderSelectButton.length; i++) { //성별 선택 이벤트
@@ -114,20 +138,47 @@ function sendButtonFunction() { //전송 버튼 함수
         errorMessage.innerHTML = "@dongguk.ac.kr 형식으로 작성해주세요."
         return;
     }
-    webMail = email.value;
+    let formData = new FormData();
+    formData.append("webMail", email.value);
+    const payload = new URLSearchParams(formData);
+    fetch('../DataBase/sendMail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload,
+    })
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(txt) {
+        const result = txt;
+        if(result == "없음") {
+            errorMessage.innerHTML = "이미 가입된 웹 메일입니다."
+            errorMessage.style.display = "flex";
+            
+        }
+        else {
+            sendMailSuccess(email.value, txt);
+        }
+    });
+}
+
+function sendMailSuccess(email, paramCode) { //이메일 전송이 성공 했을 시
+    setWebMail(email);
     errorMessage.style.display = "none";
     let time = 180; //인증 가능한 시간
-    code = randomCode();
-    // setCode(randomCode()); //유효 코드를 생성하여 저장
-    // sendEmail(code, emailNum + "@dongguk.ac.kr");
+    // code = paramCode;
+    setCode(paramCode); //유효 코드를 생성하여 저장
+    sendEmail(code, email);
     inputCodeUserInterfaceActivity();
     const timer = document.querySelector(".timer");
     timer.style.display = "flex";
     email_ResendButton.style.display = "none";
     time_thred = setInterval(function () { //타이머
                 
-        minutes = parseInt(time / 60, 10);
-        seconds = parseInt(time % 60, 10);
+        let minutes = parseInt(time / 60, 10);
+        let seconds = parseInt(time % 60, 10);
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -152,8 +203,8 @@ function sendEmail(msg, e) {
 
 function timeStop() {
     clearInterval(time_thred);
-    // setTimeOver(true);
-    timeOver = true;
+    setTimeOver(true);
+    // timeOver = true;
 }
 
 function randomCode() {
