@@ -2,7 +2,7 @@ let pg_v = document.querySelector(".pg_v");
 let pg = document.querySelector(".innerCircle");
 let c = 0;
 let c1 = -10; // 온도 그라데이션 표현을 위한것
-let degree = 50; // 이 값 수정하면 온도 바뀜 0~360
+let degree = 300; // 이 값 수정하면 온도 바뀜 0~360
 
 // 30~40 사이 값으로 변환해서 저장. toFixed(1)은 소수점 1자리까지
 let temper = (30 + (degree / 360) * 10).toFixed(1);
@@ -45,8 +45,17 @@ let destination = "동국대"; // 팟 목적지 변수
 document.getElementById("schedule-text").textContent =
   scheduleTime + "시 " + departure + " - " + destination + " 팟이 있어요";
 
-window.onload = function() { //로그인 안했는데 홈 주소로 들어려고 할때 다시 로그인 화면으로 보내줌
+window.onload = function () {
+  //로그인 안했는데 홈 주소로 들어려고 할때 다시 로그인 화면으로 보내줌
   // if(localStorage.getItem("test") == null) {
   //   location.href = "../login/index.html";
   // }
+};
+
+/*function openDrawer() {
+  document.getElementById("user_log").style.height = "800px";
+} 이용내역 네모 누르면 밑에 내역 쭈르륵 나오게 하고 싶엇는데 일단 보류 그냥 새 창 만들고 연결하던가 네모 누르면 드르륵 밑에 열리게 연결하던가..*/
+
+function open_log() {
+  window.location.href = "user_log/user_log.html"; // 이용내역 페이지로 이동
 }

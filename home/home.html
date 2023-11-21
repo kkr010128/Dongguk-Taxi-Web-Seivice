@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no"
     />
-    <title>동행: 같이타요</title>
+    <title>홈 화면</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
       rel="stylesheet"
@@ -53,7 +53,7 @@
         </div>
 
         <!--이용내역-->
-        <div class="user_log" onclick="">
+        <div class="user_log" id="user_log" onclick="open_log()">
           <div class="log-comment">
             <div class="log-title">이용내역</div>
             <div id="log-text">최근 이용내역이에요</div>
@@ -64,6 +64,7 @@
 
     <!--하단 바-->
     <script src="../lower_bar/lower_barScript.js"></script>
+
     <script src="./home.js"></script>
   </body>
 </html>

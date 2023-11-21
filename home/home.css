@@ -75,13 +75,15 @@ p {
   border-radius: 16px;
   display: flex;
   margin-bottom: 10px;
-  box-shadow: 4px 3px 9px rgb(220, 220, 220);
+  box-shadow: 2px 3px 9px rgb(220, 220, 220);
+  transition: 0.5s; /* 애니메이션 그냥 함 신기해서 넣어봣음.. */
 }
 .user_schedule {
   flex-direction: column;
 }
 .user_log {
   flex-direction: column;
+  cursor: pointer;
 }
 
 .degree-textContainer {
@@ -113,11 +115,13 @@ p {
 
 #degree-value {
   margin-top: 10%;
-  border: 0.01em solid rgb(193, 190, 190);
-  background-color: rgb(246, 243, 243);
-  border-radius: 8px;
+  line-height: 40px;
+  border: 0.01em solid rgb(225, 222, 222);
+  box-shadow: 1px 1px 15px rgb(220, 220, 220);
+  border-radius: 14px;
   text-align: center;
   width: 90%;
+  height: 40px;
 }
 
 .bg,
@@ -142,6 +146,7 @@ p {
   position: relative;
   background: conic-gradient(orange 120deg, white 125deg);
   box-shadow: 0px 2px 9px rgb(171, 171, 171);
+  margin-right: 10%;
 }
 
 .innerCircle::before {
@@ -165,9 +170,8 @@ p {
 }
 
 #schedule-text {
-  border: 0.01em solid rgb(193, 190, 190);
-  background-color: rgb(246, 243, 243);
-
+  border: 0.01em solid rgb(225, 222, 222);
+  box-shadow: 1px 1px 15px rgb(220, 220, 220);
   border-radius: 14px;
   width: 90%;
   height: 50%;
