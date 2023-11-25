@@ -2,8 +2,8 @@ const script = document.createElement("script");
 const personCnt = document.getElementById("maxPerson");
 const minusBtn = document.getElementById("minus");
 const plusBtn = document.getElementById("plus");
-const markers = [null, null];
-const vertexArr = []; //중요한 놈임
+const markers = [null, null]; //중요
+const PolyLine = [null]; //중요
 
 /*script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing?autoload=false";
 script.onload = () => {
@@ -12,7 +12,6 @@ script.onload = () => {
     });
 };
 document.body.appendChild(script);*/
-
 
 /**드롭다운 리스트 이벤트 */
 document.querySelectorAll("select").forEach(function(e) {
@@ -30,6 +29,9 @@ function setMarkers(values, which){
 
     var marker;
     var LatLng = [];
+    const vertexArr = []; //중요한 놈임
+
+    PolyLine[0]!=null ? PolyLine[0].setMap(null) : null;
 
     switch(values){
         case "entrance":
@@ -86,7 +88,7 @@ function setMarkers(values, which){
         if(vertexArr.length!=0)
             vertexArr.length=0;
         
-        console.log(vertexArr.length);
+        //console.log(vertexArr.length);
         var start_x = markers[0].getPosition().getLng();
         var start_y = markers[0].getPosition().getLat();
         var arrive_x = markers[1].getPosition().getLng();
@@ -126,8 +128,9 @@ function setMarkers(values, which){
                 strokeOpacity: 0.7,               
                 strokeStyle: "shortdashdot"       
             });
+            PolyLine[0] = roadLine;
             roadLine.setMap(map);
-            //getLength 써서 거리 알려줘도 좋을듯
+
         })
     }
 }
@@ -184,23 +187,23 @@ document.getElementById("cancelBtn").addEventListener('click', function(){
    
 /**완료버튼 이벤트 TODO: 누를 시 매칭 + 정보를 넘겨주는 기능 추가 필요 */
 document.getElementById("setBtn").addEventListener('click', function(){
-    var serverUrl = "http://dongguk-taxi.kro.kr";
+    var serverUrl = "http://127.0.0.1:5500/main_page/main_page.html"; //"http://dongguk-taxi.kro.kr";
+    
+    var formdata = new FormData();
+    formdata.append("equal_sex",);
+    var swi = document.getElementById("switch1");
+    console.log(swi.Check);
     var options = {
         method: "POST",
-        headers: {
-            //뭐적어야 되징 흑흑
-        },
-    }
+        body: formdata
+    };
     fetch(serverUrl, options)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("not json create");
-        }
-        return response.json();
+    .then(response => response.json())
+    .then(data=>{
+        console.log(data);
     })
 
-
-    window.location.href="../matching_room/matching_room.html"; //임시
+    //window.location.href="../matching_room/matching_room.html"; //임시
 });
    
 /**지도 생성하기❤️ 
