@@ -13,20 +13,99 @@ script.onload = () => {
 };
 document.body.appendChild(script);*/
 
+document.addEventListener("DOMContentLoaded", function(){
+    var selecter = document.getElementById("setArrive");
+    
+    for(let i=0; i<selecter.options.length; i++){
+        var b = selecter.options[i];
+        if(b.classList.contains("sj")){
+            b.disabled = true;
+        }
+    }
+});
+
 /**드롭다운 리스트 이벤트 */
 document.querySelectorAll("select").forEach(function(e) {
     e.addEventListener("change", function(){
         if(this.name=="start_location"){
             setMarkers(this.value, "start");
+            selecterOptionDisable("setStart");
         }else if(this.name=="arrive_location"){
             setMarkers(this.value, "arrive");
+            selecterOptionDisable("setArrive");
         }
     });
 });
 
+/**드롭다운 리스트 비활성화 */
+function selecterOptionDisable(which){
+    var selecter = document.getElementById(which);
+    var selectedOptions = selecter.options[selecter.selectedIndex];
+    var place;
+
+    if(which == "setStart"){
+        place = "setArrive";
+    }else if(which == "setArrive"){
+        place = "setStart"
+    }
+
+    if(selectedOptions.classList.contains("sj")){
+        var op = document.getElementById(place);
+        for(let i=0; i<op.options.length; i++){
+            var b = op.options[i];
+            if(b.classList.contains("sj")){
+                b.disabled = true;
+            }else if(b.classList.contains("another")){
+                b.disabled = false;
+            }
+        }
+    }
+    else if(selectedOptions.classList.contains("another")){
+        var op = document.getElementById(place);
+        for(let i=0; i<op.options.length; i++){
+            var b = op.options[i];
+            if(b.classList.contains("another")){
+                b.disabled = true;
+            }else if(b.classList.contains("sj")){
+                b.disabled = false;
+            }
+        }
+    }
+}
+
+/** 출발, 도착 위치 바꾸기 - 마커 바뀌는거까지 구현 완*/
+document.getElementById("change").addEventListener("click", function(){
+    let start = document.getElementById("setStart");
+    let arrive = document.getElementById("setArrive");
+    let temp = start.value;
+    let tmpMarker;
+
+    start.value = arrive.value;
+    arrive.value = temp;
+    
+    tmpMarker = markers[0];
+    markers[0] = markers[1];
+    markers[1] = tmpMarker;
+
+    for(let i=0; i<start.options.length; i++){
+        var startLocation = start.options[i];
+        var arriveLocation = arrive.options[i];
+        if(startLocation.disabled){
+            startLocation.disabled = false;
+        }else if(startLocation.disabled==false){
+            startLocation.disabled = true;
+        }
+        if(arriveLocation.disabled){
+            arriveLocation.disabled = false;
+        }else if(arriveLocation.disabled==false){
+            arriveLocation.disabled = true;
+        }
+    }
+});
+
+
 /**값받기 - 선택한 값 받아서 마커 생성  TODO: 마커 이미지 출/도착 필요 ❤️❤️*/
 function setMarkers(values, which){
-
     var marker;
     var LatLng = [];
     const vertexArr = []; //중요한 놈임
@@ -38,9 +117,9 @@ function setMarkers(values, which){
             LatLng[0]=35.8625;
             LatLng[1]=129.1945;
             break;
-        case "schoolyard": //운동장 왜인지 모르겟는데 마커가 안찍힘 😢
-            LatLng[0] = 35.860479;
-            LatLng[1] = 129.194337;
+        case "schoolyard": //운동장 왜인지 모르겟는데 마커가 안찍힘 😢 지정하면 지도 버그남
+            LatLng[0]=35.860479;
+            LatLng[1]=129.194337;
             break;
         case "dorm":
             LatLng[0]=35.863694;
@@ -68,10 +147,10 @@ function setMarkers(values, which){
     });
 
     //이전 마커 지우기
-    if(which=="start" && markers[0]!=null){
+    if(which == "start" && markers[0]!=null){
         markers[0].setMap(null);
         markers[0] = marker;
-    }else if(which=="arrive" && markers[1]!=null){
+    }else if(which =="arrive" && markers[1]!=null){
         markers[1].setMap(null);
         markers[1] = marker;
     }
@@ -111,8 +190,7 @@ function setMarkers(values, which){
             return response.json();
         })
         .then((data)=> {
-            //console.log(data.routes[0].sections[0].roads);
-            
+            //console.log(data.routes[0].sections[0].roads); 
             //겁나 중요한 샛기
             var createRoute = data.routes[0].sections[0].roads.forEach(marker => {
                 marker.vertexes.forEach((vertex, num)=>{
@@ -130,25 +208,10 @@ function setMarkers(values, which){
             });
             PolyLine[0] = roadLine;
             roadLine.setMap(map);
-
+            
         })
     }
 }
-
-/** 출발, 도착 위치 바꾸기 - 마커 바뀌는거까지 구현 완*/
-document.getElementById("change").addEventListener("click", function(){
-    let start = document.getElementById("setStart");
-    let arrive = document.getElementById("setArrive");
-    let temp = start.value;
-    let tmpMarker;
-
-    start.value = arrive.value;
-    arrive.value = temp;
-    
-    tmpMarker = markers[0];
-    markers[0] = markers[1];
-    markers[1] = tmpMarker;
-});
 
 
 /**사람 수 조정 +, - 버튼 */
@@ -187,12 +250,26 @@ document.getElementById("cancelBtn").addEventListener('click', function(){
    
 /**완료버튼 이벤트 TODO: 누를 시 매칭 + 정보를 넘겨주는 기능 추가 필요 */
 document.getElementById("setBtn").addEventListener('click', function(){
-    var serverUrl = "http://127.0.0.1:5500/main_page/main_page.html"; //"http://dongguk-taxi.kro.kr";
+    var serverUrl = "http://dongguk-taxi.kro.kr/main_page/main_page.html"; //"http://127.0.0.1:5500/main_page/main_page.html";
     
     var formdata = new FormData();
-    formdata.append("equal_sex",);
-    var swi = document.getElementById("switch1");
-    console.log(swi.Check);
+    var equal_sex = document.getElementById("switch1").value;
+    var maximum_person = document.getElementById("maxPerson").innerText;
+    var departure_time = [document.getElementById("setTime").value,
+                        document.getElementById("setMinute").value];
+    var many_baggage = document.getElementById("switch2").value;
+
+    formdata.append("equal_sex", equal_sex);
+    formdata.append("maximum_person", maximum_person);
+    formdata.append("departure_time", departure_time[0] + ":" + departure_time[1]);
+    formdata.append("many_baggage", many_baggage);
+    formdata.append("Start", document.getElementById("setStart").value);
+    formdata.append("Arrive", document.getElementById("setArrive").value);
+
+    for(let pair of formdata.entries()){
+        console.log(pair[0] + ": " + pair[1]); //데이터 삽입 확인용
+    }
+
     var options = {
         method: "POST",
         body: formdata
@@ -203,7 +280,7 @@ document.getElementById("setBtn").addEventListener('click', function(){
         console.log(data);
     })
 
-    //window.location.href="../matching_room/matching_room.html"; //임시
+    //window.location.href="../matching_room/matching_room.html"; 
 });
    
 /**지도 생성하기❤️ 

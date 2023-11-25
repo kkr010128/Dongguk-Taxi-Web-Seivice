@@ -102,6 +102,7 @@ body{
     /*display: flex;
     align-items: center;
     justify-content: center;*/
+
 }
 
 #btnBox{
@@ -296,6 +297,7 @@ body{
     height: 100%;
     border-radius: 40px;
 }
+
 
 @media screen and (min-width: 450px) and (min-height: 700px){
     
