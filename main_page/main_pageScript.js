@@ -3,6 +3,7 @@ const personCnt = document.getElementById("maxPerson");
 const minusBtn = document.getElementById("minus");
 const plusBtn = document.getElementById("plus");
 const markers = [null, null];
+const vertexArr = []; //중요한 놈임
 
 /*script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing?autoload=false";
 script.onload = () => {
@@ -24,18 +25,20 @@ document.querySelectorAll("select").forEach(function(e) {
     });
 });
 
-/**값받기 - 선택한 값 받아서 마커 생성 TODO: 마커 두 개 올려질 시에 맵 크기 줄이며 경로 생성*/
+/**값받기 - 선택한 값 받아서 마커 생성  TODO: 마커 이미지 출/도착 필요 ❤️❤️*/
 function setMarkers(values, which){
+
     var marker;
     var LatLng = [];
+
     switch(values){
         case "entrance":
             LatLng[0]=35.8625;
             LatLng[1]=129.1945;
             break;
-        case "schoolyard":
-            LatLng[0] = 35.860583;
-            LatLng[1] = 129.194609;
+        case "schoolyard": //운동장 왜인지 모르겟는데 마커가 안찍힘 😢
+            LatLng[0] = 35.860479;
+            LatLng[1] = 129.194337;
             break;
         case "dorm":
             LatLng[0]=35.863694;
@@ -74,23 +77,59 @@ function setMarkers(values, which){
     which=="start" ? markers[0]=marker : markers[1]=marker;
     marker.setMap(map);
 
+    //지도 중심 이동하기, 경로 생성
     if(markers[0]==null || markers[1]==null){
         map.panTo(new kakao.maps.LatLng(LatLng[0], LatLng[1]));
     }else if(markers[0]!=null && markers[1]!=null) { 
+
         map.setBounds(new kakao.maps.LatLngBounds(markers[0].getPosition(), markers[1].getPosition()));
-    }
+        if(vertexArr.length!=0)
+            vertexArr.length=0;
+        
+        console.log(vertexArr.length);
+        var start_x = markers[0].getPosition().getLng();
+        var start_y = markers[0].getPosition().getLat();
+        var arrive_x = markers[1].getPosition().getLng();
+        var arrive_y = markers[1].getPosition().getLat();
 
-    if(markers[0]!=null && markers[1]!=null){
-        var roadLine = new kakao.maps.Polyline({
-            path: [markers[0].getPosition(), markers[1].getPosition()], 
-            strokeWeight: 3,                  
-            strokeColor: "rgb(255, 155, 47)", 
-            strokeOpacity: 0.7,               
-            strokeStyle: "shortdashdot"       
+        var routeUrl = `https://apis-navi.kakaomobility.com/v1/directions?priority=RECOMMEND&car_type=1&car_fuel=GASOLINE&origin=${start_x},${start_y}&destination=${arrive_x},${arrive_y}`;
+
+        let header = {
+            method: "GET",
+            headers: {
+                Authorization: "KakaoAK a6f9e20a12bfdba4e1ef0fc22d616bcc"
+            },
+        };
+        //Ajax 호출
+        fetch(routeUrl, header)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("error");
+            }
+            return response.json();
         })
-        roadLine.setMap(map);
+        .then((data)=> {
+            //console.log(data.routes[0].sections[0].roads);
+            
+            //겁나 중요한 샛기
+            var createRoute = data.routes[0].sections[0].roads.forEach(marker => {
+                marker.vertexes.forEach((vertex, num)=>{
+                    if(num%2==0){
+                        vertexArr.push(new kakao.maps.LatLng(marker.vertexes[num+1], marker.vertexes[num]));
+                    }
+                });
+            })
+            var roadLine = new kakao.maps.Polyline({
+                path: vertexArr,
+                strokeWeight: 3,                  
+                strokeColor: "red", 
+                strokeOpacity: 0.7,               
+                strokeStyle: "shortdashdot"       
+            });
+            roadLine.setMap(map);
+            //getLength 써서 거리 알려줘도 좋을듯
+        })
     }
-
 }
 
 /** 출발, 도착 위치 바꾸기 - 마커 바뀌는거까지 구현 완*/
@@ -105,7 +144,7 @@ document.getElementById("change").addEventListener("click", function(){
     
     tmpMarker = markers[0];
     markers[0] = markers[1];
-    markers[0] = tmpMarker;
+    markers[1] = tmpMarker;
 });
 
 
@@ -140,15 +179,31 @@ minusBtn.addEventListener("click", function(){
 
 /**취소 버튼 이벤트 */
 document.getElementById("cancelBtn").addEventListener('click', function(){
-
+    window.location.reload();
 });
    
 /**완료버튼 이벤트 TODO: 누를 시 매칭 + 정보를 넘겨주는 기능 추가 필요 */
 document.getElementById("setBtn").addEventListener('click', function(){
+    var serverUrl = "http://dongguk-taxi.kro.kr";
+    var options = {
+        method: "POST",
+        headers: {
+            //뭐적어야 되징 흑흑
+        },
+    }
+    fetch(serverUrl, options)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("not json create");
+        }
+        return response.json();
+    })
+
+
     window.location.href="../matching_room/matching_room.html"; //임시
 });
    
-/**지도 생성하기❤️ */
+/**지도 생성하기❤️ 
 function generateMap(){
     var container = document.getElementById('map'),
     options = {
@@ -165,4 +220,4 @@ function generateMap(){
     });
 
     return map;
-}
+}*/
