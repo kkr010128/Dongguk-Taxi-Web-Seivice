@@ -77,7 +77,7 @@ window.onload = function () {
         getSchedule(obj.result.success.studentID);
       }
     });
-};
+}
 
 function getSchedule(studentID) {
   let formDate = new FormData();
@@ -113,5 +113,5 @@ function getSchedule(studentID) {
 } 이용내역 네모 누르면 밑에 내역 쭈르륵 나오게 하고 싶엇는데 일단 보류 그냥 새 창 만들고 연결하던가 네모 누르면 드르륵 밑에 열리게 연결하던가..*/
 
 function open_log() {
-  window.location.href = "user_log/user_log.html"; // 이용내역 페이지로 이동
+  window.location.href = "use_log/use_log.html"; // 이용내역 페이지로 이동
 }
