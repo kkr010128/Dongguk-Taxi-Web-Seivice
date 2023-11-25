@@ -22,7 +22,6 @@ p {
 	align-items: center;
 	justify-content: center;
 	top: 3.5em;
-	display: none;
 }
 
 .matching_check p {
@@ -63,10 +62,23 @@ p {
 .matching_current_room {
     width: 60%;
 	height: 60%;
-	display: flex;
+	display: none;
 	align-items: center;
     border: 2px solid lightgray;
 	flex-direction: column;
+	border-radius: 16px;
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0px 2px 9px rgb(171, 171, 171);
+}
+
+.matching_current_room_none {
+    width: 60%;
+	height: 60%;
+	display: none;
+	align-items: center;
+    border: 2px solid lightgray;
+	flex-direction: column;
+	justify-content: center;
 	border-radius: 16px;
 	background-color: rgb(255, 255, 255);
 	box-shadow: 0px 2px 9px rgb(171, 171, 171);

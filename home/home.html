@@ -6,21 +6,18 @@
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no"
     />
-    <title>동행: 같이타요</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>홈 화면</title>
     <link rel="stylesheet" href="../lower_bar/lower_barStyle.css" />
 
     <link rel="stylesheet" href="./home.css" />
   </head>
 
+  <!---2023년 11월 25일 최신-->
   <body>
     <div class="wrap">
       <div class="wrap1">
         <div class="main_title">
-          <div>동행</div>
+          <p>동행</p>
         </div>
       </div>
     </div>
@@ -31,7 +28,7 @@
         <div class="user_schedule" onclick="">
           <div class="schedule-comment">
             <div class="schedule-title">오늘의 택시 일정</div>
-            <div id="schedule-text">??시 ??에서 택시 팟이 있어요</div>
+            <div id="schedule-text"></div>
           </div>
         </div>
 
@@ -40,22 +37,23 @@
           <div class="degree-textContainer">
             <div class="degree-comment">
               <div class="degree-title">나의 매너온도는?</div>
-
-              <div id="degree-value">??도. 훌륭해요~</div>
+              <div id="degree-value"></div>
             </div>
           </div>
           <div class="bg">
             <div class="innerCircle">
-              <span class="pg_v">0%</span>
+              <!--숫자 띠리링 변하게 만들거-->
+              <p id="temperature"></p>
+              <span class="pg_v"></span>
             </div>
           </div>
         </div>
 
         <!--이용내역-->
-        <div class="user_log" onclick="">
+        <div class="user_log" id="user_log" onclick="open_log()">
           <div class="log-comment">
             <div class="log-title">이용내역</div>
-            <div class="log-text">최근 이용내역이에요</div>
+            <div id="log-text">최근 이용내역이에요</div>
           </div>
         </div>
       </div>
@@ -63,6 +61,7 @@
 
     <!--하단 바-->
     <script src="../lower_bar/lower_barScript.js"></script>
+
     <script src="./home.js"></script>
   </body>
 </html>
