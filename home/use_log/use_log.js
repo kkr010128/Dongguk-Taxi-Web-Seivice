@@ -23,7 +23,6 @@ function getUseLog(studentID) {
   .then(function(json) {
     const roomJson = JSON.stringify(json);
     const useLogList = JSON.parse(roomJson).room_information;
-    console.log(useLogList);
     createUseLogGUI(useLogList);
   });
 }
