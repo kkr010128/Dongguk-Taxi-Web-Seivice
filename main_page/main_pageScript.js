@@ -117,7 +117,7 @@ function setMarkers(values, which){
             LatLng[0]=35.8625;
             LatLng[1]=129.1945;
             break;
-        case "schoolyard": //운동장 왜인지 모르겟는데 마커가 안찍힘 😢 지정하면 지도 버그남
+        case "schoolYard": //운동장 왜인지 모르겟는데 마커가 안찍힘 😢 지정하면 지도 버그남
             LatLng[0]=35.860479;
             LatLng[1]=129.194337;
             break;

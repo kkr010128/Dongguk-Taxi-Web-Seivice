@@ -2,6 +2,7 @@ const previousCalendar = document.querySelector(".calendar_previous");
 const nextCalendar = document.querySelector(".calendar_next");
 const previousRoom = document.querySelector(".matching_previous_room");
 const nextRoom = document.querySelector(".matching_next_room");
+const signBtn = document.querySelector("#matchingRoomSign");
 let initDate = new Date();
 let nowYear;
 let nowMonth;
@@ -26,6 +27,27 @@ previousRoom.addEventListener("click", function() {
 nextRoom.addEventListener("click", function() {
     roomPage = roomPage < (roomList.length -1) ? roomPage + 1 : roomPage;
     setRoomPage();
+});
+
+signBtn.addEventListener("click", function() {
+    let formDate = new FormData();
+    formDate.append("studentID", sessionStorage.key(0));
+    formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+    formDate.append("roomNumber", roomList[roomPage].number);
+    const payload = new URLSearchParams(formDate);
+    fetch('../../DataBase/matchingRoomSign', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    })
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(txt) {
+        console.log(txt);
+    });
 });
 
 function createCalendar(year, month) {
@@ -120,12 +142,11 @@ for(let i = 0; i < dateArray.length; i++) {
                 body: payload
             })
             .then(function(response) {
-            return response.json();
+                return response.json();
             })
             .then(function(json) {
                 const roomJson = JSON.stringify(json);
                 roomList = JSON.parse(roomJson).room_information;
-                console.log(roomList);
                 const calendarWrap = document.querySelector(".calendar_wrap");
                 calendarWrap.style.display = "none";
                 setRoomPage();
@@ -140,7 +161,7 @@ function setRoomPage() {
     if(roomList.length < 1) {
         const div = document.querySelector(".matching_current_room_none");
         div.style.display = "flex";
-        div.children[0].innerHTML = nowYear + "년" + nowMonth + "월" + nowDate + "일에 해당하는 방이 없습니다."
+        div.children[0].innerHTML = nowYear + "년" + (nowMonth+1) + "월" + nowDate + "일에 해당하는 방이 없습니다."
         return;
     }
     document.querySelector(".matching_current_room").style.display = "flex";
@@ -148,8 +169,9 @@ function setRoomPage() {
     const divElement = document.getElementsByClassName("matching_room_div");
     const h1Element = divElement[0].children[0];
     h1Element.innerHTML = "#" + roomInfo.number;
-    const date = roomInfo.date.split("/");
-    divElement[1].children[0].innerHTML = date[1] + "월" + date[2] + "일 " + roomInfo.time;
+    const date = roomInfo.date.split("-");
+    const time = roomInfo.time.split(":");
+    divElement[1].children[0].innerHTML = date[1] + "월" + date[2] + "일 " + time[0] + "시 " + time[1] + "분";
     divElement[2].children[0].innerHTML = roomInfo.from;
     divElement[4].children[0].innerHTML = roomInfo.to;
     let imgElement = divElement[5].children[0];
@@ -175,7 +197,7 @@ function setRoomPage() {
         if(i == 0) 
             imgElement.setAttribute("src", "../assets/main/room_list/person_joined.png");
         else {
-            if(roomInfo.members[i - 1] != "null") 
+            if(roomInfo.members[i - 1] != "0") 
                 imgElement.setAttribute("src", "../assets/main/room_list/person_joined.png");
             else
                 imgElement.setAttribute("src", "../assets/main/room_list/person_blank.png");
