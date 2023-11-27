@@ -103,23 +103,30 @@ p {
   margin-top: 5%;
 }
 
-#schedule-text,
+#schedule-text {
+  margin-top: 4%;
+}
 #log-text {
   margin-top: 8%;
 }
 
 .degree-comment {
-  margin-left: 15%;
   margin-top: 8%;
 }
 
+.degree-title {
+  margin-left: 15%;
+}
+
 #degree-value {
+  margin-left: 6%;
   margin-top: 10%;
   line-height: 40px;
   border: 0.01em solid rgb(225, 222, 222);
   box-shadow: 1px 1px 15px rgb(220, 220, 220);
   border-radius: 14px;
   text-align: center;
+  font-size: 15px;
   width: 90%;
   height: 40px;
 }
@@ -173,8 +180,8 @@ p {
   border: 0.01em solid rgb(225, 222, 222);
   box-shadow: 1px 1px 15px rgb(220, 220, 220);
   border-radius: 14px;
-  width: 90%;
-  height: 50%;
+  width: 88%;
+  height: 60px;
   text-align: center;
   justify-content: center;
   flex-direction: column;
