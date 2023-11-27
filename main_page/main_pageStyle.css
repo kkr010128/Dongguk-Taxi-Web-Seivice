@@ -297,6 +297,7 @@ body{
     border-radius: 12px;
     background: #f8f3ed;
     border-color: #f8f3ed;
+    color: #444444;
     box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
 }
 
@@ -328,16 +329,27 @@ body{
     
 }
 
-select{
-    /*ios대응*/
+input, textarea {
+
+    appearance: none;
+    
+    -webkit-appearance: none;
+    
+    -webkit-border-radius: 0;
+    
+    }
+    
+    
+    select {
     -webkit-appearance: none;
     -moz-appearance: none; 
     appearance: none;
-}
-
-input{
-    /*ios대응*/
-    appearance: none;
-    -webkit-appearance: none;
-    -webkit-border-radius: 0;
-}
+    
+    /*화살표 배경 넣기*/
+    background: #fff url('이미지경로') no-repeat 98% center;
+    }
+    
+    select::-ms-expand{
+    /* 화살표 없애기 for IE10, 11*/ 
+    display:none;
+    }
