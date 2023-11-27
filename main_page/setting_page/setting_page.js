@@ -2,25 +2,45 @@
 //     window.location.href = "http://dongguk-taxi.kro.kr/dongguk_dh/main_page/setting_page/dev_info/dev_info.html";
 //   }
 
-
-
   const handle = document.getElementById("handle");
   const drawer = document.getElementById("drawer");
+  const mainWrap = document.querySelectorAll(".wrap_main");
   
-  handle.addEventListener('click', function(){
-      if (drawer.classList.contains("drawer_close")) {
-          drawer.classList.remove("drawer_close");
-          drawer.classList.add("drawer_open");
-      }else if(drawer.classList.contains("drawer_open")){
-          drawer.classList.remove("drawer_open");
-          drawer.classList.add("drawer_close");
-      }
-  });
+  function drawerOpen(){
+    if (drawer.classList.contains("drawer_close")) {
+      console.log("drawer Open!");
+      drawer.classList.remove("drawer_close");
+      drawer.classList.add("drawer_open");
+    }
+    else if (drawer.classList.contains("drawer_open")) {
+      console.log("drawer Closed");
+      drawer.classList.remove("drawer_open");
+      drawer.classList.add("drawer_close");
+    }
+  }
+  
+  function drawerClose(){
+    if (drawer.classList.contains("drawer_open")) {
+      console.log("drawer Closed!");
+      drawer.classList.remove("drawer_open");
+      drawer.classList.add("drawer_close");
+    }
+  }
+  
+  handle.addEventListener("click", drawerOpen);
+  mainWrap.forEach((e) => e.addEventListener("click", drawerClose));
 
 
-const imageUpload = document.getElementById("imageUpload");
+  const dragBar = document.querySelectorAll("hr");
 
-imageUpload.addEventListener("change", function(event) {
+  dragBar.forEach((bar) => bar.addEventListener("drag",(event)=>{
+    dragged = event.target;
+    event.target.classList.add("dragging");
+  }));
+
+  const imageUpload = document.getElementById("imageUpload");
+
+  imageUpload.addEventListener("change", function(event) {
   const file = event.target.files[0];
   
   // 파일 처리 로직 추가
