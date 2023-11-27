@@ -1,73 +1,112 @@
-const Chat = (function(){
-        const myName = "blue";
-     
-        // init 함수
-        function init() {
-            // enter 키 이벤트
-            $(document).on('keydown', 'div.input-div textarea', function(e){
-                if(e.keyCode == 13 && !e.shiftKey) {
-                    e.preventDefault();
-                    const message = $(this).val();
-     
-                    // 메시지 전송
-                    sendMessage(message);
-                    // 입력창 clear
-                    clearTextarea();
-                }
-            });
-        }
-     
-        // 메세지 태그 생성
-        function createMessageTag(LR_className, senderName, message) {
-            // 형식 가져오기
-            let chatLi = $('div.chat.format ul li').clone();
-     
-            // 값 채우기
-            chatLi.addClass(LR_className);
-            chatLi.find('.sender span').text(senderName);
-            chatLi.find('.message span').text(message);
-     
-            return chatLi;
-        }
-     
-        // 메세지 태그 append
-        function appendMessageTag(LR_className, senderName, message) {
-            const chatLi = createMessageTag(LR_className, senderName, message);
-     
-            $('div.chat:not(.format) ul').append(chatLi);
-     
-            // 스크롤바 아래 고정
-            $('div.chat').scrollTop($('div.chat').prop('scrollHeight'));
-        }
-     
-        // 메세지 전송
-        function sendMessage(message) {
-            // 서버에 전송하는 코드로 후에 대체
-            const data = {
-                "senderName"    : "blue",
-                "message"        : message
-            };
-     
-            // 통신하는 기능이 없으므로 여기서 receive
-            resive(data);
-        }
-     
-        // 메세지 입력박스 내용 지우기
-        function clearTextarea() {
-            $('div.input-div textarea').val('');
-        }
-     
-        // 메세지 수신
-        function resive(data) {
-            const LR = (data.senderName != myName)? "left" : "right";
-            appendMessageTag("right", data.senderName, data.message);
-        }
-     
-        return {
-            'init': init
-        };
-    })();
-     
-    $(function(){
-        Chat.init();
+function createChatGUI(chatList) {
+    for(let i = 0; i < chatList.length; i++) {
+        chat = chatList[i];
+        const divElement = document.createElement("div");
+        divElement.classList.add("chat_format");
+        const ulElement = document.createElement("ul");
+        const liElement = document.createElement("li");
+
+        const senderDiv = document.createElement("div");
+        senderDiv.classList.add("sender");
+        const span1Element = document.createElement("span");
+        span1Element.innerHTML = chat.studentID + " " + chat.name;
+        senderDiv.appendChild(span1Element);
+        liElement.appendChild(senderDiv);
+
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+        const span2Element = document.createElement("span");
+        span2Element.innerHTML = chat.content;
+        messageDiv.appendChild(span2Element);
+        liElement.appendChild(messageDiv);
+
+        const timeDiv = document.createElement("div");
+        timeDiv.classList.add("time");
+        const span3Element = document.createElement("span");
+        span3Element.innerHTML = chat.time;
+        timeDiv.appendChild(span3Element);
+        liElement.appendChild(timeDiv);
+
+        ulElement.appendChild(liElement);
+        divElement.appendChild(ulElement);
+        
+        const chatDiv = document.querySelector(".chat");
+        chatDiv.children[0].appendChild(divElement);
+    }
+}
+
+function getChatID(studentID) {
+    const formDate = new FormData();
+    formDate.append("type", "get");
+    formDate.append("studentID", studentID);
+    const payload = new URLSearchParams(formDate);
+    fetch('../../DataBase/chatSelect', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    })
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(txt) {
+        const num = parseInt(txt);
+        getChatLog(num);
     });
+}
+
+function getChatLog(chatID) {
+    const date = new Date();
+    const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+    const formDate = new FormData();
+    formDate.append("chatID", chatID);
+    formDate.append("dateTime", dateTime);
+    const payload = new URLSearchParams(formDate);
+    fetch('../DataBase/loadChat', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(json) {
+        const Json = JSON.stringify(json);
+        const obj = JSON.parse(Json);
+        createChatGUI(obj.chat_information);
+    });
+}
+
+window.onload = function() {
+    if(sessionStorage.key(0) == null) {
+        location.href = "../index.html";
+        return;
+    }
+    let formDate = new FormData();
+    formDate.append("studentID", sessionStorage.key(0));
+    formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+    const payload = new URLSearchParams(formDate);
+    fetch('../DataBase/loginCheck', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(json) {
+        const userJson = JSON.stringify(json);
+        const obj = JSON.parse(userJson);
+        if(obj.result == "failure") {
+            location.href = "../index.html";
+        }
+        else {
+            getChatID(obj.result.success.studentID);
+        }
+    });
+}
