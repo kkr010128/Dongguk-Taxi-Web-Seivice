@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>채팅방 목록</title>
-  <link rel="stylesheet" href="./romm.css">
+  <link rel="stylesheet" href="./room.css">
 </head>
 <body>
   <div class="chat-room-list">
@@ -17,29 +17,30 @@
       <!-- 채팅방에 대한 추가 정보를 여기에 추가하세요 -->
     </div>
 
-    <div class="chat-room" onclick="redirectToChat('ChatRoom2')">
+    <div class="chat-room" onclick="preventNavigation()">
       <h2>채팅방 2</h2>
       <!-- 채팅방에 대한 추가 정보를 여기에 추가하세요 -->
     </div>
 
     <!-- 원하는 만큼 채팅방을 추가하세요 -->
-    <div class="chat-room" onclick="redirectToChat('ChatRoom2')">
+    <div class="chat-room" onclick="preventNavigation()">
       <h2>채팅방 3</h2>
       <!-- 채팅방에 대한 추가 정보를 여기에 추가하세요 -->
     </div>
 
-    <div class="chat-room" onclick="redirectToChat('ChatRoom2')">
+    <div class="chat-room" onclick="preventNavigation()">
       <h2>채팅방 4</h2>
       <!-- 채팅방에 대한 추가 정보를 여기에 추가하세요 -->
     </div>
   </div>
 
+
   <script>
     // 클릭한 채팅방으로 이동하는 함수
-    function redirectToChat(chatRoomId) {
-      // 원하는 채팅방의 URL로 리다이렉션하는 코드를 여기에 추가하세요
-      // 예: window.location.href = 'chat.html?room=' + chatRoomId;
-    }
+    function redirectToChat(chatRoomId) { 
+
+  window.location.href = `http://127.0.0.1:5500/dongguk_dh/chat/chatting.html?room=${chatRoomId}`;
+}
   </script>
 </body>
 </html>
