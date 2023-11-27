@@ -3,7 +3,7 @@
 //   }
 
 
-function check(){
+
   const handle = document.getElementById("handle");
   const drawer = document.getElementById("drawer");
   
@@ -16,10 +16,20 @@ function check(){
           drawer.classList.add("drawer_close");
       }
   });
-}
-  const handle = document.getElementById("handle");
-  const drawer = document.getElementById("drawer");
+
+
+const imageUpload = document.getElementById("imageUpload");
+
+imageUpload.addEventListener("change", function(event) {
+  const file = event.target.files[0];
   
+  // 파일 처리 로직 추가
+});
+
+
+
+
+
 // const homeBar = document.querySelector(".home");
 // homeBar.addEventListener("click", function() {
    
