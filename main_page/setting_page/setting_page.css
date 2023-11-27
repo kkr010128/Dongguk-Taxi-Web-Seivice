@@ -110,7 +110,6 @@ p {
 
 #drawer {
     position : fixed;
-    display: flex;
     z-index: 2;
     top : 50%;
     right : 10%;
@@ -125,4 +124,12 @@ p {
     box-shadow:  3px 3px 6px #cbc7c2, -3px -3px 6px #ffffff;
     color : #111111;
     border-radius: 12px;
+}
+
+hr {
+  margin-top: 10vh;
+  border-top: 3px solid rgb(184, 184, 184);
+  width: 30%;
+  border-radius: 40px;
+  margin: auto;
 }

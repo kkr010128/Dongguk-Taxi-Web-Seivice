@@ -5,30 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>동행: 같이타요</title>
     <link rel="stylesheet" href="./setting_page.css">
-    <script src="./setting_page.js"></script>
 </head>
 <body>
    <div class="wrap_main">
-
             <img src="https://media.discordapp.net/attachments/1175362452469321748/1175362842745126942/default_profile.png?ex=656af4f2&is=65587ff2&hm=d465bd22c24a98efce6a2070accaee98a6534855c79f64df0bbbad3aad0eedcc&=&width=976&height=976" width="40%">
                 <div class="user_info">
                     <div class="user_info_inner">
-                        <p>2020214597 김광래</p>
+                        <p>2020214597 이름</p>
                     </div>
                 </div>
-
             <div class="wrap1">
-                <div class="setting_detail1">
+                <div id="handle" class="setting_detail1">
                     <p>프로필 수정<img src="../../assets/main/setting_page/arrow_right.png" width="20em" height="20em" align="right" hspace="10%"></p>
                     <div class="sliding_drawer">
-                        <button id="handle">매칭 준비하기</button>
                         <div id="drawer" class="drawer_close">
-                            <h4 id="Questions">같은 성별끼리 합승하기</h4>
-                            <div class="switch_gender">
-                                <input type="checkbox" id="switch">
-                                <label for="switch" class="switch_label">
-                                <span class="onf_btn"></span>
-                                </label>
+                            <div class="drawer1">
+                                <p>프로필 이미지 변경</p>
+                                <form>
+                                <input type="file" id="imageUpload" accept="image/*">
+                                <button type="submit">업로드</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -57,6 +53,7 @@
             </div> 
 
     </div>
+    <script src="./setting_page.js"></script>
 </body>
 </html>
 
