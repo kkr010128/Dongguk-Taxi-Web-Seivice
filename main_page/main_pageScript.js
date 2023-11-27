@@ -38,7 +38,7 @@ function setMarkers(values, which){
             LatLng[0]=35.8625;
             LatLng[1]=129.1945;
             break;
-        case "schoolyard": //운동장 왜인지 모르겟는데 마커가 안찍힘 😢
+        case "schoolyard":
             LatLng[0] = 35.860479;
             LatLng[1] = 129.194337;
             break;
@@ -49,6 +49,10 @@ function setMarkers(values, which){
         case "suckjang":
             LatLng[0]=35.8625;
             LatLng[1]=129.191178;
+            break;
+        case "yeonhop":
+            LatLng[0]=35.842033;
+            LatLng[1]=129.182027;
             break;
         case "army":
             LatLng[0]=35.854379;
@@ -156,11 +160,11 @@ plusBtn.addEventListener("click", function(){
     let temp=0;
     if(parseInt(personCnt.innerText) < 4){
         minusBtn.disabled=false;
-        minusBtn.style.background="rgb(255, 155, 47)";
+        minusBtn.style.borderColor="rgb(255, 194, 85)";
         temp = parseInt(personCnt.innerText)+1;
         personCnt.innerText = temp;
         if(personCnt.innerText==4){
-            plusBtn.style.background="rgb(171, 171, 171)";
+            plusBtn.style.borderColor="#ffffff";
             plusBtn.disabled=true;
         }
     }
@@ -170,11 +174,11 @@ minusBtn.addEventListener("click", function(){
     let temp=0;
     if(parseInt(personCnt.innerText) > 2){
         plusBtn.disabled=false;
-        plusBtn.style.background="rgb(255, 155, 47)";
+        plusBtn.style.borderColor="rgb(255, 194, 85)";
         temp = parseInt(personCnt.innerText)-1;
         personCnt.innerText = temp;
     if(personCnt.innerText==2){
-        minusBtn.style.background="rgb(171, 171, 171)";
+        minusBtn.style.borderColor="#ffffff";
         minusBtn.disabled=true;
         }
     }
@@ -187,7 +191,7 @@ document.getElementById("cancelBtn").addEventListener('click', function(){
    
 /**완료버튼 이벤트 TODO: 누를 시 매칭 + 정보를 넘겨주는 기능 추가 필요 */
 document.getElementById("setBtn").addEventListener('click', function(){
-    var serverUrl = "http://127.0.0.1:5500/main_page/main_page.html"; //"http://dongguk-taxi.kro.kr";
+    var serverUrl = "http://택시.com/main_page/main_page.html"; //"http://dongguk-taxi.kro.kr";
     
     var formdata = new FormData();
     formdata.append("equal_sex",);
