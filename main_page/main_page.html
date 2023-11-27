@@ -90,7 +90,7 @@
                         <select name="timePicker" id="setTime">
                             <script>
                                 selecter = document.getElementById("setTime");
-                                for(let i=0; i<24; i++){
+                                for(let i=1; i<=24; i++){
                                     x = document.createElement("option");
                                     x.innerText = i.toString();
                                     selecter.appendChild(x);
@@ -98,14 +98,15 @@
                             </script>
                         </select>
                     </form>
+                    <p>&nbsp;:&nbsp;</p>
                     <form action="#" id="minute">
                         <!--<label id="time_label" for="time">시간</label>-->
                         <select name="minutePicker" id="setMinute">
                             <script>
                                 selecter = document.getElementById("setMinute");
-                                for(let i=0; i<60; i++){
+                                for(let i=0; i<=60; i++){
                                     x = document.createElement("option");
-                                    if(i%5==0){
+                                    if(i%15==0){
                                         x.innerText = i.toString();
                                         selecter.appendChild(x);
                                     }

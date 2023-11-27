@@ -258,12 +258,12 @@ body{
     position: relative;
     cursor: pointer;
     display: inline-block;
-    width: 17.4vw;
+    width: 17vw;
     height: 4vh;
     background: #f8f3ed;
     /* border: 2px solid gray; */
     border-radius: 16px;
-    transition: 0.2s;
+    transition: 1.4s;
     box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
 }
 
@@ -292,12 +292,13 @@ body{
 
 #setTime, #setMinute{
     font-size: 3vw;
-    width: 20vw;
+    width: 12vw;
     height: 2.5em;
     border-radius: 12px;
     background: #f8f3ed;
     border-color: #f8f3ed;
-    color: #444444;
+    -webkit-color: #444444;
+    text-align: center;
     box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
 }
 
