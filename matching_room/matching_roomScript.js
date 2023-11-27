@@ -168,7 +168,7 @@ function setRoomPage() {
     const roomInfo = roomList[roomPage];
     const divElement = document.getElementsByClassName("matching_room_div");
     const h1Element = divElement[0].children[0];
-    h1Element.innerHTML = "#" + roomInfo.number;
+    h1Element.innerHTML = "#" + (roomPage+1);
     const date = roomInfo.date.split("-");
     const time = roomInfo.time.split(":");
     divElement[1].children[0].innerHTML = date[1] + "월" + date[2] + "일 " + time[0] + "시 " + time[1] + "분";
