@@ -1,4 +1,5 @@
 body {
+<<<<<<< Updated upstream
   font-family: 'Arial', sans-serif;
   margin: 0;
   background-color: #e8e4df; /* 전체 배경색 변경 */
@@ -14,35 +15,59 @@ body {
   border-radius: 3px; /* 줄 라인 끝 부분을 둥글게 만들기 */
 
 }
+=======
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+>>>>>>> Stashed changes
 .chat-room-list {
   max-width: 500px;
   height: 600px;
   margin: 20px auto;
   padding: 20px;
+<<<<<<< Updated upstream
   border: 1px solid #e0ceb2; /* 테두리 색 변경 */
   border-radius: 10px;
   background-color: #ffffff; /* 전체 배경색 변경 */
   box-shadow: 0px 0px 15px 0px #b3b3b3; /* 그림자 효과 추가 */
+=======
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  background-color: #f8f3ed;
+>>>>>>> Stashed changes
 }
 
 .chat-room {
   margin-bottom: 23px;
+<<<<<<< Updated upstream
   padding: 20px;
   border: 2px solid #e0ceb2;
   border-radius: 10px;
   background-color: #f8f3ed; /* 기본 배경색 변경 */
+=======
+  padding: 10px;
+  border: 2px solid #e0ceb2;
+  border-radius: 10px;
+  background-color: #ffffff;
+>>>>>>> Stashed changes
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .chat-room:hover {
+<<<<<<< Updated upstream
   background-color: #b68b48; /* 호버 시 배경색 변경 */
+=======
+  background-color: #f1c37e;
+>>>>>>> Stashed changes
 }
 
 .chat-room h2 {
   margin: 0;
   font-size: 18px;
   color: #424242;
+<<<<<<< Updated upstream
   text-align: center; /* 텍스트 중앙 정렬 */
 }
 
@@ -52,4 +77,6 @@ body {
   font-size: 32px;
   margin-bottom: 35px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* 텍스트 그림자 효과 추가 */
+=======
+>>>>>>> Stashed changes
 }
