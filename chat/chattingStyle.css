@@ -46,6 +46,7 @@ body {
 
 .chat ul li {
   width: 100%;
+  text-align: right;
 }
 
 .chat ul li .sender {
@@ -85,4 +86,21 @@ body {
   padding: 10px;
   border-radius: 30px;
   margin-top: 10px; /* 여백 조절 */
+}
+
+.enter_new p{
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+.time {
+  font-size: 15px;
+  color: #000000;
+}
+
+.current-time {
+  font-size: 0px;
+  color: #888;
+  margin-top: 10px;
 }

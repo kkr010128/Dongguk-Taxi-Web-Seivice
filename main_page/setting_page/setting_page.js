@@ -1,6 +1,34 @@
-function redirectDevInfo() {
-    window.location.href = "http://dongguk-taxi.kro.kr/dongguk_dh/main_page/setting_page/dev_info/dev_info.html";
-  }
+// function redirectDevInfo() {
+//     window.location.href = "http://dongguk-taxi.kro.kr/dongguk_dh/main_page/setting_page/dev_info/dev_info.html";
+//   }
+
+
+
+  const handle = document.getElementById("handle");
+  const drawer = document.getElementById("drawer");
+  
+  handle.addEventListener('click', function(){
+      if (drawer.classList.contains("drawer_close")) {
+          drawer.classList.remove("drawer_close");
+          drawer.classList.add("drawer_open");
+      }else if(drawer.classList.contains("drawer_open")){
+          drawer.classList.remove("drawer_open");
+          drawer.classList.add("drawer_close");
+      }
+  });
+
+
+const imageUpload = document.getElementById("imageUpload");
+
+imageUpload.addEventListener("change", function(event) {
+  const file = event.target.files[0];
+  
+  // 파일 처리 로직 추가
+});
+
+
+
+
 
 // const homeBar = document.querySelector(".home");
 // homeBar.addEventListener("click", function() {
