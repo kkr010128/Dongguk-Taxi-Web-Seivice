@@ -191,13 +191,13 @@ body{
 }
 
 #minus, #plus{
-    width: 7vw;
-    height: 7vw;
+    width: 1em;
+    height: 1em;
     border: solid 1px #f8f3ed;
     border-radius: 12px;
     background: #f8f3ed;
     border-color: rgb(255, 194, 85);
-    font-size: 1em;
+    font-size: 2em;
     margin: 10%;
     box-shadow:  1.5px 1.5px 2px #d3cfc9, -1.5px -1.5px 2px #ffffff;
 }
@@ -249,7 +249,7 @@ body{
 }
   
 #switch1:checked + .switch_label1 .onf_btn1, #switch2:checked + .switch_label2 .onf_btn2 {
-    left: 17vw;
+    left: 11vw;
     background: #fff;
     box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
@@ -258,12 +258,12 @@ body{
     position: relative;
     cursor: pointer;
     display: inline-block;
-    width: 17.4vw;
+    width: 19vw;
     height: 4vh;
     background: #f8f3ed;
     /* border: 2px solid gray; */
     border-radius: 16px;
-    transition: 0.2s;
+    transition: 1.4s;
     box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
 }
 
@@ -281,7 +281,7 @@ body{
     border-radius: 16px;
     background: #f8f3ed;
     border: solid rgb(255, 194, 85); 
-    transition: 0.2s;
+    transition: 0.5s;
     box-shadow: 1px 1px 2px #d3cfc9, -1px -1px 2px #ffffff;
 }
 
@@ -292,11 +292,13 @@ body{
 
 #setTime, #setMinute{
     font-size: 3vw;
-    width: 20vw;
+    width: 12vw;
     height: 2.5em;
     border-radius: 12px;
     background: #f8f3ed;
     border-color: #f8f3ed;
+    color: #000000;
+    text-align: center;
     box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
 }
 
@@ -328,16 +330,27 @@ body{
     
 }
 
-select{
-    /*ios대응*/
+input, textarea {
+
+    appearance: none;
+    
+    -webkit-appearance: none;
+    
+    -webkit-border-radius: 0;
+    
+    }
+    
+    
+    select {
     -webkit-appearance: none;
     -moz-appearance: none; 
     appearance: none;
-}
-
-input{
-    /*ios대응*/
-    appearance: none;
-    -webkit-appearance: none;
-    -webkit-border-radius: 0;
-}
+    
+    /*화살표 배경 넣기*/
+    background: #fff url('이미지경로') no-repeat 98% center;
+    }
+    
+    select::-ms-expand{
+    /* 화살표 없애기 for IE10, 11*/ 
+    display:none;
+    }
