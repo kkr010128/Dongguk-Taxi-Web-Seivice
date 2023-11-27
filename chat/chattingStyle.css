@@ -9,8 +9,8 @@ body {
   margin: 0; /* body의 기본 마진 제거 */
 }
 
-.chat.format {
-  display: none;
+.chat_format {
+  display: flex;
 }
 
 .chat_wrap {
@@ -91,7 +91,6 @@ body {
 .enter_new p{
   margin: 0 auto;
   text-align: center;
-
 }
 
 .time {
