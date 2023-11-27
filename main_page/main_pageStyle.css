@@ -327,3 +327,17 @@ body{
 @media screen and (min-width: 450px) and (min-height: 700px){
     
 }
+
+select{
+    /*ios대응*/
+    -webkit-appearance: none;
+    -moz-appearance: none; 
+    appearance: none;
+}
+
+input{
+    /*ios대응*/
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
