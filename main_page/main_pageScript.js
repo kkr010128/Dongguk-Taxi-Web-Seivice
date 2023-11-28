@@ -13,12 +13,6 @@ script.onload = () => {
 };
 document.body.appendChild(script);*/
 
-
-// function rotateImage(img) {
-    
-// };
-
-
 /**드롭다운 리스트 이벤트 */
 document.querySelectorAll("select").forEach(function(e) {
     e.addEventListener("change", function(){
@@ -44,7 +38,7 @@ function setMarkers(values, which){
             LatLng[0]=35.8625;
             LatLng[1]=129.1945;
             break;
-        case "schoolYard":
+        case "schoolyard":
             LatLng[0] = 35.860479;
             LatLng[1] = 129.194337;
             break;
@@ -73,25 +67,8 @@ function setMarkers(values, which){
             LatLng[1]=129.202447;
             break;
     }
-    
-    if(which=="start"){
-        imageSize = new kakao.maps.Size(48, 52), // 마커이미지의 크기입니다
-        imageOption = {offset: new kakao.maps.Point(24, 47)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-        var imageSrc = 'https://media.discordapp.net/attachments/1175471776373952572/1178934329993338910/marker_start.png?ex=6577f327&is=65657e27&hm=706b56782aefb14b6658a3b5b3cfa457d34dbbc5040c45ae4b6be4851f5d6f91&=&format=webp&quality=lossless&width=512&height=552'; // 마커이미지의 주소입니다    
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-    }
-    else if(which=="arrive"){
-        imageSize = new kakao.maps.Size(35, 34), // 마커이미지의 크기입니다
-        imageOption = {offset: new kakao.maps.Point(10, 34)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-        var imageSrc = 'https://media.discordapp.net/attachments/1175471776373952572/1178941073549185074/marker_arrive.png?ex=6577f96f&is=6565846f&hm=824c62d35eb3c86f9d3aa2fe83d30c8444aa5014c99e5bebb2e701b312c79ebc&=&format=webp&quality=lossless&width=320&height=308'; // 마커이미지의 주소입니다    
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-    }
-    
     marker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(LatLng[0], LatLng[1]),
-        image: markerImage
-        
-
+        position: new kakao.maps.LatLng(LatLng[0], LatLng[1])
     });
 
     //이전 마커 지우기
@@ -150,10 +127,10 @@ function setMarkers(values, which){
             })
             var roadLine = new kakao.maps.Polyline({
                 path: vertexArr,
-                strokeWeight: 5,                  
-                strokeColor: "#ffc355", 
-                strokeOpacity: 1.0,               
-                strokeStyle: "shortline"       
+                strokeWeight: 3,                  
+                strokeColor: "red", 
+                strokeOpacity: 0.7,               
+                strokeStyle: "shortdashdot"       
             });
             PolyLine[0] = roadLine;
             roadLine.setMap(map);
@@ -162,34 +139,19 @@ function setMarkers(values, which){
     }
 }
 
-let degree = 0;
 /** 출발, 도착 위치 바꾸기 - 마커 바뀌는거까지 구현 완*/
-document.getElementById("changeBtn").addEventListener("click", function(){
+document.getElementById("change").addEventListener("click", function(){
     let start = document.getElementById("setStart");
     let arrive = document.getElementById("setArrive");
     let temp = start.value;
     let tmpMarker;
-    let tmpMarkerImage;
 
     start.value = arrive.value;
     arrive.value = temp;
     
-    // console.log(markers[0].getPosition(), " ", markers[1].getPosition());
     tmpMarker = markers[0];
     markers[0] = markers[1];
     markers[1] = tmpMarker;
-    
-    tmpMarkerImage = markers[0].getImage();
-    markers[0].setImage(markers[1].getImage());
-    markers[1].setImage(tmpMarkerImage);
-
-
-    const img = document.querySelector("#change");
-    // console.log(img);
-    degree ++;
-    img.style.transition = "transform 0.7s ease-in-out";
-    img.style.transform = "rotate(" + (180*degree) + "deg)";
-    // console.log(markers[0].get, " ", markers[1].getPosition());
 });
 
 

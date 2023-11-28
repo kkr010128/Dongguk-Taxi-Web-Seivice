@@ -157,7 +157,7 @@ body{
     border-radius : 12px;
     z-index: 2;
     color : rgb(88, 88, 88);
-    font-size: 0.9em;
+    font-size: medium;
 }
 
 #setBtn {
@@ -171,7 +171,7 @@ body{
     color : rgb(88, 88, 88);
     font-style: bold;
     background: #f8f3ed;
-    font-size: 0.9em;
+    font-size: medium;
 }
 
 .sex_switch{
@@ -249,7 +249,7 @@ body{
 }
   
 #switch1:checked + .switch_label1 .onf_btn1, #switch2:checked + .switch_label2 .onf_btn2 {
-    left: 2.5em;
+    left: 17vw;
     background: #fff;
     box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
@@ -258,7 +258,7 @@ body{
     position: relative;
     cursor: pointer;
     display: inline-block;
-    width: 4em;
+    width: 17.4vw;
     height: 4vh;
     background: #f8f3ed;
     /* border: 2px solid gray; */
@@ -292,12 +292,11 @@ body{
 
 #setTime, #setMinute{
     font-size: 3vw;
-    width: 12vw;
+    width: 20vw;
     height: 2.5em;
     border-radius: 12px;
     background: #f8f3ed;
     border-color: #f8f3ed;
-    text-align: center;
     box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
 }
 
@@ -329,11 +328,16 @@ body{
     
 }
 
-input, textarea, button, option, select {
-    appearance: none;
-    -moz-appearance: none;
+select{
+    /*ios대응*/
     -webkit-appearance: none;
-    border-radius: 0;
+    -moz-appearance: none; 
+    appearance: none;
+}
+
+input{
+    /*ios대응*/
+    appearance: none;
+    -webkit-appearance: none;
     -webkit-border-radius: 0;
-    -moz-border-radius: 0;
 }
