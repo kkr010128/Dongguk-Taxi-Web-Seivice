@@ -157,7 +157,7 @@ body{
     border-radius : 12px;
     z-index: 2;
     color : rgb(88, 88, 88);
-    font-size: medium;
+    font-size: 0.9em;
 }
 
 #setBtn {
@@ -171,7 +171,7 @@ body{
     color : rgb(88, 88, 88);
     font-style: bold;
     background: #f8f3ed;
-    font-size: medium;
+    font-size: 0.9em;
 }
 
 .sex_switch{
@@ -191,13 +191,13 @@ body{
 }
 
 #minus, #plus{
-    width: 1em;
-    height: 1em;
+    width: 7vw;
+    height: 7vw;
     border: solid 1px #f8f3ed;
     border-radius: 12px;
     background: #f8f3ed;
     border-color: rgb(255, 194, 85);
-    font-size: 2em;
+    font-size: 1em;
     margin: 10%;
     box-shadow:  1.5px 1.5px 2px #d3cfc9, -1.5px -1.5px 2px #ffffff;
 }
@@ -249,7 +249,7 @@ body{
 }
   
 #switch1:checked + .switch_label1 .onf_btn1, #switch2:checked + .switch_label2 .onf_btn2 {
-    left: 11vw;
+    left: 2.5em;
     background: #fff;
     box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
@@ -258,12 +258,12 @@ body{
     position: relative;
     cursor: pointer;
     display: inline-block;
-    width: 19vw;
+    width: 4em;
     height: 4vh;
     background: #f8f3ed;
     /* border: 2px solid gray; */
     border-radius: 16px;
-    transition: 1.4s;
+    transition: 0.2s;
     box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
 }
 
@@ -281,7 +281,7 @@ body{
     border-radius: 16px;
     background: #f8f3ed;
     border: solid rgb(255, 194, 85); 
-    transition: 0.5s;
+    transition: 0.2s;
     box-shadow: 1px 1px 2px #d3cfc9, -1px -1px 2px #ffffff;
 }
 
@@ -297,7 +297,6 @@ body{
     border-radius: 12px;
     background: #f8f3ed;
     border-color: #f8f3ed;
-    color: #000000;
     text-align: center;
     box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
 }
@@ -330,27 +329,11 @@ body{
     
 }
 
-input, textarea {
-
+input, textarea, button, option, select {
     appearance: none;
-    
+    -moz-appearance: none;
     -webkit-appearance: none;
-    
+    border-radius: 0;
     -webkit-border-radius: 0;
-    
-    }
-    
-    
-    select {
-    -webkit-appearance: none;
-    -moz-appearance: none; 
-    appearance: none;
-    
-    /*화살표 배경 넣기*/
-    background: #fff url('이미지경로') no-repeat 98% center;
-    }
-    
-    select::-ms-expand{
-    /* 화살표 없애기 for IE10, 11*/ 
-    display:none;
-    }
+    -moz-border-radius: 0;
+}

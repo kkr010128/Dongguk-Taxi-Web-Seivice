@@ -3,9 +3,6 @@ const nextCalendar = document.querySelector(".calendar_next");
 const previousRoom = document.querySelector(".matching_previous_room");
 const nextRoom = document.querySelector(".matching_next_room");
 const signBtn = document.querySelector("#matchingRoomSign");
-const weightPopup = document.querySelector("#weight_popup");
-const signPopUp = document.querySelector("#sign_popup");
-const signPopUpBtn = document.querySelector("#sign_popup_button");
 let initDate = new Date();
 let nowYear;
 let nowMonth;
@@ -13,53 +10,6 @@ let nowDate;
 let roomList;
 let roomPage = 0;
 let myRoom;
-
-for(let i = 0; i < weight_button.length; i++) {
-    weight_button[i].addEventListener("click", function() {
-        weightPopup.style.display = "none";
-        const formDate = new FormData();
-        formDate.append("studentID", sessionStorage.key(0));
-        formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
-        formDate.append("roomNumber", roomList[roomPage].number);
-        const weight = weight_button[i].innerHTML == "YES" ? 2: 1;
-        formDate.append("weight", weight)
-        const payload = new URLSearchParams(formDate);
-        fetch('../../DataBase/matchingRoomSign', {
-            method: 'post',
-            headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: payload
-        })
-        .then(function(response) {
-            return response.text();
-        })
-        .then(function(txt) {
-            signPopUp.style.display = "flex";
-            let comment = "해당 방은 짐이 너무 많아 가입이 불가능합니다.";
-            const result = parseInt(txt);
-            switch(result) {
-                case -2:
-                    comment = "짐 없이만 탑승이 가능합니다."
-                    break;
-                case -1:
-                    comment = "해당 방 가입에 실패하였습니다."
-                    break;
-                case 0:
-                    comment = "해당 방은 인원 초과되었습니다."
-                    break;
-                case 1:
-                    comment = "해당 방 가입에 성공하였습니다."
-                    break;
-                case 2:
-                    comment = "해당 방에 이미 사용자가 존재합니다."
-                    break;
-            }
-            signPopUp.children[0].children[0].innerHTML = comment;
-        });
-    });
-}
-
 
 previousCalendar.addEventListener("click", function() {
     createCalendar(nowYear, nowMonth - 1);
@@ -80,11 +30,24 @@ nextRoom.addEventListener("click", function() {
 });
 
 signBtn.addEventListener("click", function() {
-    weightPopup.style.display = "flex";
-});
-
-signPopUpBtn.addEventListener("click", function() {
-    signPopUp.style.display = "none";
+    let formDate = new FormData();
+    formDate.append("studentID", sessionStorage.key(0));
+    formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+    formDate.append("roomNumber", roomList[roomPage].number);
+    const payload = new URLSearchParams(formDate);
+    fetch('../../DataBase/matchingRoomSign', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    })
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(txt) {
+        console.log(txt);
+    });
 });
 
 function createCalendar(year, month) {
