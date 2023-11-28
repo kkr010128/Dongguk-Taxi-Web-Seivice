@@ -47,7 +47,7 @@
         </div>
         <div id="btnBox">    
             <button type="button" id="changeBtn">
-                <img src="../assets/main/switch_path.png" id="change" >
+                <img src="../assets/main/switch_path.png" id="change">
             </button>
         </div>
     </div>
@@ -65,57 +65,12 @@
         </script>
     </div>
         <div class="options">
-            <div id="q3">
-                <h3 id="Questions">출발 시간</h3>
-                <div class="time_picker">
-                    <form action="#" id="time">
-                        <!--<label id="time_label" for="time">시간</label>-->
-                        <select name="timePicker" id="setTime">
-                            <script>
-                                selecter = document.getElementById("setTime");
-                                for(let i=1; i<=24; i++){
-                                    x = document.createElement("option");
-                                    x.innerText = i.toString();
-                                    selecter.appendChild(x);
-                                }
-                            </script>
-                        </select>
-                    </form>
-                    <div>
-                        <p>&nbsp;:&nbsp;</p>
-                    </div>
-                    <form action="#" id="minute">
-                        <!--<label id="time_label" for="time">시간</label>-->
-                        <select name="minutePicker" id="setMinute">
-                            <script>
-                                selecter = document.getElementById("setMinute");
-                                for(let i=0; i<=60; i++){
-                                    x = document.createElement("option");
-                                    if(i%15==0){
-                                        x.innerText = i.toString();
-                                        selecter.appendChild(x);
-                                    }
-                                }
-                            </script>
-                        </select>
-                    </form>
-                </div>
-            </div>
             <div id="q1">
                 <h3 id="Questions">같은 성별끼리 합승하기</h3>
                 <div class="sex_switch">
                     <input type="checkbox" id="switch1">
                     <label for="switch1" class="switch_label1">
                     <span class="onf_btn1"></span>
-                    </label>
-                </div>
-            </div>
-            <div id="q4">
-                <h3 id="Questions" >짐이 많아요(캐리어 등)</h3>
-                <div class="bag_switch">
-                    <input type="checkbox" id="switch2">
-                    <label for="switch2" class="switch_label2">
-                    <span class="onf_btn2"></span>
                     </label>
                 </div>
             </div>
@@ -126,6 +81,48 @@
                     <span id="maxPerson">3</span>
                     <button id="plus">+</button>
                 </div>
+            </div>
+            <div id="q3">
+                <h3 id="Questions">출발 시간</h3>
+                <div class="time_picker">
+                    <form action="#" id="time">
+                        <!--<label id="time_label" for="time">시간</label>-->
+                        <select name="timePicker" id="setTime">
+                            <script>
+                                selecter = document.getElementById("setTime");
+                                for(let i=0; i<24; i++){
+                                    x = document.createElement("option");
+                                    x.innerText = i.toString();
+                                    selecter.appendChild(x);
+                                }
+                            </script>
+                        </select>
+                    </form>
+                    <form action="#" id="minute">
+                        <!--<label id="time_label" for="time">시간</label>-->
+                        <select name="minutePicker" id="setMinute">
+                            <script>
+                                selecter = document.getElementById("setMinute");
+                                for(let i=0; i<60; i++){
+                                    x = document.createElement("option");
+                                    if(i%5==0){
+                                        x.innerText = i.toString();
+                                        selecter.appendChild(x);
+                                    }
+                                }
+                            </script>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <div id="q4">
+                <h3 id="Questions" >짐이 많아요(캐리어 등)</h3>
+                <div class="bag_switch">
+                    <input type="checkbox" id="switch2">
+                    <label for="switch2" class="switch_label2">
+                    <span class="onf_btn2"></span>
+                    </label>
+                </div>
             </div>  
                 <div class="buttons">
                     <button id="cancelBtn">초기화</button>
@@ -135,6 +132,6 @@
         </div>
     </div>
     <script src="./main_pageScript.js"></script>
-    <!-- <script src="../nav_neumorph/nav_neumorph.js"></script> -->
+    <script src="../nav_neumorph/nav_neumorph.js"></script>
 </body>
 </html>
