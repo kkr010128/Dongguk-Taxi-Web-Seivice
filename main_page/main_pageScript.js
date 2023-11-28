@@ -65,38 +65,50 @@ function setMarkers(values, which){
     PolyLine[0]!=null ? PolyLine[0].setMap(null) : null;
 
     switch(values){
-        case "동국대 정문":
-            LatLng[0]=35.8625;
-            LatLng[1]=129.1945;
-            break;
-        case "동국대 운동장":
-            LatLng[0] = 35.860479;
-            LatLng[1] = 129.194337;
+        // case "동국대 정문":
+        //     LatLng[0]=35.8625;
+        //     LatLng[1]=129.1945;
+        //     break;
+        case "동국대 택시정류장":
+            LatLng[0] = 35.861399;
+            LatLng[1] = 129.195216;
             break;
         case "동국대 기숙사":
-            LatLng[0]=35.863694;
-            LatLng[1]=129.191178;
+            LatLng[0]=35.863833;
+            LatLng[1]=129.191140;
             break;
-        case "석장동":
-            LatLng[0]=35.8625;
-            LatLng[1]=129.191178;
+        case "석장동 택시정류장":
+            LatLng[0]=35.861372;
+            LatLng[1]=129.189675;
             break;
-        case "연합기숙사":
+        case "경주시 연합기숙사":
             LatLng[0]=35.842033;
             LatLng[1]=129.182027;
             break;
-        case "경주 예비군 훈련장":
+        case "경주시 예비군 훈련장":
             LatLng[0]=35.854379;
             LatLng[1]=129.237773;
             break;
-        case "신경주역":
-            LatLng[0]=35.798296;
-            LatLng[1]=129.138968;
+        case "신경주역 택시정류장":
+            LatLng[0]=35.798301;
+            LatLng[1]=129.140145;
             break;
-        case "시외버스터미널":
-            LatLng[0]=35.8397794;
-            LatLng[1]=129.202447;
+        case "경주 시외버스터미널":
+            LatLng[0]=35.839428;
+            LatLng[1]=129.202335;
             break;
+        case "[황리단길]첨성대,대릉원주차장":
+            LatLng[0]=35.834694;
+            LatLng[1]=129.215668;
+            break;
+        case "[황리단길]경주공고":
+            LatLng[0]=35.837309;
+            LatLng[1]=129.207140;
+            break;
+        case "[황리단길]중앙광장,공영주차장":
+            LatLng[0]=35.837410;
+            LatLng[1]=129.209759;
+            break;     
     }
     
     if(which=="start"){
