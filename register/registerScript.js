@@ -207,31 +207,31 @@ function timeStop() {
     // timeOver = true;
 }
 
-function randomCode() {
-    const alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    let numCount = 0;
-    let code = "";
-    for(let i = 0; i < 6; i++) {
-        let random = null;
-        let numSelection = false;
-        if(numCount < 2) {
-            if(6-i <= 2 - numCount) {
-                numSelection = true;
-            }
-            else {
-                if(Math.random() < 0.5){
-                    numSelection = true;
-                }
-            }
-        }
-        if(numSelection) {
-            random = parseInt(Math.random() * 10);
-            numCount ++;
-        }
-        else {
-            random = alpha[parseInt(Math.random() * alpha.length)];
-        }
-        code += random;
-    }
-    return code;
-}
+// function randomCode() {
+//     const alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+//     let numCount = 0;
+//     let code = "";
+//     for(let i = 0; i < 6; i++) {
+//         let random = null;
+//         let numSelection = false;
+//         if(numCount < 2) {
+//             if(6-i <= 2 - numCount) {
+//                 numSelection = true;
+//             }
+//             else {
+//                 if(Math.random() < 0.5){
+//                     numSelection = true;
+//                 }
+//             }
+//         }
+//         if(numSelection) {
+//             random = parseInt(Math.random() * 10);
+//             numCount ++;
+//         }
+//         else {
+//             random = alpha[parseInt(Math.random() * alpha.length)];
+//         }
+//         code += random;
+//     }
+//     return code;
+// }
