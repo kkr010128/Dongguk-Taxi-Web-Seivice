@@ -1,6 +1,7 @@
-function getChatList(studentID) {
+function getChatList(studentID, password) {
     let formDate = new FormData();
     formDate.append("studentID", studentID);
+    formDate.append("password", password);
     const payload = new URLSearchParams(formDate);
     fetch('../../DataBase/chatList', {
         method: 'post',
@@ -21,7 +22,6 @@ function getChatList(studentID) {
 
 function enterChattingRoom(chatID, studentID) {
     const formDate = new FormData();
-    formDate.append("type", "set");
     formDate.append("studentID", studentID);
     formDate.append("chatID", chatID);
     const payload = new URLSearchParams(formDate);
@@ -89,7 +89,7 @@ window.onload = function () {
           location.href = "../index.html";
         }
         else {
-            getChatList(obj.result.success.studentID);
+            getChatList(obj.result.success.studentID, obj.result.success.password);
         }
     });
   }
