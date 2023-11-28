@@ -21,7 +21,11 @@ document.body.appendChild(script);*/
 
 /**드롭다운 리스트 이벤트 */
 document.querySelectorAll("select").forEach(function(e) {
-    e.addEventListener("change", function(){
+    e.addEventListener("change", function(event){
+        if(this.value == "출발지 선택하기" || this.value == "목적지 선택하기") {
+            event.preventDefault();
+            return;
+        }
         if(this.name=="start_location"){
             setMarkers(this.value, "start");
         }else if(this.name=="arrive_location"){
@@ -40,35 +44,35 @@ function setMarkers(values, which){
     PolyLine[0]!=null ? PolyLine[0].setMap(null) : null;
 
     switch(values){
-        case "entrance":
+        case "동국대 정문":
             LatLng[0]=35.8625;
             LatLng[1]=129.1945;
             break;
-        case "schoolYard":
+        case "동국대 운동장":
             LatLng[0] = 35.860479;
             LatLng[1] = 129.194337;
             break;
-        case "dorm":
+        case "동국대 기숙사":
             LatLng[0]=35.863694;
             LatLng[1]=129.191178;
             break;
-        case "suckjang":
+        case "석장동":
             LatLng[0]=35.8625;
             LatLng[1]=129.191178;
             break;
-        case "yeonhop":
+        case "연합기숙사":
             LatLng[0]=35.842033;
             LatLng[1]=129.182027;
             break;
-        case "army":
+        case "경주 예비군 훈련장":
             LatLng[0]=35.854379;
             LatLng[1]=129.237773;
             break;
-        case "station":
+        case "신경주역":
             LatLng[0]=35.798296;
             LatLng[1]=129.138968;
             break;
-        case "terminal":
+        case "시외버스터미널":
             LatLng[0]=35.8397794;
             LatLng[1]=129.202447;
             break;
@@ -229,24 +233,106 @@ document.getElementById("cancelBtn").addEventListener('click', function(){
    
 /**완료버튼 이벤트 TODO: 누를 시 매칭 + 정보를 넘겨주는 기능 추가 필요 */
 document.getElementById("setBtn").addEventListener('click', function(){
-    var serverUrl = "http://택시.com/main_page/main_page.html"; //"http://dongguk-taxi.kro.kr";
+    // var serverUrl = "http://택시.com/main_page/main_page.html"; //"http://dongguk-taxi.kro.kr";
     
-    var formdata = new FormData();
-    formdata.append("equal_sex",);
-    var swi = document.getElementById("switch1");
-    console.log(swi.Check);
-    var options = {
-        method: "POST",
-        body: formdata
-    };
-    fetch(serverUrl, options)
-    .then(response => response.json())
-    .then(data=>{
-        console.log(data);
+    // var formdata = new FormData();
+    // formdata.append("equal_sex",);
+    // var swi = document.getElementById("switch1");
+    // console.log(swi.Check);
+    // var options = {
+    //     method: "POST",
+    //     body: formdata
+    // };
+    // fetch(serverUrl, options)
+    // .then(response => response.json())
+    // .then(data=>{
+    //     console.log(data);
+    // })
+    const formData = matchData();
+    if(formData == null) {
+        return;
+    }
+    const payload = new URLSearchParams(formData);
+    fetch('../DataBase/matchingStart', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
     })
-
-    //window.location.href="../matching_room/matching_room.html"; //임시
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(txt) {
+        if(txt == "-1") {
+            console.log(txt);
+        }
+    });
 });
+
+function matchData() {
+    const formData = new FormData();
+    formData.append("studentID", sessionStorage.key(0));
+    formData.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+
+    const date = new Date();
+    const hour = document.querySelector("#setTime");
+    const minute = document.querySelector("#setMinute");
+    const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + hour.value + ":" + minute.value;
+    formData.append("dateTime", dateTime);
+
+    const from = document.querySelector("#setStart");
+    if(from.value == "출발지 선택하기") {
+        return null;
+    }
+    formData.append("from", from.value);
+
+    const to = document.querySelector("#setArrive");
+    if(to.value == "목적지 선택하기") {
+        return null;
+    }
+    formData.append("to", to.value);
+
+    const genderSwitch = document.querySelector("#switch1");
+    const gender = genderSwitch.checked ? "동성" : "모두";
+    formData.append("gender", gender);
+
+    const t = document.querySelector("#maxPerson");
+    formData.append("maximum", parseInt(t.innerHTML));
+
+    const weightSwitch = document.querySelector("#switch1");
+    const weight = weightSwitch.checked ? 2 : 1;
+    formData.append("weight", weight);
+    return formData;
+}
+
+window.onload = function() {
+    if(sessionStorage.key(0) == null) {
+        location.href = "../index.html";
+        return;
+    }
+    let formData = new FormData();
+    formData.append("studentID", sessionStorage.key(0));
+    formData.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+    const payload = new URLSearchParams(formData);
+    fetch('../DataBase/loginCheck', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(json) {
+        const userJson = JSON.stringify(json);
+        const obj = JSON.parse(userJson);
+        if(obj.result == "failure") {
+            location.href = "../index.html";
+        }
+    });
+}
    
 /**지도 생성하기❤️ 
 function generateMap(){
