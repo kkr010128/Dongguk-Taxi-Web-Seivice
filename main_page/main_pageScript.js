@@ -4,6 +4,7 @@ const minusBtn = document.getElementById("minus");
 const plusBtn = document.getElementById("plus");
 const markers = [null, null]; //중요
 const PolyLine = [null]; //중요
+const matchFailure = document.querySelector("#match_failure_popup");
 
 /*script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing?autoload=false";
 script.onload = () => {
@@ -18,6 +19,26 @@ document.body.appendChild(script);*/
     
 // };
 
+for(let i = 0; i < create_button.length; i++) {
+    create_button[i].addEventListener("click", function() {
+        matchFailure.style.display = "none";
+        const mapBox = document.querySelector(".mapBox");
+        mapBox.style.visibility = "visible";
+        if(create_button[i].innerHTML == "YES") {
+            const formData = new FormData();
+            formData.append("studentID", sessionStorage.key(0));
+            formData.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+            const payload = new URLSearchParams(formData);
+            fetch('../DataBase/createMatchingRoom', {
+                method: 'post',
+                headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: payload
+            });
+        }
+    });
+}
 
 /**드롭다운 리스트 이벤트 */
 document.querySelectorAll("select").forEach(function(e) {
@@ -265,7 +286,10 @@ document.getElementById("setBtn").addEventListener('click', function(){
     })
     .then(function(txt) {
         if(txt == "-1") {
-            console.log(txt);
+            matchFailure.style.display = "flex";
+            matchFailure.children[0].children[0].innerHTML = "조건이 맞는 사람이 존재하지 않습니다. 방을 생성하시겠습니까 ? (생성하지 않으셔도 매칭은 계속 진행됩니다.)"
+            const mapBox = document.querySelector(".mapBox");
+            mapBox.style.visibility = "hidden";
         }
     });
 });
