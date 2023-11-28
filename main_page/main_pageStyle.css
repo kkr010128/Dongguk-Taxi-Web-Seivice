@@ -315,7 +315,6 @@ body{
     align-items: center;
     text-align: center;
     display: flex;
-
 }
 .map{
     /*position: absolute;*/
@@ -336,4 +335,39 @@ input, textarea, button, option, select {
     border-radius: 0;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
+}
+
+.match_popup {
+	width: 12em;
+	height: 10em;
+	position: absolute;
+	bottom: 65%;
+	left: 50%;
+	transform: translate(-50%, 50%) scale(1);
+	background-color: white;
+	padding: 0px 20px 0px;
+	box-shadow: 0px 2px 9px rgb(171, 171, 171);
+	flex-direction: column;
+	display: none;
+	border-radius: 12px;
+}
+.match_popup_wrap {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.match_popup_wrap button {
+	width: 50%;
+	height: 100%;
+	border: 0;
+	outline: none;
+	border-radius: 30px;
+	background: #d3d3d3;
+	color: rgb(110, 110, 110);
+	font-size: 1em;
+	letter-spacing: 2px;
+	background: #f8f3ed;
+	box-shadow: 3px 3px 6px #cbc7c2,  -3px -3px 6px #ffffff;
 }
