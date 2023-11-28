@@ -19,7 +19,11 @@ function showLowerNav() {
                           ["green", "채팅"], 
                           ["rebeccapurple", "설정"]];
 
-  const a_href = "#"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
+  const a_href = "http://택시.com/home/home.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
+  const b_href = "http://택시.com/main_page/main_page.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
+  const c_href = "http://택시.com/matching_room/matching_room.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
+  const d_href = "http://택시.com/chat/chatroom/room.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
+  const e_href = "http://택시.com/main_page/setting_page/setting_page.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
   const nav_normal = "nav-item";
 
   for(let i=0; i<navChildOptions.length; i++){
@@ -30,6 +34,28 @@ function showLowerNav() {
     if(i==0){
       navChildElement.classList.add(nav_normal);
       navChildElement.classList.add("is-active");
+      navChildElement.setAttribute("href", a_href);
+
+    }
+    else if(i==1){
+      navChildElement.classList.add(nav_normal);
+      navChildElement.classList.add("is-active");
+      navChildElement.setAttribute("href", b_href);
+    }
+    else if(i==2){
+      navChildElement.classList.add(nav_normal);
+      navChildElement.classList.add("is-active");
+      navChildElement.setAttribute("href", c_href);
+    }
+    else if(i==3){
+      navChildElement.classList.add(nav_normal);
+      navChildElement.classList.add("is-active");
+      navChildElement.setAttribute("href", d_href);
+    }
+    else if(i==4){
+      navChildElement.classList.add(nav_normal);
+      navChildElement.classList.add("is-active");
+      navChildElement.setAttribute("href", e_href);
     }
     else{
       navChildElement.classList.add(nav_normal);

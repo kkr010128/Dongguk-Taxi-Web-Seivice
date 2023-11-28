@@ -11,17 +11,16 @@
 }
 
 .nav {
-  position: fixed;
   display: inline-flex;
   /* overflow: hidden; */
   width: 82vw;
   height: 13.5vw;
-  background: #e0e0e0;
+  background: rgb(248, 243, 237);
   padding: 0 10px;
   bottom: 5px;
   
   border-radius: 100px;
-  box-shadow:  8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+  box-shadow: 2px 2px 3px #cbc7c2, -2px -2px 3px #ffffff;
   
   text-align: center;
   justify-content: center;
@@ -30,14 +29,14 @@
 
 .nav-item {
   color: #9b9b9b;
-  padding: 20px;
+  padding: 0.6em;
   text-decoration: none;
-  transition: 1s;
-  margin: 0 1vw;
+  transition: 1.2s;
+  margin: 0.4em;
   z-index: 1;
   font-family: 'DM Sans', sans-serif;
   font-weight: 500;
-  font-size: 3vw;
+  font-size: 4vw;
   position: relative;
   
   &:before {
