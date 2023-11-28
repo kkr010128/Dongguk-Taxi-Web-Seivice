@@ -30,13 +30,36 @@
   handle.addEventListener("click", drawerOpen);
   mainWrap.forEach((e) => e.addEventListener("click", drawerClose));
 
+  /**드로어 슬라이드 이벤트*/
+  document.addEventListener("DOMContentLoaded", function(){
+    const slideBar = document.querySelectorAll("hr");
+    var x;
+    var y;
+    
+    //터치 시작
+    slideBar.forEach((bar) => bar.addEventListener("touchstart",(event)=>{
+      x = event.touches[0].pageX;
+      y = event.touches[0].pageY;
+      console.log("event: touchstart x: ", x, "y: ", y);
+    }));
 
-  const dragBar = document.querySelectorAll("hr");
+    //터치 중
+    slideBar.forEach((bar) => bar.addEventListener("touchmove", function(e){
+      console.log("event:touchmove Start");  
+    }));
 
-  dragBar.forEach((bar) => bar.addEventListener("drag",(event)=>{
-    dragged = event.target;
-    event.target.classList.add("dragging");
-  }));
+    //터치 끝난 시점
+    slideBar.forEach((bar) => bar.addEventListener("touchend", function(e){
+      var moveX = e.changedTouches[0].pageX;
+      var moveY = e.changedTouches[0].pageY;
+      if(y<moveY){
+        drawer.classList.remove("drawer_open");
+        drawer.classList.add("drawer_close");
+      }
+      console.log("event: touchend x: ", moveX, "y: ", moveY);
+    }));
+  });
+  
 
   const imageUpload = document.getElementById("imageUpload");
 
