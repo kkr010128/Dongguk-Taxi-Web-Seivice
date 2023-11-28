@@ -1,5 +1,26 @@
+const sendBtn = document.querySelector("#send_message");
+
+sendBtn.addEventListener("click", function() {
+    const date = new Date();
+    const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+    const message = document.querySelector("#message");
+    const formDate = new FormData();
+    formDate.append("studentID", sessionStorage.key(0));
+    formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+    formDate.append("content", message.value);
+    formDate.append("dateTime", dateTime);
+    const payload = new URLSearchParams(formDate);
+    fetch('../../DataBase/chat', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    });
+});
+
 function createChatGUI(chatList) {
-    for(let i = 0; i < chatList.length; i++) {
+    for(let i = chatList.length - 1; i >= 0; i--) {
         chat = chatList[i];
         const divElement = document.createElement("div");
         divElement.classList.add("chat_format");
@@ -35,49 +56,39 @@ function createChatGUI(chatList) {
     }
 }
 
-function getChatID(studentID) {
-    const formDate = new FormData();
-    formDate.append("type", "get");
-    formDate.append("studentID", studentID);
-    const payload = new URLSearchParams(formDate);
-    fetch('../../DataBase/chatSelect', {
-        method: 'post',
-        headers: {
+function getChatLog(studentID, password) {
+    let recent = null;
+    setInterval(() => {
+        const date = new Date();
+        const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+        const formDate = new FormData();
+        formDate.append("studentID", studentID);
+        formDate.append("password", password);
+        formDate.append("dateTime", dateTime);
+        const payload = new URLSearchParams(formDate);
+        fetch('../DataBase/loadChat', {
+            method: 'post',
+            headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: payload
-    })
-    .then(function(response) {
-        return response.text();
-    })
-    .then(function(txt) {
-        const num = parseInt(txt);
-        getChatLog(num);
-    });
-}
-
-function getChatLog(chatID) {
-    const date = new Date();
-    const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
-    const formDate = new FormData();
-    formDate.append("chatID", chatID);
-    formDate.append("dateTime", dateTime);
-    const payload = new URLSearchParams(formDate);
-    fetch('../DataBase/loadChat', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: payload
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(json) {
-        const Json = JSON.stringify(json);
-        const obj = JSON.parse(Json);
-        createChatGUI(obj.chat_information);
-    });
+            },
+            body: payload
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(json) {
+            const Json = JSON.stringify(json);
+            const obj = JSON.parse(Json);
+            console.log(roomList);
+            if(recent == null) {
+                recent = obj.chat.chat_information[0];
+                createChatGUI(obj.chat_information);
+            }
+            else {
+                if(recent)
+            }
+        });
+    }, 1000);
 }
 
 window.onload = function() {
@@ -106,7 +117,7 @@ window.onload = function() {
             location.href = "../index.html";
         }
         else {
-            getChatID(obj.result.success.studentID);
+            getChatLog(obj.result.success.studentID, obj.result.success.password);
         }
     });
 }
