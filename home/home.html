@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, user-scalable=no"
     />
     <title>홈 화면</title>
-    <link rel="stylesheet" href="../lower_bar/lower_barStyle.css" />
+    <!-- <link rel="stylesheet" href="../lower_bar/lower_barStyle.css" /> -->
 
     <link rel="stylesheet" href="./home.css" />
   </head>
@@ -17,26 +17,19 @@
     <div class="wrap">
       <div class="wrap1">
         <div class="main_title">
-          <p>동행</p>
+          <p>같이, 동행</p>
         </div>
       </div>
     </div>
 
     <div class="wrap_t">
       <div class="wrap2">
-        <!--일정-->
-        <div class="user_schedule" onclick="">
-          <div class="schedule-comment">
-            <div class="schedule-title">오늘의 택시 일정</div>
-            <div id="schedule-text"></div>
-          </div>
-        </div>
 
         <!--온도-->
         <div class="user_degree" onclick="">
           <div class="degree-textContainer">
             <div class="degree-comment">
-              <div class="degree-title">나의 매너온도는?</div>
+              <div class="degree-title">당신의 온도</div>
               <div id="degree-value"></div>
             </div>
           </div>
@@ -49,18 +42,26 @@
           </div>
         </div>
 
+        <!--일정-->
+        <div class="user_schedule" onclick="">
+          <div class="schedule-comment">
+            <div class="schedule-title">다가오는 약속</div>
+            <div id="schedule-text"></div>
+          </div>
+        </div>        
+
         <!--이용내역-->
         <div class="user_log" id="user_log" onclick="open_log()">
           <div class="log-comment">
-            <div class="log-title">이용내역</div>
-            <div id="log-text">최근 이용내역이에요</div>
+            <div class="log-title">최근 이용내역</div>
+            <div id="log-text">완료된 일정을 보여드릴게요.</div>
           </div>
         </div>
       </div>
     </div>
 
     <!--하단 바-->
-    <script src="../lower_bar/lower_barScript.js"></script>
+    <!-- <script src="../lower_bar/lower_barScript.js"></script> -->
 
     <script src="./home.js"></script>
   </body>
