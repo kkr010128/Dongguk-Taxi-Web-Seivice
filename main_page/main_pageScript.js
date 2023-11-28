@@ -108,7 +108,7 @@ function setMarkers(values, which){
         case "[황리단길]중앙광장,공영주차장":
             LatLng[0]=35.837410;
             LatLng[1]=129.209759;
-            break;     
+            break;
     }
     
     if(which=="start"){
