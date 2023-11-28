@@ -12,6 +12,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 .wrap_main {
@@ -25,7 +26,7 @@ body {
 }
 
 .wrap_main img {
-  filter: drop-shadow(0px 2px 9px rgb(171, 171, 171));
+  filter: drop-shadow(0px 2px 9px rgb(171, 171, 171));  
 }
 
 .wrap1 {
@@ -37,7 +38,6 @@ body {
   margin: 3vw;
   background: #f8f3ed;
   box-shadow:  3px 3px 6px #cbc7c2, -3px -3px 6px #ffffff;
-  z-index: 1;
 }
 
 .wrap2 {
@@ -68,79 +68,68 @@ p {
   color: #444444;
 }
   
-.center-hr {
-  display: flex;
-	align-items: center;
-	justify-content: center;
-}
+  .center-hr {
+    display: flex;
+	  align-items: center;
+	  justify-content: center;
+  }
   
 
-.setting_title {
-  position: relative;
-  color: #ADADAD;
-  font-family: Rubik;
-  font-size: 1.2em;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-left: 1.4em;
-  margin-top: 2.4em;
-  bottom: 2.2em;
-}
+  .setting_title {
+    position: relative;
+    color: #ADADAD;
+    font-family: Rubik;
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 1.4em;
+    margin-top: 2.4em;
+    bottom: 2.2em;
+  }
 
-.setting_detail1{
-  position: relative;
-  display: block;
-  color: #000000;
-  font-family: Rubik;
-  font-size: 1.2em;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-left: 1.4em;
-  margin-top: 2.1em;
-}
-
-
-.sliding_drawer{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .setting_detail1 {
+    position: relative;
+    color: #000000;
+    font-family: Rubik;
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 1.4em;
+    margin-top: 2.1em;
+  }
 
 .drawer_close{
     transform: translateY(100%);
 }
-
 .drawer_open{
-    transform: translateY(0); 
+    transform: translateY(0);
+    /*display: inline;*/
 }
 
-#drawer{
-    position: fixed;
-    /*width: 80%;
-    height: 70%;*/
+#drawer {
+    position : fixed;
+    z-index: 2;
+    top : 50%;
+    right : 10%;
+    width: 80%;
+    height: 70%;
     top : 58%;
-    right : 5%;
-    width: 90%;
+    right : 2%;
+    width: 96%;
     height: 60%;
-    align-items: center;
-    justify-content: center;
     background: rgb(248, 243, 237);
     transition: transform 0.7s ease-in-out;
     box-shadow:  3px 3px 6px #cbc7c2, -3px -3px 6px #ffffff;
     color : #111111;
     border-radius: 12px;
-    z-index: 2;
 }
 
 hr {
   margin-top: 10vh;
   border-top: 3px solid rgb(184, 184, 184);
   width: 30%;
-  border: bold;
   border-radius: 40px;
   margin: auto;
 }
