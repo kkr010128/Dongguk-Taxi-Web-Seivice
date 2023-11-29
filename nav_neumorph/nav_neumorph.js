@@ -25,7 +25,9 @@ function showLowerNav() {
   const d_href = "http://택시.com/chat/chatroom/room.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
   const e_href = "http://택시.com/main_page/setting_page/setting_page.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
   const nav_normal = "nav-item";
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 지금 네비 바 a b c d e 이렇게 나뉘어져있고 각 순서대로 색도 정해져 있어서 해당 메뉴를 눌렀을 때 그 페이지로 이동하면서 아래 네비바에도
+// 변한 색이 적용되면서 애니메이션이 보여져야하는데 그게 안되고 있어요 수민선생님 도와주세요
   for(let i=0; i<navChildOptions.length; i++){
     const navChildSets = navChildOptions[i];
     const navChildElement = document.createElement("a");
