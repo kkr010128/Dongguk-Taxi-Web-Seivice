@@ -1,4 +1,6 @@
+// import { ArrayList } from "../util/utilities";
 const sendBtn = document.querySelector("#send_message");
+const previousMessage = document.querySelector("previous_message");
 
 sendBtn.addEventListener("click", function() {
     const date = new Date();
@@ -58,7 +60,7 @@ function createChatGUI(chatList) {
 
 function getChatLog(studentID, password) {
     let recent = null;
-    setInterval(() => {
+    setInterval(() => { //완성 이제 스크롤 올렸을 때 이전 데이터만 불러오게 만들면 됨
         const date = new Date();
         const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
         const formDate = new FormData();
@@ -79,16 +81,28 @@ function getChatLog(studentID, password) {
         .then(function(json) {
             const Json = JSON.stringify(json);
             const obj = JSON.parse(Json);
-            console.log(roomList);
             if(recent == null) {
-                recent = obj.chat.chat_information[0];
+                recent = obj.chat_information[0];
                 createChatGUI(obj.chat_information);
             }
             else {
-                if(recent)
+                const chatList = [];
+                const chatLog = obj.chat_information;
+                if(recent.chatNumber != chatLog[0].chatNumber) {
+                    for(let i = 0; i < chatLog.length; i++) {
+                        if(recent.chatNumber == chatLog[i].chatNumber) {
+                            break;
+                        }
+                        chatList.push(chatLog[i]);
+                    }
+                }
+                if(chatList.length > 0) {
+                    recent = chatList[0];
+                    createChatGUI(chatList);
+                }
             }
         });
-    }, 1000);
+    }, 500);
 }
 
 window.onload = function() {
