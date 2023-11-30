@@ -21,10 +21,17 @@
   
   handle.forEach((handle) => handle.addEventListener("click", function(){
     drawers.forEach((drawer)=> {
+
       var handleid = document.getElementById(handle.id);
       var drawerid = document.getElementById(drawer.id);
       if(handleid.contains(drawerid)){
         if (drawerid.classList.contains("drawer_close")) {
+          for(let i=0; i<drawers.length; i++){
+            if(drawers[i].classList.contains("drawer_open")){
+              drawers[i].classList.remove("drawer_open");
+              drawers[i].classList.add("drawer_close");
+            }
+          }
           console.log("drawer Open!");
           drawerid.classList.remove("drawer_close");
           drawerid.classList.add("drawer_open");
