@@ -19,9 +19,9 @@ function showLowerNav() {
                           ["green", "채팅"], 
                           ["rebeccapurple", "설정"]];
 
-  const a_href = "http://127.0.0.1:5500/home/home.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐http://택시.com/home/home.html
-  const b_href = "http://127.0.0.1:5500/main_page/main_page.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐http://택시.com/main_page/main_page.html
-  const c_href = "http://127.0.0.1:5500/matching_room/matching_room.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐http://택시.com/matching_room/matching_room.html
+  const a_href = "http://택시.com/home/home.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐http://택시.com/home/home.html
+  const b_href = "http://택시.com/main_page/main_page.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐http://택시.com/main_page/main_page.html
+  const c_href = "http://택시.com/matching_room/matching_room.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐http://택시.com/matching_room/matching_room.html
   const d_href = "http://택시.com/chat/chatroom/room.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
   const e_href = "http://택시.com/main_page/setting_page/setting_page.html"; // 필요할 때 바꾸기 나중에 navChildOption으로 각각 옵션줘도 댐
   const nav_normal = "nav-item";
