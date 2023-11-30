@@ -62,18 +62,46 @@
 
     //터치 중
     slideBar.forEach((bar) => bar.addEventListener("touchmove", function(e){
-      console.log("event:touchmove Start");  
+      console.log("event:touchmove Start");
+      var movingX = e.touches[0].pageX;
+      var movingY = e.touches[0].pageY;
+      //var screenHeight = window.screen.height;
+      var Ygap = y-movingY;
+      drawers.forEach((drawer)=>{
+        
+        if(Ygap > 0){ //위로 슬라이드 할 때
+          if(drawer.classList.contains("drawer_open")){
+            console.log(movingY);
+            drawer.style.transition = "0.7s ease-in-out";
+            //var fuck = screenHeight-y
+            drawer.style.top=`${movingY}px`;
+            drawer.style.transform = `translateY(${Ygap}px);`
+          }
+
+        }else if(Ygap < 0){ //아래로 슬라이드 할 때
+          if(drawer.classList.contains("drawer_open")){
+            drawer.style.transition = "0.7s ease-in-out";
+            drawer.style.top=`-${movingY}px`;
+          drawer.style.transform = `translateY(-${Ygap}px);`
+            //아니 이거 스크롤 이슈가 너무 큼 ㄹㅇ
+          }
+        }
+      });
     }));
 
     //터치 끝난 시점
     slideBar.forEach((bar) => bar.addEventListener("touchend", function(e){
       var moveX = e.changedTouches[0].pageX;
       var moveY = e.changedTouches[0].pageY;
-      if(y<moveY){
+      if(430<moveY){
         drawers.forEach((drawer)=>{
-          drawer.classList.remove("drawer_open");
-          drawer.classList.add("drawer_close");
-        })
+          if(drawer.classList.contains("drawer_open")){
+            drawer.classList.remove("drawer_open");
+            drawer.classList.add("drawer_close");
+            drawer.style.top="58%";
+            console.log("drawer closed!");
+          }
+        });
       }
       console.log("event: touchend x: ", moveX, "y: ", moveY);
     }));
