@@ -97,26 +97,29 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
             popup.classList.add("open_popup");
 
             // 웹훅에 전송할 데이터
-            
             const date = new Date();
-            const timeStamp = date.getFullYear() + "-" + (date.getMonth+1) + "-" + date.getDate() + "T" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            let timeStamp = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + "T";
+            const hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+            const minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+            timeStamp += hour + ":" + minute;
+            const genderStr = gender == 0 ? "여자" : "남자";
             const webhookUrl = "https://discord.com/api/webhooks/1163496099135361044/ct8FpfvuXTGRG-NKeHrakdwyLjbcY9ARSQebdy8avoDiCmo1qlUhOlVYwFZcWkAkHCD4"; // 디스코드 웹훅 URL을 입력하세요.
             const payload = {
-                content: `신규 사용자의 데이터가 생성되었습니다.`,
+                content: "신규 사용자의 데이터가 생성되었습니다.",
                 embeds: [
                     {
-                        title: `${studentIdValue}`,
-                        description: `이름: ${userName.value}\n성별: ${gender}\n이메일: ${webMail}`,
-                        color: 16762998,
-                        author: {
-                        name: "동행: 같이타요"
+                        "title": studentIdValue,
+                        "description": "이름: " + userName.value + "\n 웹메일: " + webMail + "\n성별: " + genderStr,
+                        "color": 16762998,
+                        "author": {
+                            "name": "동행: 같이타요"
                         },
-                        timestamp: `${timeStamp}`
+                        "timestamp": timeStamp
                     }
                 ],
                 attachments: [],
                 username: "웹훅 봇" // 웹훅 메시지의 사용자명
-                };
+            };
 
             // 웹훅 전송 요청
             fetch(webhookUrl, {
