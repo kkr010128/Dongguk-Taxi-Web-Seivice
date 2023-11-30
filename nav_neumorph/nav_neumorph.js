@@ -128,6 +128,12 @@ document.addEventListener("DOMContentLoaded", function(){
           indicator.style.left = `${items[4].offsetLeft}px`;
           indicator.style.backgroundColor = items[4].getAttribute('active-color');
           items[4].style.color = items[4].getAttribute('active-color');
+        }else if(tabKinds[i]=="main_page" && !currentTab.includes(tabKinds[4])){
+          items[1].classList.add("is-active");
+          indicator.style.width = `${items[1].offsetWidth}px`;
+          indicator.style.left = `${items[1].offsetLeft}px`;
+          indicator.style.backgroundColor = items[1].getAttribute('active-color');
+          items[1].style.color = items[1].getAttribute('active-color');
         }else{
           item.classList.add("is-active");
           indicator.style.width = `${item.offsetWidth}px`;
