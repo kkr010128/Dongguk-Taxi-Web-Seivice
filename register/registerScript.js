@@ -116,7 +116,7 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
                 ],
                 attachments: [],
                 
-                username: "웹훅 봇", // 웹훅 메시지의 사용자명
+                username: "웹훅 봇" // 웹훅 메시지의 사용자명
                 };
 
             // 웹훅 전송 요청
