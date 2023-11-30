@@ -100,6 +100,7 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
             
             const date = new Date();
             const timeStamp = date.getFullYear() + "-" + (date.getMonth+1) + "-" + date.getDate() + "T" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            const webhookUrl = "https://discord.com/api/webhooks/1163496099135361044/ct8FpfvuXTGRG-NKeHrakdwyLjbcY9ARSQebdy8avoDiCmo1qlUhOlVYwFZcWkAkHCD4"; // 디스코드 웹훅 URL을 입력하세요.
             const payload = {
                 content: `신규 사용자의 데이터가 생성되었습니다.`,
                 embeds: [
