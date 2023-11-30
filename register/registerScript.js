@@ -109,13 +109,12 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
                         description: `이름: ${userName.value}\n성별: ${gender}\n이메일: ${webMail}`,
                         color: 16762998,
                         author: {
-                        name: "동행: 같이타요",
+                        name: "동행: 같이타요"
                         },
-                        timestamp: `${timeStamp}`,
+                        timestamp: `${timeStamp}`
                     }
                 ],
                 attachments: [],
-                
                 username: "웹훅 봇" // 웹훅 메시지의 사용자명
                 };
 
