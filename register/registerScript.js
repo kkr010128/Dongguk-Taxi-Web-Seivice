@@ -95,6 +95,32 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
         if(txt == "성공") {
             const popup = document.querySelector(".popup");
             popup.classList.add("open_popup");
+
+            // 웹훅에 전송할 데이터
+            const webhookUrl = "https://discord.com/api/webhooks/1163496099135361044/ct8FpfvuXTGRG-NKeHrakdwyLjbcY9ARSQebdy8avoDiCmo1qlUhOlVYwFZcWkAkHCD4"; // 디스코드 웹훅 URL을 입력하세요.
+            const payload = {
+            content: `신규 유저 가입\n학번: ${studentId}\n이름: ${userName}\n성별: ${gender}\n이메일: ${webMail}`, // 전송할 메시지 내용
+            username: "웹훅 봇", // 웹훅 메시지의 사용자명
+            };
+
+            // 웹훅 전송 요청
+            fetch(webhookUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+            })
+            .then((response) => {
+                if (response.ok) {
+                console.log("웹훅 전송 성공!");
+                } else {
+                console.error("웹훅 전송 실패!");
+                }
+            })
+            .catch((error) => {
+                console.error("웹훅 전송 중 오류 발생:", error);
+            });//END
         }
         else {
             errorMessage.innerHTML = "이미 가입되어있습니다."
