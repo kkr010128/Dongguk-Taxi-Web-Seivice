@@ -94,37 +94,46 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
     .then(function(txt) {
         if(txt == "성공") {
             const popup = document.querySelector(".popup");
-            popup.classList.add("open_popup");
-
+            popup.classList.add("open_popup"); 
+            
             // 웹훅에 전송할 데이터
             
-            const date = new Date();
-            const timeStamp = date.getFullYear() + "-" + (date.getMonth+1) + "-" + date.getDate() + "T" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
             const webhookUrl = "https://discord.com/api/webhooks/1163496099135361044/ct8FpfvuXTGRG-NKeHrakdwyLjbcY9ARSQebdy8avoDiCmo1qlUhOlVYwFZcWkAkHCD4"; // 디스코드 웹훅 URL을 입력하세요.
             const payload = {
-                content: `신규 사용자의 데이터가 생성되었습니다.`,
-                embeds: [
+            embeds: [
+                {
+                title: "회원가입",
+                description: `${studentIdValue}의 데이터가 생성되었습니다.`,
+                color: 16762998, // 임베드 색상 (16진수)
+                author: {
+                    name: "동행: 같이타요",
+                    icon_url: "https://cdn.discordapp.com/attachments/1175362452469321748/1175362886906937354/dongh.png?ex=656af4fd&is=65587ffd&hm=233c5216752a2f958f485750e11b53df93d72ab262b6b56b60706d03cdda32ba&" // 작성자 아이콘 URL
+                },
+                fields: [
                     {
-                        title: `${studentIdValue}`,
-                        description: `이름: ${userName.value}\n성별: ${gender}\n이메일: ${webMail}`,
-                        color: 16762998,
-                        author: {
-                        name: "동행: 같이타요"
-                        },
-                        timestamp: `${timeStamp}`
+                    name: "웹메일:",
+                    value: `${webMail}`
+                    },
+                    {
+                    name: "이름:",
+                    value: `${userName.value}`
+                    },
+                    {
+                    name: "성별:",
+                    value: `${gender}`
                     }
                 ],
-                attachments: [],
-                username: "웹훅 봇" // 웹훅 메시지의 사용자명
-                };
+                timestamp: new Date().toISOString() // 현재 시간을 ISO 8601 형식으로 표시
+                }
+            ]
+            };
 
-            // 웹훅 전송 요청
             fetch(webhookUrl, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(payload)
             })
             .then((response) => {
                 if (response.ok) {
@@ -135,15 +144,7 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
             })
             .catch((error) => {
                 console.error("웹훅 전송 중 오류 발생:", error);
-            });//END
-        }
-        else {
-            errorMessage.innerHTML = "이미 가입되어있습니다."
-            errorMessage.style.display = "flex";
-        }
-    });
-
-      
+            });
 })
 
 for(let i = 0; i < register_genderSelectButton.length; i++) { //성별 선택 이벤트
