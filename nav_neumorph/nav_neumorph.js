@@ -104,9 +104,9 @@ items.forEach((item, index) => {
 /**html 문서 불러올 때 이벤트*/
 document.addEventListener("DOMContentLoaded", function(){
 
-  //다른 종류 html 추가되면 버그 생길 가능성 있음
   items.forEach((item) => {
-    const currentTab = item.href;
+    /*const currentTab = item.href;
+    
      if(window.location.href == currentTab){ //현재 주소랑 눌려진 a태그 href 값이랑 비교
         item.classList.add("is-active");
         indicator.style.width = `${item.offsetWidth}px`;
@@ -115,6 +115,33 @@ document.addEventListener("DOMContentLoaded", function(){
         item.style.color = item.getAttribute('active-color');
      }else{
         item.classList.remove("is-active");
+     }*/
+
+     const currentTab = window.location.pathname;
+     const tabKinds = ["home", "main_page", "matching_room", "chat", "setting_page"];
+     for(let i=0; i<tabKinds.length; i++){
+      if(currentTab.includes(tabKinds[i]) && item.href.includes(tabKinds[i])){
+
+        if(tabKinds[i]=="main_page" && currentTab.includes(tabKinds[4])){
+          items[4].classList.add("is-active");
+          indicator.style.width = `${items[4].offsetWidth}px`;
+          indicator.style.left = `${items[4].offsetLeft}px`;
+          indicator.style.backgroundColor = items[4].getAttribute('active-color');
+          items[4].style.color = items[4].getAttribute('active-color');
+        }else if(tabKinds[i]=="main_page" && !currentTab.includes(tabKinds[4])){
+          items[1].classList.add("is-active");
+          indicator.style.width = `${items[1].offsetWidth}px`;
+          indicator.style.left = `${items[1].offsetLeft}px`;
+          indicator.style.backgroundColor = items[1].getAttribute('active-color');
+          items[1].style.color = items[1].getAttribute('active-color');
+        }else{
+          item.classList.add("is-active");
+          indicator.style.width = `${item.offsetWidth}px`;
+          indicator.style.left = `${item.offsetLeft}px`;
+          indicator.style.backgroundColor = item.getAttribute('active-color');
+          item.style.color = item.getAttribute('active-color');
+        }
+      }
      }
   });
 });

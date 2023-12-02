@@ -21,10 +21,17 @@
   
   handle.forEach((handle) => handle.addEventListener("click", function(){
     drawers.forEach((drawer)=> {
+
       var handleid = document.getElementById(handle.id);
       var drawerid = document.getElementById(drawer.id);
       if(handleid.contains(drawerid)){
         if (drawerid.classList.contains("drawer_close")) {
+          for(let i=0; i<drawers.length; i++){
+            if(drawers[i].classList.contains("drawer_open")){
+              drawers[i].classList.remove("drawer_open");
+              drawers[i].classList.add("drawer_close");
+            }
+          }
           console.log("drawer Open!");
           drawerid.classList.remove("drawer_close");
           drawerid.classList.add("drawer_open");
@@ -55,18 +62,46 @@
 
     //터치 중
     slideBar.forEach((bar) => bar.addEventListener("touchmove", function(e){
-      console.log("event:touchmove Start");  
+      console.log("event:touchmove Start");
+      var movingX = e.touches[0].pageX;
+      var movingY = e.touches[0].pageY;
+      //var screenHeight = window.screen.height;
+      var Ygap = y-movingY;
+      drawers.forEach((drawer)=>{
+        
+        if(Ygap > 0){ //위로 슬라이드 할 때
+          if(drawer.classList.contains("drawer_open")){
+            console.log(movingY);
+            drawer.style.transition = "0.7s ease-in-out";
+            //var fuck = screenHeight-y
+            drawer.style.top=`${movingY}px`;
+            drawer.style.transform = `translateY(${Ygap}px);`
+          }
+
+        }else if(Ygap < 0){ //아래로 슬라이드 할 때
+          if(drawer.classList.contains("drawer_open")){
+            drawer.style.transition = "0.7s ease-in-out";
+            drawer.style.top=`-${movingY}px`;
+          drawer.style.transform = `translateY(-${Ygap}px);`
+            //아니 이거 스크롤 이슈가 너무 큼 ㄹㅇ
+          }
+        }
+      });
     }));
 
     //터치 끝난 시점
     slideBar.forEach((bar) => bar.addEventListener("touchend", function(e){
       var moveX = e.changedTouches[0].pageX;
       var moveY = e.changedTouches[0].pageY;
-      if(y<moveY){
+      if(430<moveY){
         drawers.forEach((drawer)=>{
-          drawer.classList.remove("drawer_open");
-          drawer.classList.add("drawer_close");
-        })
+          if(drawer.classList.contains("drawer_open")){
+            drawer.classList.remove("drawer_open");
+            drawer.classList.add("drawer_close");
+            drawer.style.top="58%";
+            console.log("drawer closed!");
+          }
+        });
       }
       console.log("event: touchend x: ", moveX, "y: ", moveY);
     }));
@@ -111,3 +146,21 @@
 
 
 
+$('#name').keyup(function(){
+  $('.name').addClass('typing');
+  if( $(this).val().length == 0 ) {
+      $('.name').removeClass('typing');
+  }
+});
+$('#email').keyup(function(){
+  $('.email').addClass('typing');
+  if( $(this).val().length == 0 ) {
+      $('.email').removeClass('typing');
+  }
+});
+$('#message').keyup(function(){
+  $('.message').addClass('typing');
+  if( $(this).val().length == 0 ) {
+      $('.message').removeClass('typing');
+  }
+});
