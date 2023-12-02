@@ -60,7 +60,6 @@ for(let i = 0; i < weight_button.length; i++) {
     });
 }
 
-
 previousCalendar.addEventListener("click", function() {
     createCalendar(nowYear, nowMonth - 1);
 });

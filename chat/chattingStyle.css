@@ -74,10 +74,11 @@ body {
   text-align: center;
   border-top: 1px solid #4c4c4c;
   padding: 10px;
+  display: flex;
 }
 
 .input-div textarea {
-  width: calc(100% - 20px); /* 여백 제거 */
+  width: calc(95% - 20px); /* 여백 제거 */
   height: 50px;
   border: solid;
   border-color: #e0ceb2;
@@ -86,6 +87,12 @@ body {
   padding: 10px;
   border-radius: 30px;
   margin-top: 10px; /* 여백 조절 */
+}
+
+.input-div button {
+  width: calc(20% - 20px);
+  height: 50px;
+  margin-top: 10px;
 }
 
 .enter_new p{

@@ -2,32 +2,42 @@
 //     window.location.href = "http://dongguk-taxi.kro.kr/dongguk_dh/main_page/setting_page/dev_info/dev_info.html";
 //   }
 
-  const handle = document.getElementById("handle");
-  const drawer = document.getElementById("drawer");
+  /*const handle = document.getElementById("handle");
+  const drawer = document.getElementById("drawer");*/
   const mainWrap = document.querySelectorAll(".wrap_main");
-  
-  function drawerOpen(){
-    if (drawer.classList.contains("drawer_close")) {
-      console.log("drawer Open!");
-      drawer.classList.remove("drawer_close");
-      drawer.classList.add("drawer_open");
-    }
-    else if (drawer.classList.contains("drawer_open")) {
-      console.log("drawer Closed");
-      drawer.classList.remove("drawer_open");
-      drawer.classList.add("drawer_close");
-    }
-  }
+  const handle = document.querySelectorAll(".setting_detail1:not(.policy, .dev_info)");
+  const drawers = document.querySelectorAll(".drawer");
   
   function drawerClose(){
-    if (drawer.classList.contains("drawer_open")) {
-      console.log("drawer Closed!");
-      drawer.classList.remove("drawer_open");
-      drawer.classList.add("drawer_close");
-    }
+    drawers.forEach((drawer)=> {
+      var drawerid = document.getElementById(drawer.id);
+      if (drawerid.classList.contains("drawer_open")) {
+        console.log("drawer Closed!");
+        drawerid.classList.remove("drawer_open");
+        drawerid.classList.add("drawer_close");
+      }
+    });
   }
   
-  handle.addEventListener("click", drawerOpen);
+  handle.forEach((handle) => handle.addEventListener("click", function(){
+    drawers.forEach((drawer)=> {
+      var handleid = document.getElementById(handle.id);
+      var drawerid = document.getElementById(drawer.id);
+      if(handleid.contains(drawerid)){
+        if (drawerid.classList.contains("drawer_close")) {
+          console.log("drawer Open!");
+          drawerid.classList.remove("drawer_close");
+          drawerid.classList.add("drawer_open");
+        }
+        else if (drawerid.classList.contains("drawer_open")) {
+          console.log("drawer Closed");
+          drawerid.classList.remove("drawer_open");
+          drawerid.classList.add("drawer_close");
+        }
+      }
+    });
+  }));
+
   mainWrap.forEach((e) => e.addEventListener("click", drawerClose));
 
   /**드로어 슬라이드 이벤트*/
@@ -53,8 +63,10 @@
       var moveX = e.changedTouches[0].pageX;
       var moveY = e.changedTouches[0].pageY;
       if(y<moveY){
-        drawer.classList.remove("drawer_open");
-        drawer.classList.add("drawer_close");
+        drawers.forEach((drawer)=>{
+          drawer.classList.remove("drawer_open");
+          drawer.classList.add("drawer_close");
+        })
       }
       console.log("event: touchend x: ", moveX, "y: ", moveY);
     }));
