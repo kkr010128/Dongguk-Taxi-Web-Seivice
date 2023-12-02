@@ -129,7 +129,7 @@ body{
 
 .options{
     width: 88vw;
-    height: 35vh;
+    height: 35vh; /*41*/
     display: flex;
     flex-direction: column;
     border: 0;
@@ -290,7 +290,7 @@ body{
     align-items: center;
 }
 
-#setTime, #setMinute{
+#setTime, #setMinute, #setMonth, #setDate{
     font-size: 3vw;
     width: 12vw;
     height: 2.5em;
@@ -299,6 +299,20 @@ body{
     border-color: #f8f3ed;
     text-align: center;
     box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
+}
+
+.priceTab{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#showPrice{
+    display: none;
+    font-size: 3.2vw;
+    align-items: center;
+    border: bolder;
+    color: #ffc355;
 }
 
 .nav{

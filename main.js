@@ -120,18 +120,6 @@ function getCookie (cookieName){
         }
     }
     return "";
-    
-    /*let result = '';
-    //1. 쿠키 가져와서 분리
-    document.cookie.split(';').map((item) => {
-        // 2. 분리한 값의 앞뒤 공백 제거
-        const cookieItem = item.trim();
-        // 3. 키 값과 매칭이 되는 값을 반환
-        if(item.includes(cookieName)) {
-            result = cookieItem.split('=')[1]; 
-        }
-    });
-    return result;*/
 }
 
 /**쿠키 삭제 - 로그아웃 시*/
