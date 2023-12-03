@@ -79,15 +79,15 @@ window.onload = function () {
         temper = obj.result.success.kindness;
         degree = (temper / 99) * 360;
         animation();
-        getSchedule(obj.result.success.studentID);
+        getSchedule(obj.result.success.studentID, obj.result.success.password);
       }
     });
 }
 
-function getSchedule(studentID) {
+function getSchedule(studentID, password) {
   let formDate = new FormData();
   formDate.append("studentID", studentID);
-  formDate.append("getMethod", "방 정보");
+  formDate.append("password", password);
   const payload = new URLSearchParams(formDate);
   fetch('../DataBase/myRoom', {
       method: 'post',
@@ -102,13 +102,14 @@ function getSchedule(studentID) {
     .then(function(json) {
       const result = JSON.stringify(json);
       const obj = JSON.parse(result);
-      if(obj.room_information == "없음") {
+      const myRoom = obj.room_information;
+      console.log(myRoom);
+      if(myRoom[0] == "없음" || myRoom[0] == "오류" ) {
         document.getElementById("schedule-text").textContent = "일정이 없습니다.";
       }
       else {
-        const myRoom = obj.room_information;
         document.getElementById("schedule-text").textContent = 
-        myRoom.date + " " + myRoom.time + " " + myRoom.from + " -> " + myRoom.to;
+        myRoom[0].date + " " + myRoom[0].time + " " + myRoom[0].from + " -> " + myRoom[0].to;
       }
     });
 }
