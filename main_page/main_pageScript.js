@@ -5,6 +5,8 @@ const plusBtn = document.getElementById("plus");
 const markers = [null, null]; //중요
 const PolyLine = [null]; //중요
 const matchFailure = document.querySelector("#match_failure_popup");
+const showPrice = document.getElementById("showPrice");
+let taxi_prices = 0;
 
 /*script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing?autoload=false";
 script.onload = () => {
@@ -149,10 +151,15 @@ function setMarkers(values, which){
     }else if(markers[0]!=null && markers[1]!=null) { 
 
         map.setBounds(new kakao.maps.LatLngBounds(markers[0].getPosition(), markers[1].getPosition()));
+        /*var markerInfoWindow = new kakao.maps.InfoWindow({
+            map: map,
+            position: new kakao.maps.LatLng(33.450701, 126.570667),
+            content: '목적지까지의 소요시간: 2시간'
+        });
+        markerInfoWindow.open(map, markers[0]);*/
         if(vertexArr.length!=0)
             vertexArr.length=0;
         
-        //console.log(vertexArr.length);
         var start_x = markers[0].getPosition().getLng();
         var start_y = markers[0].getPosition().getLat();
         var arrive_x = markers[1].getPosition().getLng();
@@ -175,8 +182,9 @@ function setMarkers(values, which){
             return response.json();
         })
         .then((data)=> {
-            //console.log(data.routes[0].sections[0].roads);
+            //console.log(data.routes[0].sections[0].roads); //길 정보
             
+    
             //겁나 중요한 샛기
             var createRoute = data.routes[0].sections[0].roads.forEach(marker => {
                 marker.vertexes.forEach((vertex, num)=>{
@@ -185,6 +193,17 @@ function setMarkers(values, which){
                     }
                 });
             })
+            
+            var taxiPrice = data.routes[0].summary.fare.taxi;
+            //var arriveTime = data.routes[0].sections.duration;
+            var optionTab = document.querySelector(".options");
+            var persons =  parseInt(personCnt.innerText);
+
+            showPrice.style.display = "flex";
+            optionTab.style.height = "41vh";
+            showPrice.innerText= `예상되는 개인당 금액은 ${Math.floor(taxiPrice/persons)}원이에요 !`; 
+            taxi_prices = taxiPrice;
+
             var roadLine = new kakao.maps.Polyline({
                 path: vertexArr,
                 strokeWeight: 5,                  
@@ -194,7 +213,6 @@ function setMarkers(values, which){
             });
             PolyLine[0] = roadLine;
             roadLine.setMap(map);
-
         })
     }
 }
@@ -243,6 +261,9 @@ plusBtn.addEventListener("click", function(){
             plusBtn.disabled=true;
         }
     }
+    if(showPrice.style.display == "flex"){
+        showPrice.innerText=`예상되는 개인당 금액은 ${Math.floor(taxi_prices/personCnt.innerText)}원이에요 !`; 
+    }
 });
 
 minusBtn.addEventListener("click", function(){
@@ -256,6 +277,9 @@ minusBtn.addEventListener("click", function(){
         minusBtn.style.borderColor="#ffffff";
         minusBtn.disabled=true;
         }
+    }
+    if(showPrice.style.display == "flex"){
+        showPrice.innerText=`예상되는 개인당 금액은 ${Math.floor(taxi_prices/personCnt.innerText)}원이에요 !`; 
     }
 });
 
@@ -310,13 +334,15 @@ function matchData() {
     const formData = new FormData();
     formData.append("studentID", sessionStorage.key(0));
     formData.append("password", sessionStorage.getItem(sessionStorage.key(0)));
-
-    const date = new Date();
+    //const date = new Date();
+    const year = new Date();
+    const setDate = document.getElementById("setDate").value.split('-');
     const hour = document.querySelector("#setTime");
     const minute = document.querySelector("#setMinute");
-    const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + hour.value + ":" + minute.value;
+    //const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + hour.value + ":" + minute.value;
+    const dateTime = year.getFullYear() + "-" + (setDate[1] + "-" + setDate[2] + " " + hour.value + ":" + minute.value);
     formData.append("dateTime", dateTime);
-
+    
     const from = document.querySelector("#setStart");
     if(from.value == "출발지 선택하기") {
         return null;

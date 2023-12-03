@@ -98,12 +98,13 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
 
             // 웹훅에 전송할 데이터
             const date = new Date();
-            // let timeStamp = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + "T";
-            // const hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-            // const minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-            // timeStamp += hour + ":" + minute;
+            date.setHours(date.getHours() - 9);
+            let timeStamp = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + "T";
+            const hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+            const minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+            timeStamp += hour + ":" + minute;
             const genderStr = gender == 0 ? "여자" : "남자";
-            const webhookUrl = "https://discord.com/api/webhooks/1163496099135361044/ct8FpfvuXTGRG-NKeHrakdwyLjbcY9ARSQebdy8avoDiCmo1qlUhOlVYwFZcWkAkHCD4"; //웹훅 URL
+            const webhookUrl = "https://discord.com/api/webhooks/1163496099135361044/ct8FpfvuXTGRG-NKeHrakdwyLjbcY9ARSQebdy8avoDiCmo1qlUhOlVYwFZcWkAkHCD4"; // 디스코드 웹훅 URL을 입력하세요.
             const payload = {
                 content: "신규 사용자의 데이터가 생성되었습니다.",
                 embeds: [
@@ -112,14 +113,13 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
                         "description": "이름: " + userName.value + "\n 웹메일: " + webMail + "\n성별: " + genderStr,
                         "color": 16762998,
                         "author": {
-                            "name": "동행: 같이타요",
-                            "icon_url": "https://cdn.discordapp.com/attachments/1175362452469321748/1175362886906937354/dongh.png?ex=656af4fd&is=65587ffd&hm=233c5216752a2f958f485750e11b53df93d72ab262b6b56b60706d03cdda32ba&"
+                            "name": "동행: 같이타요"
                         },
-                        "timestamp": new Date().toISOString() // 현재 시간을 ISO 8601 형식으로 표시
+                        "timestamp": timeStamp
                     }
                 ],
                 attachments: [],
-                username: "동행 데이터관리" // 웹훅 메시지의 사용자명
+                username: "웹훅 봇" // 웹훅 메시지의 사용자명
             };
 
             // 웹훅 전송 요청
