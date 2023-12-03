@@ -4,7 +4,6 @@ const previousMessage = document.querySelector(".previous_message");
 const chattingList = new ArrayList(10);
 const socket = new WebSocket("ws://택시.com:80/DataBase/WebSocket?studentID=" + sessionStorage.key(0) + "&password=" + sessionStorage.getItem(sessionStorage.key(0)));
 
-
 socket.addEventListener("open", (event) => {
 });
 
@@ -14,6 +13,7 @@ socket.addEventListener("message", (event) => {
     const list = new ArrayList(1);
     list.add(obj.chat_information[0]);
     createChatGUI(list);
+    document.querySelector(".chat").scrollTo(0, document.querySelector(".chat").scrollHeight);
 });
 
 previousMessage.addEventListener("click", function() {
