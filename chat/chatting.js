@@ -2,7 +2,7 @@ import { ArrayList } from "../util/utilities.js";
 const sendBtn = document.querySelector("#send_message");
 const previousMessage = document.querySelector(".previous_message");
 const chattingList = new ArrayList(10);
-const socket = new WebSocket("ws://택시.com:80/DataBase/WebSocket");
+const socket = new WebSocket("ws://택시.com:80/DataBase/WebSocket?studentID=" + sessionStorage.key(0) + "&password=" + sessionStorage.getItem(sessionStorage.key(0)));
 
 
 socket.addEventListener("open", (event) => {
