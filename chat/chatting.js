@@ -12,8 +12,12 @@ socket.addEventListener("message", (event) => {
     chattingList.addI(0, obj.chat_information[0]);
     const list = new ArrayList(1);
     list.add(obj.chat_information[0]);
+    const maxY = document.querySelector(".chat").scrollHeight-582;
     createChatGUI(list);
-    document.querySelector(".chat").scrollTo(0, document.querySelector(".chat").scrollHeight);
+    const locationY = document.querySelector(".chat").scrollTop;
+    if(locationY >= maxY) {
+        document.querySelector(".chat").scrollTo(0, document.querySelector(".chat").scrollHeight);
+    }
 });
 
 previousMessage.addEventListener("click", function() {
