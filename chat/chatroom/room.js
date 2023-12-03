@@ -52,7 +52,7 @@ function createChatListGUI(roomList, studentID) {
         const h2Element = document.createElement("h2");
         const roomDateSplit = room.date.split("-");
         const roomTimeSplit = room.time.split(":");
-        h2Element.innerHTML = roomDateSplit[1] + "월 " + roomDateSplit[2] + "일 " + roomTimeSplit[0] + "시 " + roomTimeSplit[1] + "분";
+        h2Element.innerHTML = room.number + "번 " + roomDateSplit[1] + "월 " + roomDateSplit[2] + "일 " + roomTimeSplit[0] + "시 " + roomTimeSplit[1] + "분";
         divElement.appendChild(h2Element);
 
         const pElement = document.createElement("p");
@@ -86,7 +86,7 @@ window.onload = function () {
         const userJson = JSON.stringify(json);
         const obj = JSON.parse(userJson);
         if(obj.result == "failure") {
-          location.href = "../index.html";
+          location.href = "../../index.html";
         }
         else {
             getChatList(obj.result.success.studentID, obj.result.success.password);

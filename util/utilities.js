@@ -23,6 +23,12 @@ class ArrayList {
         this.numItems ++;
     }
 
+    addAll(array) {
+        for(let i = 0; i < array.length; i++) {
+            this.add(array[i]);
+        }
+    }
+
     set(index, E) {
         if(index >= this.numItems) {
             return;
@@ -74,6 +80,10 @@ class ArrayList {
 
     clear() {
         this.numItems = 0;
+    }
+
+    size() {
+        return this.numItems;
     }
 }
 

@@ -1,6 +1,52 @@
-// import { ArrayList } from "../util/utilities";
+import { ArrayList } from "../util/utilities.js";
 const sendBtn = document.querySelector("#send_message");
-const previousMessage = document.querySelector("previous_message");
+const previousMessage = document.querySelector(".previous_message");
+const chattingList = new ArrayList(10);
+const socket = new WebSocket("ws://localhost:8080/DataBase/WebSocket");
+
+
+socket.addEventListener("open", (event) => {
+});
+
+socket.addEventListener("message", (event) => {
+    const obj = JSON.parse(event.data);
+    chattingList.addI(0, obj.chat_information[0]);
+    const list = new ArrayList(1);
+    list.add(obj.chat_information[0]);
+    createChatGUI(list);
+});
+
+previousMessage.addEventListener("click", function() {
+    const date = new Date();
+    const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+    const formDate = new FormData();
+    formDate.append("studentID", sessionStorage.key(0));
+    formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+    formDate.append("dateTime", dateTime);
+    const loadedChatNumber = chattingList.size() < 1 ? -1 : chattingList.get(chattingList.size()-1).chatNumber;
+    formDate.append("loadedChatNumber", loadedChatNumber);
+    const payload = new URLSearchParams(formDate);
+    fetch('../DataBase/loadChat', {
+        method: 'post',
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(json) {
+        const Json = JSON.stringify(json);
+        const obj = JSON.parse(Json);
+        if(obj.chat_information.length > 0) {
+            chattingList.addAll(obj.chat_information);
+            const chatDiv = document.querySelector(".chat");
+            chatDiv.children[1].innerHTML = "";
+            createChatGUI(chattingList);
+        }
+    });
+});
 
 sendBtn.addEventListener("click", function() {
     const date = new Date();
@@ -18,12 +64,23 @@ sendBtn.addEventListener("click", function() {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: payload
+    })
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(txt){
+        const result = parseInt(txt);
+        if(result == 1) {
+            const msg = "studentID:" + sessionStorage.key(0) + ", password:" + sessionStorage.getItem(sessionStorage.key(0)) + ", " + "dateTime:" + dateTime
+            socket.send(msg);
+        }
     });
+    message.value = "";
 });
 
 function createChatGUI(chatList) {
-    for(let i = chatList.length - 1; i >= 0; i--) {
-        chat = chatList[i];
+    for(let i = chatList.size() - 1; i >= 0; i--) {
+        const chat = chatList.get(i);
         const divElement = document.createElement("div");
         divElement.classList.add("chat_format");
         const ulElement = document.createElement("ul");
@@ -54,55 +111,38 @@ function createChatGUI(chatList) {
         divElement.appendChild(ulElement);
         
         const chatDiv = document.querySelector(".chat");
-        chatDiv.children[0].appendChild(divElement);
+        chatDiv.children[1].appendChild(divElement);
     }
 }
 
 function getChatLog(studentID, password) {
-    let recent = null;
-    setInterval(() => { //완성 이제 스크롤 올렸을 때 이전 데이터만 불러오게 만들면 됨
-        const date = new Date();
-        const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
-        const formDate = new FormData();
-        formDate.append("studentID", studentID);
-        formDate.append("password", password);
-        formDate.append("dateTime", dateTime);
-        const payload = new URLSearchParams(formDate);
-        fetch('../DataBase/loadChat', {
-            method: 'post',
-            headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: payload
-        })
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(json) {
-            const Json = JSON.stringify(json);
-            const obj = JSON.parse(Json);
-            if(recent == null) {
-                recent = obj.chat_information[0];
-                createChatGUI(obj.chat_information);
-            }
-            else {
-                const chatList = [];
-                const chatLog = obj.chat_information;
-                if(recent.chatNumber != chatLog[0].chatNumber) {
-                    for(let i = 0; i < chatLog.length; i++) {
-                        if(recent.chatNumber == chatLog[i].chatNumber) {
-                            break;
-                        }
-                        chatList.push(chatLog[i]);
-                    }
-                }
-                if(chatList.length > 0) {
-                    recent = chatList[0];
-                    createChatGUI(chatList);
-                }
-            }
-        });
-    }, 500);
+    const date = new Date();
+    const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+    const formDate = new FormData();
+    formDate.append("studentID", studentID);
+    formDate.append("password", password);
+    formDate.append("dateTime", dateTime);
+    formDate.append("loadedChatNumber", -1);
+    const payload = new URLSearchParams(formDate);
+    fetch('../DataBase/loadChat', {
+        method: 'post',
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(json) {
+        const Json = JSON.stringify(json);
+        const obj = JSON.parse(Json);
+        if(obj.chat_information.length < 1) {
+            return;
+        }
+        chattingList.addAll(obj.chat_information);
+        createChatGUI(chattingList);
+    });
 }
 
 window.onload = function() {
