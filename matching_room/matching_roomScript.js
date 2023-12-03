@@ -86,6 +86,39 @@ signPopUpBtn.addEventListener("click", function() {
     signPopUp.style.display = "none";
 });
 
+function onClickDate(tmpDate) {
+    tmpDate.addEventListener("click", function() {
+        const dateNode = tmpDate.children[0];
+        let formDate = new FormData();
+        formDate.append("year", nowYear);
+        formDate.append("month", nowMonth + 1);
+        formDate.append("date", dateNode.innerHTML);
+        nowDate = dateNode.innerHTML;
+        const payload = new URLSearchParams(formDate);
+        if(dateNode.style.color != "lightgray") {
+            fetch('../../DataBase/MatchingRoomList', {
+                method: 'post',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: payload
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                const roomJson = JSON.stringify(json);
+                roomList = JSON.parse(roomJson).room_information;
+                const calendarWrap = document.querySelector(".calendar_wrap");
+                calendarWrap.style.display = "none";
+                setRoomPage();
+                const matchingRoomWrap = document.querySelector(".wrap");
+                matchingRoomWrap.style.display = "flex";
+            });
+        }   
+    });
+}
+
 function createCalendar(year, month) {
     let nowCalendarDate = new Date(year, month, 1);
     nowYear = nowCalendarDate.getFullYear();
@@ -114,6 +147,7 @@ function createCalendar(year, month) {
         for(let j = 0; j < 7; j++) {
             const dateElement = document.createElement("div"); 
             dateElement.classList.add("date");
+            onClickDate(dateElement);
             // const hrElement = document.createElement("hr");
             // hrElement.style.border = "solid 1px lightgray";
             const pElement = document.createElement("p");
@@ -157,41 +191,6 @@ function createCalendar(year, month) {
 }
 
 createCalendar(initDate.getFullYear(), initDate.getMonth());
-
-const dateArray = document.getElementsByClassName("date");
-for(let i = 0; i < dateArray.length; i++) {
-    const tmpDate = dateArray[i];
-    tmpDate.addEventListener("click", function() {
-        const dateNode = tmpDate.children[0];
-        let formDate = new FormData();
-        formDate.append("year", nowYear);
-        formDate.append("month", nowMonth + 1);
-        formDate.append("date", dateNode.innerHTML);
-        nowDate = dateNode.innerHTML;
-        const payload = new URLSearchParams(formDate);
-        if(dateNode.style.color != "lightgray") {
-            fetch('../../DataBase/MatchingRoomList', {
-                method: 'post',
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: payload
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(json) {
-                const roomJson = JSON.stringify(json);
-                roomList = JSON.parse(roomJson).room_information;
-                const calendarWrap = document.querySelector(".calendar_wrap");
-                calendarWrap.style.display = "none";
-                setRoomPage();
-                const matchingRoomWrap = document.querySelector(".wrap");
-                matchingRoomWrap.style.display = "flex";
-            });
-        }
-    });
-}
 
 function setRoomPage() {
     if(roomList.length < 1) {

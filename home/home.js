@@ -103,7 +103,6 @@ function getSchedule(studentID, password) {
       const result = JSON.stringify(json);
       const obj = JSON.parse(result);
       const myRoom = obj.room_information;
-      console.log(myRoom);
       if(myRoom[0] == "없음" || myRoom[0] == "오류" ) {
         document.getElementById("schedule-text").textContent = "일정이 없습니다.";
       }
