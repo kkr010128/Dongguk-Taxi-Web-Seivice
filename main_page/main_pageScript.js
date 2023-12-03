@@ -334,7 +334,6 @@ function matchData() {
     const formData = new FormData();
     formData.append("studentID", sessionStorage.key(0));
     formData.append("password", sessionStorage.getItem(sessionStorage.key(0)));
-
     //const date = new Date();
     const year = new Date();
     const month = document.querySelector("#setMonth")
@@ -342,7 +341,7 @@ function matchData() {
     const hour = document.querySelector("#setTime");
     const minute = document.querySelector("#setMinute");
     //const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + hour.value + ":" + minute.value;
-    const dateTime = date.getFullYear() + "-" + (month.value + "-" + day.value + " " + hour.value + ":" + minute.value);
+    const dateTime = year.getFullYear() + "-" + (month.value + "-" + day.value + " " + hour.value + ":" + minute.value);
     formData.append("dateTime", dateTime);
     
     const from = document.querySelector("#setStart");

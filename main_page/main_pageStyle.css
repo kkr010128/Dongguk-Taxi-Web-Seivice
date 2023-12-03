@@ -290,9 +290,20 @@ body{
     align-items: center;
 }
 
-#setTime, #setMinute, #setMonth, #setDate{
+#setTime, #setMinute{
     font-size: 3vw;
     width: 12vw;
+    height: 2.5em;
+    border-radius: 12px;
+    background: #f8f3ed;
+    border-color: #f8f3ed;
+    text-align: center;
+    box-shadow:  inset 1px 1px 2px #d3cfc9, inset -1px -1px 2px #ffffff;
+}
+
+#setDate{
+    font-size: 3vw;
+    width: 30vw;
     height: 2.5em;
     border-radius: 12px;
     background: #f8f3ed;
@@ -310,8 +321,8 @@ body{
 #showPrice{
     display: none;
     font-size: 3.2vw;
+    font-weight: bold;
     align-items: center;
-    border: bolder;
     color: #ffc355;
 }
 

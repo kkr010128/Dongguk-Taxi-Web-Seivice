@@ -4,7 +4,9 @@ const login_form = document.querySelector("#login_form");
 
 /**html 로드 시 쿠키 남아있으면 자동 로그인 이벤트 - 미구현 */
 document.addEventListener("DOMContentLoaded", function(){
+    if(document.cookie){ //이거 어케 구현하노 ㅋㅋ
 
+    }
 });
 
 login_form.addEventListener("submit", function(e) {
@@ -38,6 +40,9 @@ login_form.addEventListener("submit", function(e) {
             location.href = "../home/home.html";
             const userDate = obj.result.success;
             sessionStorage.setItem(userDate.studentID, userDate.password);
+            if(isChecked()==true){
+                setCookie(userDate.studentID, userDate.password, 7);
+            }
         }
     });
 
@@ -101,8 +106,10 @@ function isChecked(){
 /**쿠키값을 세팅*/
 function setCookie (cookieName, cookieValue, expiresHour) {
     const expired = new Date();
+    const encodedCookieName = encodeURIComponent(cookieName);
+    const encodedCookieValue = encodeURIComponent(cookieValue);
     expired.setTime(expired.getTime() + expiresHour * 24 * 60 * 60 * 1000); 
-    document.cookie = `${cookieName}=${cookieValue}; path=/; Expires=${expired};`;
+    document.cookie = `${encodedCookieName}=${encodedCookieValue}; path=/; Expires=${expired}; httpOnly`;
 }
 
 /**쿠키 조회 */
