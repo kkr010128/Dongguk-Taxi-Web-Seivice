@@ -16,7 +16,7 @@ body {
 .log_title {
   width: 100%;
   height: 5em;
-  background-color: #e38214;
+  background-color: rgb(255, 194, 85);
   padding: 5%;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
@@ -45,7 +45,7 @@ h2 {
   position: absolute;
   width: 30px;
   height: 30px;
-  background-color: #e38214;
+  background-color: rgb(255, 194, 85);
   top: 7px;
   right: 5px;
 }
