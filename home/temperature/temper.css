@@ -1,0 +1,35 @@
+* {
+  border: 1px solid #000000;
+  text-align: center;
+}
+.wrap {
+  background-color: beige;
+  display: flex;
+  height: 80vh;
+}
+.user_info {
+  width: 100%;
+  background-color: aqua;
+  display: flex;
+}
+.user_name,
+.user_id {
+  width: 100%;
+}
+.user_rating {
+  width: 70%;
+  background-color: rgb(50, 145, 113);
+}
+.btn_container {
+  background-color: blueviolet;
+  display: flex;
+  height: 15vh;
+}
+#btn_submit {
+  background-color: rgb(196, 129, 28);
+  width: 50%;
+}
+#btn_cancel {
+  background-color: rgb(78, 29, 124);
+  width: 50%;
+}

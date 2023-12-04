@@ -15,8 +15,8 @@ body {
 
 .log_title {
   width: 100%;
-  height: 5em;
-  background-color: rgb(255, 194, 85);
+  height: 80px;
+  background-color: #e38214;
   padding: 5%;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
@@ -30,13 +30,11 @@ h2 {
 }
 
 .log {
-  flex-direction: column;
-  display: flex;
   color: black;
   margin: 3%;
   border: 1px solid rgb(222, 221, 221);
   border-radius: 16px;
-  height: 6em;
+  height: 100px;
   padding: 4%;
   box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
@@ -45,7 +43,7 @@ h2 {
   position: absolute;
   width: 30px;
   height: 30px;
-  background-color: rgb(255, 194, 85);
+  background-color: #e38214;
   top: 7px;
   right: 5px;
 }
