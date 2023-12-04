@@ -21,6 +21,7 @@ socket.addEventListener("message", (event) => {
 });
 
 previousMessage.addEventListener("click", function() {
+    const maxY = document.querySelector(".chat").scrollHeight;
     const date = new Date();
     const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
     const formDate = new FormData();
@@ -48,6 +49,8 @@ previousMessage.addEventListener("click", function() {
             const chatDiv = document.querySelector(".chat");
             chatDiv.children[1].innerHTML = "";
             createChatGUI(chattingList);
+            const newMaxY = document.querySelector(".chat").scrollHeight;
+            document.querySelector(".chat").scrollTo(0, newMaxY - maxY);
         }
     });
 });
