@@ -9,8 +9,8 @@ body {
   margin: 0; /* body의 기본 마진 제거 */
 }
 
-.chat.format {
-  display: none;
+.chat_format {
+  display: flex;
 }
 
 .chat_wrap {
@@ -74,10 +74,11 @@ body {
   text-align: center;
   border-top: 1px solid #4c4c4c;
   padding: 10px;
+  display: flex;
 }
 
 .input-div textarea {
-  width: calc(100% - 20px); /* 여백 제거 */
+  width: calc(95% - 20px); /* 여백 제거 */
   height: 50px;
   border: solid;
   border-color: #e0ceb2;
@@ -88,10 +89,15 @@ body {
   margin-top: 10px; /* 여백 조절 */
 }
 
+.input-div button {
+  width: calc(20% - 20px);
+  height: 50px;
+  margin-top: 10px;
+}
+
 .enter_new p{
   margin: 0 auto;
   text-align: center;
-
 }
 
 .time {
@@ -103,4 +109,9 @@ body {
   font-size: 0px;
   color: #888;
   margin-top: 10px;
+}
+
+.previous_message p {
+  margin: 0 auto;
+  text-align: center;
 }

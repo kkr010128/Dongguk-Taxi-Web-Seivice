@@ -95,6 +95,51 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
         if(txt == "성공") {
             const popup = document.querySelector(".popup");
             popup.classList.add("open_popup");
+
+            // 웹훅에 전송할 데이터
+            const date = new Date();
+            date.setHours(date.getHours() - 9);
+            let timeStamp = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + "T";
+            const hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+            const minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+            timeStamp += hour + ":" + minute;
+            const genderStr = gender == 0 ? "여자" : "남자";
+            const webhookUrl = "https://discord.com/api/webhooks/1163496099135361044/ct8FpfvuXTGRG-NKeHrakdwyLjbcY9ARSQebdy8avoDiCmo1qlUhOlVYwFZcWkAkHCD4"; // 디스코드 웹훅 URL을 입력하세요.
+            const payload = {
+                content: "신규 사용자의 데이터가 생성되었습니다.",
+                embeds: [
+                    {
+                        "title": studentIdValue,
+                        "description": "이름: " + userName.value + "\n 웹메일: " + webMail + "\n성별: " + genderStr,
+                        "color": 16762998,
+                        "author": {
+                            "name": "동행: 같이타요"
+                        },
+                        "timestamp": timeStamp
+                    }
+                ],
+                attachments: [],
+                username: "웹훅 봇" // 웹훅 메시지의 사용자명
+            };
+
+            // 웹훅 전송 요청
+            fetch(webhookUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+            })
+            .then((response) => {
+                if (response.ok) {
+                console.log("웹훅 전송 성공!");
+                } else {
+                console.error("웹훅 전송 실패!");
+                }
+            })
+            .catch((error) => {
+                console.error("웹훅 전송 중 오류 발생:", error);
+            });//END
         }
         else {
             errorMessage.innerHTML = "이미 가입되어있습니다."
@@ -207,31 +252,31 @@ function timeStop() {
     // timeOver = true;
 }
 
-function randomCode() {
-    const alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    let numCount = 0;
-    let code = "";
-    for(let i = 0; i < 6; i++) {
-        let random = null;
-        let numSelection = false;
-        if(numCount < 2) {
-            if(6-i <= 2 - numCount) {
-                numSelection = true;
-            }
-            else {
-                if(Math.random() < 0.5){
-                    numSelection = true;
-                }
-            }
-        }
-        if(numSelection) {
-            random = parseInt(Math.random() * 10);
-            numCount ++;
-        }
-        else {
-            random = alpha[parseInt(Math.random() * alpha.length)];
-        }
-        code += random;
-    }
-    return code;
-}
+// function randomCode() {
+//     const alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+//     let numCount = 0;
+//     let code = "";
+//     for(let i = 0; i < 6; i++) {
+//         let random = null;
+//         let numSelection = false;
+//         if(numCount < 2) {
+//             if(6-i <= 2 - numCount) {
+//                 numSelection = true;
+//             }
+//             else {
+//                 if(Math.random() < 0.5){
+//                     numSelection = true;
+//                 }
+//             }
+//         }
+//         if(numSelection) {
+//             random = parseInt(Math.random() * 10);
+//             numCount ++;
+//         }
+//         else {
+//             random = alpha[parseInt(Math.random() * alpha.length)];
+//         }
+//         code += random;
+//     }
+//     return code;
+// }

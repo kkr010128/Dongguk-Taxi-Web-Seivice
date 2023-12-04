@@ -12,39 +12,28 @@
         동행
     </div>
     <div class="chat">
-        <div class="enter_new">
+        <!-- <div class="enter_new">
             <p>2020214597 김광래 님이 입장하셨습니다.</p>
+        </div> -->
+        <div class="previous_message">
+            <p>이전 메세지 보기</p>
         </div>
         <ul>
             <!-- 동적 생성 -->
         </ul>
     </div>
     <div class="input-div">
-        <textarea placeholder="채팅 메시지"></textarea>
+        <textarea placeholder="채팅 메시지" id="message"></textarea>
+        <button type="button" id="send_message">전송</button>
     </div>
  
     <!-- format -->
- 
-    <div class="chat format">
-        <ul>
-            <li>
-                <div class="sender">
-                    <span></span>
-                </div>
-                <div class="message">
-                    <span></span>
-                </div>
-                <div class="time">
-                    <span></span>
-                </div>
-            </li>
-        </ul>
-    </div>
     <div class="time-display">
         <p class="current-time"></p>
     </div>
+    <script src="./chatting.js" type="module"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         const Chat = (function(){
             const myName = "2020211495_김석영";
@@ -144,5 +133,5 @@
         $(function(){
             Chat.init();
         });
-    </script>
+    </script> -->
 </body>

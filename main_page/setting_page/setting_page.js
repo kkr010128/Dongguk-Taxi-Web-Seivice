@@ -2,25 +2,115 @@
 //     window.location.href = "http://dongguk-taxi.kro.kr/dongguk_dh/main_page/setting_page/dev_info/dev_info.html";
 //   }
 
-
-
-  const handle = document.getElementById("handle");
-  const drawer = document.getElementById("drawer");
+  /*const handle = document.getElementById("handle");
+  const drawer = document.getElementById("drawer");*/
+  const mainWrap = document.querySelectorAll(".wrap_main");
+  const handle = document.querySelectorAll(".setting_detail1:not(.policy, .dev_info)");
+  const drawers = document.querySelectorAll(".drawer");
   
-  handle.addEventListener('click', function(){
-      if (drawer.classList.contains("drawer_close")) {
-          drawer.classList.remove("drawer_close");
-          drawer.classList.add("drawer_open");
-      }else if(drawer.classList.contains("drawer_open")){
-          drawer.classList.remove("drawer_open");
-          drawer.classList.add("drawer_close");
+  function drawerClose(){
+    drawers.forEach((drawer)=> {
+      var drawerid = document.getElementById(drawer.id);
+      if (drawerid.classList.contains("drawer_open")) {
+        console.log("drawer Closed!");
+        drawerid.classList.remove("drawer_open");
+        drawerid.classList.add("drawer_close");
       }
+    });
+  }
+  
+  handle.forEach((handle) => handle.addEventListener("click", function(){
+    drawers.forEach((drawer)=> {
+
+      var handleid = document.getElementById(handle.id);
+      var drawerid = document.getElementById(drawer.id);
+      if(handleid.contains(drawerid)){
+        if (drawerid.classList.contains("drawer_close")) {
+          for(let i=0; i<drawers.length; i++){
+            if(drawers[i].classList.contains("drawer_open")){
+              drawers[i].classList.remove("drawer_open");
+              drawers[i].classList.add("drawer_close");
+            }
+          }
+          console.log("drawer Open!");
+          drawerid.classList.remove("drawer_close");
+          drawerid.classList.add("drawer_open");
+        }
+        else if (drawerid.classList.contains("drawer_open")) {
+          console.log("drawer Closed");
+          drawerid.classList.remove("drawer_open");
+          drawerid.classList.add("drawer_close");
+        }
+      }
+    });
+  }));
+
+  mainWrap.forEach((e) => e.addEventListener("click", drawerClose));
+
+  /**드로어 슬라이드 이벤트*/
+  document.addEventListener("DOMContentLoaded", function(){
+    const slideBar = document.querySelectorAll("hr");
+    var x;
+    var y;
+    
+    //터치 시작
+    slideBar.forEach((bar) => bar.addEventListener("touchstart",(event)=>{
+      x = event.touches[0].pageX;
+      y = event.touches[0].pageY;
+      console.log("event: touchstart x: ", x, "y: ", y);
+    }));
+
+    //터치 중
+    slideBar.forEach((bar) => bar.addEventListener("touchmove", function(e){
+      console.log("event:touchmove Start");
+      var movingX = e.touches[0].pageX;
+      var movingY = e.touches[0].pageY;
+      //var screenHeight = window.screen.height;
+      var Ygap = y-movingY;
+      drawers.forEach((drawer)=>{
+        
+        if(Ygap > 0){ //위로 슬라이드 할 때
+          if(drawer.classList.contains("drawer_open")){
+            console.log(movingY);
+            drawer.style.transition = "0.7s ease-in-out";
+            //var fuck = screenHeight-y
+            drawer.style.top=`${movingY}px`;
+            drawer.style.transform = `translateY(${Ygap}px);`
+          }
+
+        }else if(Ygap < 0){ //아래로 슬라이드 할 때
+          if(drawer.classList.contains("drawer_open")){
+            drawer.style.transition = "0.7s ease-in-out";
+            drawer.style.top=`-${movingY}px`;
+          drawer.style.transform = `translateY(-${Ygap}px);`
+            //아니 이거 스크롤 이슈가 너무 큼 ㄹㅇ
+          }
+        }
+      });
+    }));
+
+    //터치 끝난 시점
+    slideBar.forEach((bar) => bar.addEventListener("touchend", function(e){
+      var moveX = e.changedTouches[0].pageX;
+      var moveY = e.changedTouches[0].pageY;
+      if(430<moveY){
+        drawers.forEach((drawer)=>{
+          if(drawer.classList.contains("drawer_open")){
+            drawer.classList.remove("drawer_open");
+            drawer.classList.add("drawer_close");
+            drawer.style.top="58%";
+            console.log("drawer closed!");
+          }
+        });
+      }
+      console.log("event: touchend x: ", moveX, "y: ", moveY);
+    }));
   });
+  
 
+  const imageUpload = document.getElementById("imageUpload");
 
-const imageUpload = document.getElementById("imageUpload");
-
-imageUpload.addEventListener("change", function(event) {
+  imageUpload.addEventListener("change", function(event) {
   const file = event.target.files[0];
   
   // 파일 처리 로직 추가
@@ -56,3 +146,21 @@ imageUpload.addEventListener("change", function(event) {
 
 
 
+$('#name').keyup(function(){
+  $('.name').addClass('typing');
+  if( $(this).val().length == 0 ) {
+      $('.name').removeClass('typing');
+  }
+});
+$('#email').keyup(function(){
+  $('.email').addClass('typing');
+  if( $(this).val().length == 0 ) {
+      $('.email').removeClass('typing');
+  }
+});
+$('#message').keyup(function(){
+  $('.message').addClass('typing');
+  if( $(this).val().length == 0 ) {
+      $('.message').removeClass('typing');
+  }
+});

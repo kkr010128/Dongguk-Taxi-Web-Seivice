@@ -1,15 +1,64 @@
+import { myRoomList, setMyRoomList } from "./matching_roomDate.js";
 const previousCalendar = document.querySelector(".calendar_previous");
 const nextCalendar = document.querySelector(".calendar_next");
 const previousRoom = document.querySelector(".matching_previous_room");
 const nextRoom = document.querySelector(".matching_next_room");
 const signBtn = document.querySelector("#matchingRoomSign");
+const weightPopup = document.querySelector("#weight_popup");
+const signPopUp = document.querySelector("#sign_popup");
+const signPopUpBtn = document.querySelector("#sign_popup_button");
 let initDate = new Date();
 let nowYear;
 let nowMonth;
 let nowDate;
 let roomList;
 let roomPage = 0;
-let myRoom;
+
+for(let i = 0; i < weight_button.length; i++) {
+    weight_button[i].addEventListener("click", function() {
+        weightPopup.style.display = "none";
+        const formDate = new FormData();
+        formDate.append("studentID", sessionStorage.key(0));
+        formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+        formDate.append("roomNumber", roomList[roomPage].number);
+        const weight = weight_button[i].innerHTML == "YES" ? 2: 1;
+        formDate.append("weight", weight)
+        const payload = new URLSearchParams(formDate);
+        fetch('../../DataBase/matchingRoomSign', {
+            method: 'post',
+            headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: payload
+        })
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(txt) {
+            signPopUp.style.display = "flex";
+            let comment = "해당 방은 짐이 너무 많아 가입이 불가능합니다.";
+            const result = parseInt(txt);
+            switch(result) {
+                case -2:
+                    comment = "짐 없이만 탑승이 가능합니다."
+                    break;
+                case -1:
+                    comment = "해당 방 가입에 실패하였습니다."
+                    break;
+                case 0:
+                    comment = "해당 방은 인원 초과되었습니다."
+                    break;
+                case 1:
+                    comment = "해당 방 가입에 성공하였습니다."
+                    break;
+                case 2:
+                    comment = "해당 방에 이미 사용자가 존재합니다."
+                    break;
+            }
+            signPopUp.children[0].children[0].innerHTML = comment;
+        });
+    });
+}
 
 previousCalendar.addEventListener("click", function() {
     createCalendar(nowYear, nowMonth - 1);
@@ -30,25 +79,45 @@ nextRoom.addEventListener("click", function() {
 });
 
 signBtn.addEventListener("click", function() {
-    let formDate = new FormData();
-    formDate.append("studentID", sessionStorage.key(0));
-    formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
-    formDate.append("roomNumber", roomList[roomPage].number);
-    const payload = new URLSearchParams(formDate);
-    fetch('../../DataBase/matchingRoomSign', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: payload
-    })
-    .then(function(response) {
-        return response.text();
-    })
-    .then(function(txt) {
-        console.log(txt);
-    });
+    weightPopup.style.display = "flex";
 });
+
+signPopUpBtn.addEventListener("click", function() {
+    signPopUp.style.display = "none";
+});
+
+function onClickDate(tmpDate) {
+    tmpDate.addEventListener("click", function() {
+        const dateNode = tmpDate.children[0];
+        let formDate = new FormData();
+        formDate.append("year", nowYear);
+        formDate.append("month", nowMonth + 1);
+        formDate.append("date", dateNode.innerHTML);
+        nowDate = dateNode.innerHTML;
+        const payload = new URLSearchParams(formDate);
+        if(dateNode.style.color != "lightgray") {
+            fetch('../../DataBase/MatchingRoomList', {
+                method: 'post',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: payload
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                const roomJson = JSON.stringify(json);
+                roomList = JSON.parse(roomJson).room_information;
+                const calendarWrap = document.querySelector(".calendar_wrap");
+                calendarWrap.style.display = "none";
+                setRoomPage();
+                const matchingRoomWrap = document.querySelector(".wrap");
+                matchingRoomWrap.style.display = "flex";
+            });
+        }   
+    });
+}
 
 function createCalendar(year, month) {
     let nowCalendarDate = new Date(year, month, 1);
@@ -78,12 +147,13 @@ function createCalendar(year, month) {
         for(let j = 0; j < 7; j++) {
             const dateElement = document.createElement("div"); 
             dateElement.classList.add("date");
+            onClickDate(dateElement);
             // const hrElement = document.createElement("hr");
             // hrElement.style.border = "solid 1px lightgray";
             const pElement = document.createElement("p");
             if(i == 0) {
                 if(j < nowCalendarDate.getDay()) {
-                    tmpCalendar = new Date(year, month);
+                    const tmpCalendar = new Date(year, month);
                     tmpCalendar.setDate(tmpCalendar.getDate() - (nowCalendarDate.getDay() - j));
                     pElement.style.color = "lightgray";
                     pElement.innerHTML = tmpCalendar.getDate();
@@ -122,41 +192,6 @@ function createCalendar(year, month) {
 
 createCalendar(initDate.getFullYear(), initDate.getMonth());
 
-const dateArray = document.getElementsByClassName("date");
-for(let i = 0; i < dateArray.length; i++) {
-    const tmpDate = dateArray[i];
-    tmpDate.addEventListener("click", function() {
-        const dateNode = tmpDate.children[0];
-        let formDate = new FormData();
-        formDate.append("year", nowYear);
-        formDate.append("month", nowMonth + 1);
-        formDate.append("date", dateNode.innerHTML);
-        nowDate = dateNode.innerHTML;
-        const payload = new URLSearchParams(formDate);
-        if(dateNode.style.color != "lightgray") {
-            fetch('../../DataBase/MatchingRoomList', {
-                method: 'post',
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: payload
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(json) {
-                const roomJson = JSON.stringify(json);
-                roomList = JSON.parse(roomJson).room_information;
-                const calendarWrap = document.querySelector(".calendar_wrap");
-                calendarWrap.style.display = "none";
-                setRoomPage();
-                const matchingRoomWrap = document.querySelector(".wrap");
-                matchingRoomWrap.style.display = "flex";
-            });
-        }
-    });
-}
-
 function setRoomPage() {
     if(roomList.length < 1) {
         const div = document.querySelector(".matching_current_room_none");
@@ -168,7 +203,7 @@ function setRoomPage() {
     const roomInfo = roomList[roomPage];
     const divElement = document.getElementsByClassName("matching_room_div");
     const h1Element = divElement[0].children[0];
-    h1Element.innerHTML = "#" + roomInfo.number;
+    h1Element.innerHTML = "#" + (roomPage+1);
     const date = roomInfo.date.split("-");
     const time = roomInfo.time.split(":");
     divElement[1].children[0].innerHTML = date[1] + "월" + date[2] + "일 " + time[0] + "시 " + time[1] + "분";
@@ -206,11 +241,11 @@ function setRoomPage() {
     }
 }
 
-function checkMatchingRoom(studentID) {
+function checkMatchingRoom(studentID, password) {
     const wrap = document.querySelector(".matching_room_check_wrap");
     let formDate = new FormData();
     formDate.append("studentID", studentID);
-    formDate.append("getMethod", "방 번호");
+    formDate.append("password", password);
     const payload = new URLSearchParams(formDate);
     fetch('../DataBase/myRoom', {
         method: 'post',
@@ -220,12 +255,13 @@ function checkMatchingRoom(studentID) {
         body: payload
     })
     .then(function(response) {
-        return response.text();
+        return response.json();
     })
-    .then(function(txt) {
-        const result = parseInt(txt);
-        myRoom = result;
-        if(result == -1) {
+    .then(function(json) {
+        const roomJson = JSON.stringify(json);
+        const obj = JSON.parse(roomJson);
+        const room = obj.room_information;
+        if(obj.is_matching == null) {
             const divElement = document.createElement("div"); 
             divElement.classList.add("matching_room_myroom");
             const pElement = document.createElement("p");
@@ -233,26 +269,29 @@ function checkMatchingRoom(studentID) {
             divElement.appendChild(pElement);
             wrap.appendChild(divElement);
         }
-        else if(result == 0) {
-            const divElement = document.createElement("div"); 
-            divElement.classList.add("matching_check");
-            const imgElement = document.createElement("img");
-            imgElement.setAttribute("src", "../assets/main/room_list/matching.png");
-            imgElement.setAttribute("width", "40em");
-            imgElement.setAttribute("height", "40em");
-            divElement.appendChild(imgElement);
-            const pElement = document.createElement("p");
-            pElement.innerHTML = "&nbsp;&nbsp;매칭 중..."
-            divElement.appendChild(pElement);
-            wrap.appendChild(divElement);
-        }
         else {
-            const divElement = document.createElement("div"); 
-            divElement.classList.add("matching_room_myroom");
-            const pElement = document.createElement("p");
-            pElement.innerHTML = "내 방 가기"
-            divElement.appendChild(pElement);
-            wrap.appendChild(divElement);
+            setMyRoomList(room);
+            if(obj.is_matching == "true") {
+                const divElement = document.createElement("div"); 
+                divElement.classList.add("matching_check");
+                const imgElement = document.createElement("img");
+                imgElement.setAttribute("src", "../assets/main/room_list/matching.png");
+                imgElement.setAttribute("width", "40em");
+                imgElement.setAttribute("height", "40em");
+                divElement.appendChild(imgElement);
+                const pElement = document.createElement("p");
+                pElement.innerHTML = "&nbsp;&nbsp;매칭 중..."
+                divElement.appendChild(pElement);
+                wrap.appendChild(divElement);
+            }
+            else if(obj.is_matching == "false") {
+                const divElement = document.createElement("div"); 
+                divElement.classList.add("matching_room_myroom");
+                const pElement = document.createElement("p");
+                pElement.innerHTML = "내 방 가기"
+                divElement.appendChild(pElement);
+                wrap.appendChild(divElement);
+            }
         }
     });
 }
@@ -283,7 +322,7 @@ window.onload = function() {
             location.href = "../index.html";
         }
         else {
-            checkMatchingRoom(obj.result.success.studentID);
+            checkMatchingRoom(obj.result.success.studentID, obj.result.success.password);
         }
     });
 }
