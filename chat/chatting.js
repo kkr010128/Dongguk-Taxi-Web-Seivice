@@ -62,7 +62,7 @@ sendBtn.addEventListener("click", function() {
     const formDate = new FormData();
     formDate.append("studentID", sessionStorage.key(0));
     formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
-    formDate.append("content", message.value);
+    formDate.append("content", replaceSpecialChar(message.value));
     formDate.append("dateTime", dateTime);
     const payload = new URLSearchParams(formDate);
     fetch('../../DataBase/chat', {
@@ -102,15 +102,14 @@ function createChatGUI(chatList) {
 
         const messageDiv = document.createElement("div");
         messageDiv.classList.add("message");
-        const span2Element = document.createElement("span");
-        span2Element.innerHTML = chat.content;
-        messageDiv.appendChild(span2Element);
+        line(chat.content, messageDiv);
         liElement.appendChild(messageDiv);
 
         const timeDiv = document.createElement("div");
         timeDiv.classList.add("time");
         const span3Element = document.createElement("span");
         span3Element.innerHTML = chat.time;
+        
         timeDiv.appendChild(span3Element);
         liElement.appendChild(timeDiv);
 
@@ -120,6 +119,44 @@ function createChatGUI(chatList) {
         const chatDiv = document.querySelector(".chat");
         chatDiv.children[1].appendChild(divElement);
     }
+}
+
+function line(str, div) {
+    if(str.includes("\n")) {
+        const strSplit = str.split("\n");
+        str = "";
+        for(let i = 0; i < strSplit.length; i++) {
+            const span2Element = document.createElement("span");
+            if(i != 0) {
+                const brElement = document.createElement("br");
+                div.appendChild(brElement);
+            }
+            span2Element.innerHTML = strSplit[i];
+            div.appendChild(span2Element);
+        }
+    }
+    else {
+        const span2Element = document.createElement("span");
+        span2Element.innerHTML = str;
+        div.appendChild(span2Element);
+    }
+}
+
+function replaceSpecialChar(str) {
+    let msg = str;
+    if(str.includes("\n")) {
+        console.log("n");
+        msg = msg.replace(/\n/g, "\\n");
+    }
+    if(str.includes("\\n")) {
+        console.log("\\n");
+        msg = msg.replace(/\\n/g, "\\\\n");
+    }
+    if(message.value.includes("\"")) {
+        console.log("\"");
+        msg = msg.replace(/"/g, "\\\"");
+    }
+    return msg;
 }
 
 function getChatLog(studentID, password) {
