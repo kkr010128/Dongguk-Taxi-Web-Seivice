@@ -77,11 +77,25 @@
                                 <hr draggable="true">
                             </div>
                             <div class="drawer4">
-                                <p>고객센터터</p>
-                                <form>
-                                <input type="file" id="imageUpload" accept="image/*">
-                                <button type="submit">업로드</button>
-                                </form>
+                                <form class="contact-form">
+                                    <div class="name">
+                                      <label for="name">제목: </label>
+                                      <input type="text" id="contact_name" />
+                                    </div>  
+                                    <div class="email">
+                                      <label for="email">이메일: </label>
+                                      <input type="text" id="contact_email" />
+                                    </div>
+                                    <div class="message">
+                                      <label for="message">내용: </label>
+                                      <textarea name="message" id="contact_message"></textarea>
+                                    </div>
+                                    <div class="submit">
+                                      <p class="user-message">빠른 시일 내 관리자가 확인 후 회신 드리겠습니다.</p>
+                                      <input type="submit" value="Send" class="button" />
+                                    </div>
+                                  </form>
+                                  <p class="credit">기타 문의: <a href="" target="_blank">kkr010128@icloud.com</a></p>
                             </div>
                         </div>
                     </div>
