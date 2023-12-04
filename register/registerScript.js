@@ -98,6 +98,7 @@ register_comfirm.addEventListener("submit", function(event) { //가입 완료 �
 
             // 웹훅에 전송할 데이터
             const date = new Date();
+            date.setHours(date.getHours() - 9);
             let timeStamp = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + "T";
             const hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
             const minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();

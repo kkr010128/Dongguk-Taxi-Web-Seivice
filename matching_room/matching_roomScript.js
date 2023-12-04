@@ -1,3 +1,4 @@
+import { myRoomList, setMyRoomList } from "./matching_roomDate.js";
 const previousCalendar = document.querySelector(".calendar_previous");
 const nextCalendar = document.querySelector(".calendar_next");
 const previousRoom = document.querySelector(".matching_previous_room");
@@ -12,7 +13,6 @@ let nowMonth;
 let nowDate;
 let roomList;
 let roomPage = 0;
-let myRoom;
 
 for(let i = 0; i < weight_button.length; i++) {
     weight_button[i].addEventListener("click", function() {
@@ -86,6 +86,39 @@ signPopUpBtn.addEventListener("click", function() {
     signPopUp.style.display = "none";
 });
 
+function onClickDate(tmpDate) {
+    tmpDate.addEventListener("click", function() {
+        const dateNode = tmpDate.children[0];
+        let formDate = new FormData();
+        formDate.append("year", nowYear);
+        formDate.append("month", nowMonth + 1);
+        formDate.append("date", dateNode.innerHTML);
+        nowDate = dateNode.innerHTML;
+        const payload = new URLSearchParams(formDate);
+        if(dateNode.style.color != "lightgray") {
+            fetch('../../DataBase/MatchingRoomList', {
+                method: 'post',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: payload
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                const roomJson = JSON.stringify(json);
+                roomList = JSON.parse(roomJson).room_information;
+                const calendarWrap = document.querySelector(".calendar_wrap");
+                calendarWrap.style.display = "none";
+                setRoomPage();
+                const matchingRoomWrap = document.querySelector(".wrap");
+                matchingRoomWrap.style.display = "flex";
+            });
+        }   
+    });
+}
+
 function createCalendar(year, month) {
     let nowCalendarDate = new Date(year, month, 1);
     nowYear = nowCalendarDate.getFullYear();
@@ -114,12 +147,13 @@ function createCalendar(year, month) {
         for(let j = 0; j < 7; j++) {
             const dateElement = document.createElement("div"); 
             dateElement.classList.add("date");
+            onClickDate(dateElement);
             // const hrElement = document.createElement("hr");
             // hrElement.style.border = "solid 1px lightgray";
             const pElement = document.createElement("p");
             if(i == 0) {
                 if(j < nowCalendarDate.getDay()) {
-                    tmpCalendar = new Date(year, month);
+                    const tmpCalendar = new Date(year, month);
                     tmpCalendar.setDate(tmpCalendar.getDate() - (nowCalendarDate.getDay() - j));
                     pElement.style.color = "lightgray";
                     pElement.innerHTML = tmpCalendar.getDate();
@@ -157,41 +191,6 @@ function createCalendar(year, month) {
 }
 
 createCalendar(initDate.getFullYear(), initDate.getMonth());
-
-const dateArray = document.getElementsByClassName("date");
-for(let i = 0; i < dateArray.length; i++) {
-    const tmpDate = dateArray[i];
-    tmpDate.addEventListener("click", function() {
-        const dateNode = tmpDate.children[0];
-        let formDate = new FormData();
-        formDate.append("year", nowYear);
-        formDate.append("month", nowMonth + 1);
-        formDate.append("date", dateNode.innerHTML);
-        nowDate = dateNode.innerHTML;
-        const payload = new URLSearchParams(formDate);
-        if(dateNode.style.color != "lightgray") {
-            fetch('../../DataBase/MatchingRoomList', {
-                method: 'post',
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: payload
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(json) {
-                const roomJson = JSON.stringify(json);
-                roomList = JSON.parse(roomJson).room_information;
-                const calendarWrap = document.querySelector(".calendar_wrap");
-                calendarWrap.style.display = "none";
-                setRoomPage();
-                const matchingRoomWrap = document.querySelector(".wrap");
-                matchingRoomWrap.style.display = "flex";
-            });
-        }
-    });
-}
 
 function setRoomPage() {
     if(roomList.length < 1) {
@@ -242,11 +241,11 @@ function setRoomPage() {
     }
 }
 
-function checkMatchingRoom(studentID) {
+function checkMatchingRoom(studentID, password) {
     const wrap = document.querySelector(".matching_room_check_wrap");
     let formDate = new FormData();
     formDate.append("studentID", studentID);
-    formDate.append("getMethod", "방 번호");
+    formDate.append("password", password);
     const payload = new URLSearchParams(formDate);
     fetch('../DataBase/myRoom', {
         method: 'post',
@@ -256,12 +255,13 @@ function checkMatchingRoom(studentID) {
         body: payload
     })
     .then(function(response) {
-        return response.text();
+        return response.json();
     })
-    .then(function(txt) {
-        const result = parseInt(txt);
-        myRoom = result;
-        if(result == -1) {
+    .then(function(json) {
+        const roomJson = JSON.stringify(json);
+        const obj = JSON.parse(roomJson);
+        const room = obj.room_information;
+        if(obj.is_matching == null) {
             const divElement = document.createElement("div"); 
             divElement.classList.add("matching_room_myroom");
             const pElement = document.createElement("p");
@@ -269,26 +269,29 @@ function checkMatchingRoom(studentID) {
             divElement.appendChild(pElement);
             wrap.appendChild(divElement);
         }
-        else if(result == 0) {
-            const divElement = document.createElement("div"); 
-            divElement.classList.add("matching_check");
-            const imgElement = document.createElement("img");
-            imgElement.setAttribute("src", "../assets/main/room_list/matching.png");
-            imgElement.setAttribute("width", "40em");
-            imgElement.setAttribute("height", "40em");
-            divElement.appendChild(imgElement);
-            const pElement = document.createElement("p");
-            pElement.innerHTML = "&nbsp;&nbsp;매칭 중..."
-            divElement.appendChild(pElement);
-            wrap.appendChild(divElement);
-        }
         else {
-            const divElement = document.createElement("div"); 
-            divElement.classList.add("matching_room_myroom");
-            const pElement = document.createElement("p");
-            pElement.innerHTML = "내 방 가기"
-            divElement.appendChild(pElement);
-            wrap.appendChild(divElement);
+            setMyRoomList(room);
+            if(obj.is_matching == "true") {
+                const divElement = document.createElement("div"); 
+                divElement.classList.add("matching_check");
+                const imgElement = document.createElement("img");
+                imgElement.setAttribute("src", "../assets/main/room_list/matching.png");
+                imgElement.setAttribute("width", "40em");
+                imgElement.setAttribute("height", "40em");
+                divElement.appendChild(imgElement);
+                const pElement = document.createElement("p");
+                pElement.innerHTML = "&nbsp;&nbsp;매칭 중..."
+                divElement.appendChild(pElement);
+                wrap.appendChild(divElement);
+            }
+            else if(obj.is_matching == "false") {
+                const divElement = document.createElement("div"); 
+                divElement.classList.add("matching_room_myroom");
+                const pElement = document.createElement("p");
+                pElement.innerHTML = "내 방 가기"
+                divElement.appendChild(pElement);
+                wrap.appendChild(divElement);
+            }
         }
     });
 }
@@ -319,7 +322,7 @@ window.onload = function() {
             location.href = "../index.html";
         }
         else {
-            checkMatchingRoom(obj.result.success.studentID);
+            checkMatchingRoom(obj.result.success.studentID, obj.result.success.password);
         }
     });
 }
