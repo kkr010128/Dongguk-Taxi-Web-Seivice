@@ -117,6 +117,8 @@ function getSchedule(studentID, password) {
         console.log("create review ok");
         window.location.href = "../temperature/temper.html";
       }else{
+        console.log(myRoom[0].date);
+        console.log(x);
         console.log(myRoom[0].date == x);
         console.log(parseInt(z[1]) < dateTime.getHours());
       }
