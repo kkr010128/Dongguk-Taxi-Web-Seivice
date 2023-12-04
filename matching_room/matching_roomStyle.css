@@ -261,3 +261,13 @@ p {
 	background: #f8f3ed;
 	box-shadow: 3px 3px 6px #cbc7c2,  -3px -3px 6px #ffffff;
 }
+@keyframes rotate_image{
+	100% {
+    	transform: rotate(360deg);
+    }
+}
+
+.rotating-image {
+	animation: rotate 6s linear infinite;
+	transform-origin: 50% 50%;
+}
