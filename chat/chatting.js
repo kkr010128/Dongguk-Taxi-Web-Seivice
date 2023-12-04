@@ -60,6 +60,9 @@ sendBtn.addEventListener("click", function() {
     const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
     const message = document.querySelector("#message");
     const formDate = new FormData();
+    if(message.value == "") {
+        return;
+    }
     formDate.append("studentID", sessionStorage.key(0));
     formDate.append("password", sessionStorage.getItem(sessionStorage.key(0)));
     formDate.append("content", replaceSpecialChar(message.value));
