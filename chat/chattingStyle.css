@@ -28,6 +28,7 @@ body {
 
 .header {
   font-size: 25px;
+  height: 8%;
   padding: 10px 0;
   background: #f1c37e;
   color: rgb(0, 0, 0);
@@ -36,7 +37,7 @@ body {
 
 .chat {
   flex: 1; /* 채팅창이 나머지 높이를 모두 차지하도록 설정 */
-  overflow-y: auto;
+  height: 80%;
 }
 
 .chat ul {
@@ -75,6 +76,7 @@ body {
   border-top: 1px solid #4c4c4c;
   padding: 10px;
   display: flex;
+  height: 10%;
 }
 
 .input-div textarea {
