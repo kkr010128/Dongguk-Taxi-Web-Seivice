@@ -11,7 +11,7 @@
 <body>
     <div class="matching_room_check_wrap">
         <div class="matching_check">
-            <img src="../assets/main/room_list/matching.png" width="40em" height="40em">
+            <img class = "rotating-image" src="../assets/main/room_list/matching.png" width="40em" height="40em">
             <p>&nbsp;&nbsp;매칭 중...</p>
         </div>
         <div class="matching_room_myroom">
