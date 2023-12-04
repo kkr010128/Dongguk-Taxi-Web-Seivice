@@ -2,8 +2,7 @@ import { ArrayList } from "../util/utilities.js";
 const sendBtn = document.querySelector("#send_message");
 const previousMessage = document.querySelector(".previous_message");
 const chattingList = new ArrayList(10);
-const socket = new WebSocket("ws://localhost:8080/DataBase/WebSocket");
-
+const socket = new WebSocket("ws://택시.com:80/DataBase/WebSocket?studentID=" + sessionStorage.key(0) + "&password=" + sessionStorage.getItem(sessionStorage.key(0)));
 
 socket.addEventListener("open", (event) => {
 });
@@ -13,10 +12,16 @@ socket.addEventListener("message", (event) => {
     chattingList.addI(0, obj.chat_information[0]);
     const list = new ArrayList(1);
     list.add(obj.chat_information[0]);
+    const maxY = document.querySelector(".chat").scrollHeight-582;
     createChatGUI(list);
+    const locationY = document.querySelector(".chat").scrollTop;
+    if(locationY >= maxY) {
+        document.querySelector(".chat").scrollTo(0, document.querySelector(".chat").scrollHeight);
+    }
 });
 
 previousMessage.addEventListener("click", function() {
+    const maxY = document.querySelector(".chat").scrollHeight;
     const date = new Date();
     const dateTime = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
     const formDate = new FormData();
@@ -44,6 +49,8 @@ previousMessage.addEventListener("click", function() {
             const chatDiv = document.querySelector(".chat");
             chatDiv.children[1].innerHTML = "";
             createChatGUI(chattingList);
+            const newMaxY = document.querySelector(".chat").scrollHeight;
+            document.querySelector(".chat").scrollTo(0, newMaxY - maxY);
         }
     });
 });

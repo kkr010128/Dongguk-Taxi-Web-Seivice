@@ -4,10 +4,12 @@ const login_form = document.querySelector("#login_form");
 
 /**html 로드 시 쿠키 남아있으면 자동 로그인 이벤트 - 미구현 */
 document.addEventListener("DOMContentLoaded", function(){
-    if(document.cookie){ //이거 어케 구현하노 ㅋㅋ
+    /*if(document.cookie){ //이거 어케 구현하노 ㅋㅋ
 
-    }
+    }*/
+
 });
+
 
 login_form.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -109,7 +111,8 @@ function setCookie (cookieName, cookieValue, expiresHour) {
     const encodedCookieName = encodeURIComponent(cookieName);
     const encodedCookieValue = encodeURIComponent(cookieValue);
     expired.setTime(expired.getTime() + expiresHour * 24 * 60 * 60 * 1000); 
-    document.cookie = `${encodedCookieName}=${encodedCookieValue}; path=/; Expires=${expired}; httpOnly`;
+    document.cookie = `${encodedCookieName}=${encodedCookieValue}; path=/; expires=${expired};`;
+    //httpOnly 옵션 추가해야 댐 (서버)
 }
 
 /**쿠키 조회 */
