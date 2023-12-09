@@ -6,6 +6,7 @@
 
 body {
   font-family: Arial, sans-serif;
+  overflow: hidden;
   margin: 0; /* body의 기본 마진 제거 */
 }
 
@@ -37,7 +38,7 @@ body {
 
 .chat {
   flex: 1; /* 채팅창이 나머지 높이를 모두 차지하도록 설정 */
-  height: 80%;
+  overflow-y: auto;
 }
 
 .chat ul {
