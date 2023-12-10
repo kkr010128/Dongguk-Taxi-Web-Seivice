@@ -37,7 +37,8 @@ body {
 }
 
 .chat {
-  flex: 1; /* 채팅창이 나머지 높이를 모두 차지하도록 설정 */
+  flex: flex; /* 채팅창이 나머지 높이를 모두 차지하도록 설정 */
+  height: 80%;
   overflow-y: auto;
 }
 
