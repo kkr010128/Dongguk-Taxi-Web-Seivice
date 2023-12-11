@@ -138,9 +138,9 @@ p {
 
 hr {
   margin-top: 10vh;
-  border-top: 3px solid rgb(184, 184, 184);
+  border-top: 5px solid rgb(184, 184, 184);
   width: 30%;
   border: bold;
   border-radius: 40px;
-  margin: auto;
+  margin: 0 auto;
 }
