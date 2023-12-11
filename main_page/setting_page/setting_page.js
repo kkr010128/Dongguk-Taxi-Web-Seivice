@@ -117,55 +117,57 @@
 });
 
 
+const contact_name = document.getElementById("contact_name");
+const contact_email = document.getElementById("contact_email");
 const contact_massage = document.getElementById("contact_message");
 
 const send = document.getElementById("send");
 send.addEventListener("click", function(){
         // 웹훅에 전송할 데이터
-      console.log(contact_massage.value);
-      // 웹훅에 전송할 데이터
-      const date = new Date();
-      date.setHours(date.getHours() - 9);
-      let timeStamp = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + "T";
-      const hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-      const minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-      timeStamp += hour + ":" + minute;
-      const webhookUrl = "https://discord.com/api/webhooks/1163496099135361044/ct8FpfvuXTGRG-NKeHrakdwyLjbcY9ARSQebdy8avoDiCmo1qlUhOlVYwFZcWkAkHCD4"; // 디스코드 웹훅 URL을 입력하세요.
-      const payload = {
-          content: "신규 사용자의 데이터가 생성되었습니다.",
-          // embeds: [
-          //     {
-          //         "title": "sdf",
-          //         "description": "이름: ",
-          //         "color": 16762998,
-          //         "author": {
-          //             "name": "동행: 같이타요"
-          //         },
-          //         "timestamp": timeStamp
-          //     }
-          // ],
-          attachments: [],
-          username: "웹훅 봇" // 웹훅 메시지의 사용자명
-      };
-
-      // 웹훅 전송 요청
-      fetch(webhookUrl, {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-      })
-      .then((response) => {
-          if (response.ok) {
-          console.log("웹훅 전송 성공!");
-          } else {
-          console.error("웹훅 전송 실패!");
-          }
-      })
-      .catch((error) => {
-          console.error("웹훅 전송 중 오류 발생:", error);
-      });//END
+        console.log(contact_name.value);
+        // 웹훅에 전송할 데이터
+        const date = new Date();
+        date.setHours(date.getHours() - 9);
+        let timeStamp = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + "T";
+        const hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        const minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        timeStamp += hour + ":" + minute;
+        const webhookUrl = "https://discord.com/api/webhooks/1181191735611764847/UzVdP2-SsDjO9NdHt075SMifzfb2GIC90r3QX2Osc5PWrO1zw8HrAk0zbt_DeNDb9dTH"; // 디스코드 웹훅 URL을 입력하세요.
+        const payload = {
+            content: "고객센터 문의가 접수되었습니다.",
+            embeds: [
+                {
+                    "title": "제목: " + contact_name.value,
+                    "description": "회신용 이메일: "+ contact_email.value +"\n문의 내용: "+contact_massage.value,
+                    "color": 11009959,
+                    "author": {
+                        "name": "동행: 같이타요"
+                    },
+                    "timestamp": timeStamp
+                }
+            ],
+            attachments: [],
+            username: "웹훅 봇" // 웹훅 메시지의 사용자명
+        };
+  
+        // 웹훅 전송 요청
+        fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+        })
+        .then((response) => {
+            if (response.ok) {
+            console.log("웹훅 전송 성공!");
+            } else {
+            console.error("웹훅 전송 실패!");
+            }
+        })
+        .catch((error) => {
+            console.error("웹훅 전송 중 오류 발생:", error);
+        });//END
 });
 
 
