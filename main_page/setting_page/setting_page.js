@@ -133,6 +133,14 @@ send.addEventListener("click", function(){
         const minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
         timeStamp += hour + ":" + minute;
         const webhookUrl = "https://discord.com/api/webhooks/1181191735611764847/UzVdP2-SsDjO9NdHt075SMifzfb2GIC90r3QX2Osc5PWrO1zw8HrAk0zbt_DeNDb9dTH"; // 디스코드 웹훅 URL을 입력하세요.
+        
+        const contact_message = document.getElementById("contact_message").value;
+        if (contact_message.trim() === "") {
+          // 메시지 입력 안하면 전송 안됨 
+          alert("메시지 내용을 입력해주세요.");
+          return;
+        }
+
         const payload = {
             content: "고객센터 문의가 접수되었습니다.",
             embeds: [
