@@ -38,7 +38,6 @@ for(let i = 0; i < create_button.length; i++) {
             const formData = new FormData();
             formData.append("studentID", sessionStorage.key(0));
             formData.append("password", sessionStorage.getItem(sessionStorage.key(0)));
-            console.log("hi");
             const payload = new URLSearchParams(formData);
             fetch('../DataBase/createMatchingRoom', {
                 method: 'post',
@@ -333,6 +332,12 @@ document.getElementById("setBtn").addEventListener('click', function(){
         if(txt == "-1") {
             matchFailure.style.display = "flex";
             matchFailure.children[0].children[0].innerHTML = "조건이 맞는 사람이 존재하지 않습니다. 방을 생성하시겠습니까 ? (생성하지 않으셔도 매칭은 계속 진행됩니다.)"
+            const mapBox = document.querySelector(".mapBox");
+            mapBox.style.visibility = "hidden";
+        }
+        else if(txt == "0") {
+            matchPopUp.style.display = "flex";
+            matchPopUp.children[0].children[0].innerHTML = "이미 매칭 중입니다. 새로운 매칭을 원하시면 취소 후 이용해주세요."
             const mapBox = document.querySelector(".mapBox");
             mapBox.style.visibility = "hidden";
         }
