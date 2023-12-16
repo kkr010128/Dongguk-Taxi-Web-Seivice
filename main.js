@@ -139,5 +139,5 @@ function deleteCookie (cookieName) {
 };
 
 function webViewCallBack() {
-    WebViewCallbackInterface.sendFCMToken();
+    WebViewCallbackInterface.sendFCMToken(sessionStorage.key(0), sessionStorage.getItem(sessionStorage.key(0)));
 }
