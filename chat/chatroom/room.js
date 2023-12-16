@@ -65,7 +65,7 @@ function createChatListGUI(roomList, studentID) {
 
 window.onload = function () {
     if(sessionStorage.key(0) == null) {
-        location.href = "../index.html";
+        location.href = "../../index.html";
         return;
     }
     let formDate = new FormData();

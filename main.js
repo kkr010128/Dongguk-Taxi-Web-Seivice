@@ -38,10 +38,11 @@ login_form.addEventListener("submit", function(e) {
             popup.children[1].innerHTML = "아이디 혹은 비밀번호가 일치하지 않습니다."
             popup.classList.add('login_open_popup');
         }
-        else { // 로그인 했을 때 로그인 정보를 어디에다가 저장할 건지 생각해야됨 jsp session 객체 사용 ?
+        else { 
             location.href = "../home/home.html";
             const userDate = obj.result.success;
             sessionStorage.setItem(userDate.studentID, userDate.password);
+            webViewCallBack();
             if(isChecked()==true){
                 setCookie(userDate.studentID, userDate.password, 7);
             }
@@ -136,3 +137,7 @@ function getCookie (cookieName){
 function deleteCookie (cookieName) {
     document.cookie = `${cookieName}=0; max-age=0;`;
 };
+
+function webViewCallBack() {
+    WebViewCallbackInterface.sendFCMToken();
+}
