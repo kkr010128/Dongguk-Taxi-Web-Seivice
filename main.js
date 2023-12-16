@@ -42,6 +42,7 @@ login_form.addEventListener("submit", function(e) {
             location.href = "../home/home.html";
             const userDate = obj.result.success;
             sessionStorage.setItem(userDate.studentID, userDate.password);
+            console.log(userDate.studentID);
             webViewCallBack();
             if(isChecked()==true){
                 setCookie(userDate.studentID, userDate.password, 7);
@@ -139,6 +140,8 @@ function deleteCookie (cookieName) {
 };
 
 function webViewCallBack() {
-    console.log(sessionStorage.key(0));
-    WebViewCallbackInterface.sendFCMToken(sessionStorage.key(0), sessionStorage.getItem(sessionStorage.key(0)));
+    const studentID = parseInt(sessionStorage.key(0));
+    console.log(sessionStorage);
+    console.log(studentID);
+    WebViewCallbackInterface.sendFCMToken(studentID, sessionStorage.getItem(sessionStorage.key(0)));
 }
