@@ -192,7 +192,7 @@ window.onload = function() {
   formData.append("studentID", sessionStorage.key(0));
   formData.append("password", sessionStorage.getItem(sessionStorage.key(0)));
   const payload = new URLSearchParams(formData);
-  fetch('../DataBase/loginCheck', {
+  fetch('../../DataBase/loginCheck', {
       method: 'post',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
