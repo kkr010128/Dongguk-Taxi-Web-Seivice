@@ -42,7 +42,6 @@ login_form.addEventListener("submit", function(e) {
             location.href = "../home/home.html";
             const userDate = obj.result.success;
             sessionStorage.setItem(userDate.studentID, userDate.password);
-            console.log(userDate.studentID);
             webViewCallBack();
             if(isChecked()==true){
                 setCookie(userDate.studentID, userDate.password, 7);
@@ -141,7 +140,5 @@ function deleteCookie (cookieName) {
 
 function webViewCallBack() {
     const studentID = parseInt(sessionStorage.key(0));
-    console.log(sessionStorage);
-    console.log(studentID);
     WebViewCallbackInterface.sendFCMToken(studentID, sessionStorage.getItem(sessionStorage.key(0)));
 }
