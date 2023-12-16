@@ -104,7 +104,11 @@ function getSchedule(studentID, password) {
       const obj = JSON.parse(result);
       const myRoom = obj.room_information;
       const dateTime = new Date();
-      const x = dateTime.getFullYear() + "-" + dateTime.getMonth()+1 + "-" + dateTime.getDate(); 
+      let x = dateTime.getFullYear() + "-" + (dateTime.getMonth()+1) + "-";
+      if(dateTime.getDate() < 10){
+        let a = "0" + dateTime.getDate();
+        x = x+a;
+      }
       const z = myRoom[0].time.split(":");
       if(myRoom[0] == "없음" || myRoom[0] == "오류" ) {
         document.getElementById("schedule-text").textContent = "일정이 없습니다.";
@@ -113,9 +117,14 @@ function getSchedule(studentID, password) {
         document.getElementById("schedule-text").textContent = 
         myRoom[0].date + " " + myRoom[0].time + " " + myRoom[0].from + " -> " + myRoom[0].to;
       }
-      if(myRoom[0].date == x && parseInt(z[1]+1) == dateTime.getHour()){
-        console.log(ok);
+      if(myRoom[0].date == x && (parseInt(z[0]) < dateTime.getHours())){
+        console.log("create review ok");
         //window.location.href = "../temperature/temper.html";
+      }else{
+        console.log(myRoom[0].date);
+        console.log(x);
+        console.log(myRoom[0].date == x);
+        console.log(parseInt(z[1]) < dateTime.getHours());
       }
     });
 }

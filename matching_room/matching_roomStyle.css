@@ -2,6 +2,13 @@
     src: url("../assets/font/NanumFont/NanumGothic/NanumFontSetup_OTF_GOTHIC/NanumGothicBold.otf");
     font-family: "NanumGothic";
 }
+* {
+
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Noto Sans KR", sans-serif;
+}
 
 p {
 	font-family: "NanumGothic";
@@ -14,6 +21,7 @@ p {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: rgb(248, 243, 237);
 }
 .matching_check {
 	position: relative;
@@ -22,6 +30,7 @@ p {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: rgb(248, 243, 237);
 	top: 3.5em;
 }
 
@@ -68,7 +77,7 @@ p {
     border: 2px solid lightgray;
 	flex-direction: column;
 	border-radius: 16px;
-	background-color: rgb(255, 255, 255);
+	background-color: #f8f3ed;
 	box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
 
@@ -99,6 +108,8 @@ p {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: #f8f3ed;
+
 }
 
 .matching_room_div h1{
@@ -144,15 +155,18 @@ p {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: rgb(248, 243, 237);
+	position: static;
 }
 
 .calendar {
-	width: 95%;
+	width: 90%;
+	height: 65%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	border-radius: 16px;
-	background-color: rgb(255, 255, 255);
+	background-color: rgb(248, 243, 237);
 	box-shadow: 0px 2px 9px rgb(171, 171, 171);
 }
 
@@ -258,4 +272,14 @@ p {
 	letter-spacing: 2px;
 	background: #f8f3ed;
 	box-shadow: 3px 3px 6px #cbc7c2,  -3px -3px 6px #ffffff;
+}
+@keyframes rotate_image{
+	100% {
+    	transform: rotate(360deg);
+    }
+}
+
+.rotating-image {
+  animation: rotate_image 6s linear infinite; 
+  transform-origin: 50% 50%;
 }

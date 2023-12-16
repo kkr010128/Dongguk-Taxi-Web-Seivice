@@ -276,6 +276,7 @@ function checkMatchingRoom(studentID, password) {
                 divElement.classList.add("matching_check");
                 const imgElement = document.createElement("img");
                 imgElement.setAttribute("src", "../assets/main/room_list/matching.png");
+                imgElement.classList.add('rotating-image');
                 imgElement.setAttribute("width", "40em");
                 imgElement.setAttribute("height", "40em");
                 divElement.appendChild(imgElement);
