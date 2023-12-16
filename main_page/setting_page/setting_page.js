@@ -178,7 +178,41 @@ send.addEventListener("click", function(){
         });//END
 });
 
+function createProfile(studentID, name) {
+  const wrap = document.querySelector(".user_info_inner");
+  wrap.children[0].innerHTML = studentID + " " + name;
+}
 
+window.onload = function() {
+  if(sessionStorage.key(0) == null) {
+      location.href = "../../index.html";
+      return;
+  }
+  let formData = new FormData();
+  formData.append("studentID", sessionStorage.key(0));
+  formData.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+  const payload = new URLSearchParams(formData);
+  fetch('../DataBase/loginCheck', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: payload
+  })
+  .then(function(response) {
+      return response.json();
+  })
+  .then(function(json) {
+      const userJson = JSON.stringify(json);
+      const obj = JSON.parse(userJson);
+      if(obj.result == "failure") {
+          location.href = "../index.html";
+      }
+      else {
+        createProfile(obj.result.success.studentID, obj.result.success.name);
+      }
+  });
+}
 
 // const homeBar = document.querySelector(".home");
 // homeBar.addEventListener("click", function() {
