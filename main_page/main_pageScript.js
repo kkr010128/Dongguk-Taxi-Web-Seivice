@@ -38,6 +38,7 @@ for(let i = 0; i < create_button.length; i++) {
             const formData = new FormData();
             formData.append("studentID", sessionStorage.key(0));
             formData.append("password", sessionStorage.getItem(sessionStorage.key(0)));
+            console.log("hi");
             const payload = new URLSearchParams(formData);
             fetch('../DataBase/createMatchingRoom', {
                 method: 'post',

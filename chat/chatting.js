@@ -3,6 +3,7 @@ const sendBtn = document.querySelector("#send_message");
 const previousMessage = document.querySelector(".previous_message");
 const chattingList = new ArrayList(10);
 const socket = new WebSocket("ws://택시.com:80/DataBase/WebSocket?studentID=" + sessionStorage.key(0) + "&password=" + sessionStorage.getItem(sessionStorage.key(0)));
+const chatWrap = document.querySelector(".chat");
 
 socket.addEventListener("open", (event) => {
 });
@@ -15,11 +16,17 @@ socket.addEventListener("message", (event) => {
     const maxY = document.querySelector(".chat").scrollHeight-582;
     const locationY = document.querySelector(".chat").scrollTop;
     const message = document.querySelector("#message");
-    message.value =  document.querySelector(".chat").scrollHeight + ", " + maxY + ", " + locationY;
     createChatGUI(list);
+    message.value =  document.querySelector(".chat").scrollHeight + ", " + maxY + ", " + locationY + ", " + document.querySelector(".chat").scrollTop;
     if(locationY >= maxY) {
         document.querySelector(".chat").scrollTo(0, document.querySelector(".chat").scrollHeight);
     }
+});
+
+chatWrap.addEventListener("scroll", function(e) {
+    const locationY = document.querySelector(".chat").scrollTop;
+    const message = document.querySelector("#message");
+    message.value =  document.querySelector(".chat").scrollHeight + ", " + maxY + ", " + locationY;
 });
 
 previousMessage.addEventListener("click", function() {
