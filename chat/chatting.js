@@ -13,8 +13,8 @@ socket.addEventListener("message", (event) => {
     const list = new ArrayList(1);
     list.add(obj.chat_information[0]);
     const maxY = document.querySelector(".chat").scrollHeight-582;
-    createChatGUI(list);
     const locationY = document.querySelector(".chat").scrollTop;
+    createChatGUI(list);
     if(locationY >= maxY) {
         document.querySelector(".chat").scrollTo(0, document.querySelector(".chat").scrollHeight);
     }

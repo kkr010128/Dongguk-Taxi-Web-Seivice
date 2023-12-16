@@ -5,7 +5,9 @@ const plusBtn = document.getElementById("plus");
 const markers = [null, null]; //중요
 const PolyLine = [null]; //중요
 const matchFailure = document.querySelector("#match_failure_popup");
+const matchPopUp = document.querySelector("#match_popup");
 const showPrice = document.getElementById("showPrice");
+const matchPopUpBtn = document.getElementById("match_popup_button");
 let taxi_prices = 0;
 
 /*script.src = "http://dapi.kakao.com/v2/maps/sdk.js?appkey=?appkey=7bf82169a53be4c855eca8f52959e97e&libraries=services,clusterer,drawing?autoload=false";
@@ -20,6 +22,12 @@ document.body.appendChild(script);*/
 // function rotateImage(img) {
     
 // };
+
+matchPopUpBtn.addEventListener("click", function() {
+    matchPopUp.style.display = "none";
+    const mapBox = document.querySelector(".mapBox");
+    mapBox.style.visibility = "visible";
+});
 
 for(let i = 0; i < create_button.length; i++) {
     create_button[i].addEventListener("click", function() {
@@ -324,6 +332,18 @@ document.getElementById("setBtn").addEventListener('click', function(){
         if(txt == "-1") {
             matchFailure.style.display = "flex";
             matchFailure.children[0].children[0].innerHTML = "조건이 맞는 사람이 존재하지 않습니다. 방을 생성하시겠습니까 ? (생성하지 않으셔도 매칭은 계속 진행됩니다.)"
+            const mapBox = document.querySelector(".mapBox");
+            mapBox.style.visibility = "hidden";
+        }
+        else if(txt == "1" ) {
+            matchPopUp.style.display = "flex";
+            matchPopUp.children[0].children[0].innerHTML = "조건 맞는 사람을 찾았습니다."
+            const mapBox = document.querySelector(".mapBox");
+            mapBox.style.visibility = "hidden";
+        }
+        else if(txt == "2") {
+            matchPopUp.style.display = "flex";
+            matchPopUp.children[0].children[0].innerHTML = "이미 해당 날짜에 사용자가 존재합니다."
             const mapBox = document.querySelector(".mapBox");
             mapBox.style.visibility = "hidden";
         }
