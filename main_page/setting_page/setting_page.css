@@ -171,8 +171,32 @@ hr {
   align-items: center;
   margin-top: 0.1rem;
   margin-bottom: 1rem;
+  
 }
 
 label {
   margin-right: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
+.message textarea {
+  width: 150px;
+  height: 30px;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  resize: none;
+}
+
+.message label::after {
+  content: " *";
+  color: red;
+}
+
+.message label {
+  font-size: 16px;
+}
+.message label[for="message"] {
+  font-size: 16px;
+}
+
