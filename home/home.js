@@ -2,6 +2,7 @@ let pg_v = document.querySelector(".pg_v");
 let pg = document.querySelector(".innerCircle");
 let c = 0;
 const drawer = document.querySelector(".drawer");
+const reviewBtn = document.querySelector("#reviewBtn");
 let c1 = -10; // 온도 그라데이션 표현을 위한것
 // let degree = 300; // 이 값 수정하면 온도 바뀜 0~360
 
@@ -43,6 +44,10 @@ function animation() {
   }, 1);
 }
 
+reviewBtn.addEventListener("click", function() {
+  drawer.classList.remove("drawer_open");
+  drawer.classList.add("drawer_close");
+});
 
 //스케쥴 코멘트
 // let scheduleTime = 10; // 팟 시간 변수
@@ -90,7 +95,7 @@ function getSchedule(studentID, password) {
   formDate.append("studentID", studentID);
   formDate.append("password", password);
   const payload = new URLSearchParams(formDate);
-  fetch('../DataBase/myRoom', {
+  fetch('../DataBase/mySchedule', {
       method: 'post',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -110,60 +115,59 @@ function getSchedule(studentID, password) {
         let a = "0" + dateTime.getDate();
         x = x+a;
       }
-      const z = myRoom[0].time.split(":");
-      if(myRoom[0] == "없음" || myRoom[0] == "오류" ) {
+      // const z = myRoom[0].time.split(":");
+      if(myRoom == "없음" || myRoom == "오류" ) {
         document.getElementById("schedule-text").textContent = "일정이 없습니다.";
       }
       else {
         document.getElementById("schedule-text").textContent = 
-        myRoom[0].date + " " + myRoom[0].time + " " + myRoom[0].from + " -> " + myRoom[0].to;
+        myRoom.date + " " + myRoom.time + " " + myRoom.from + " -> " + myRoom.to;
       }
-      if(myRoom[0].date == x && (parseInt(z[0]) < dateTime.getHours()) && drawer.classList.contains("drawer_close")){
-        //12-16 여기부터 작업함
-        drawer.classList.remove("drawer_close");
-        drawer.classList.add("drawer_open");
-        let userData = new FormData();
-        userData.append("userID", studentID);
-        userData.append("date", myRoom[0].date + " " + myRoom[0].time);
+      reviewGUI(studentID, password);
+    });
+}
 
-        fetch('../DataBase/reviewUserName', {
-          method: 'post',
-          body: userData
-        })
-        .then((res)=>res.json())
-        .then((data)=>{
-          //크아아악 눈갱 쓰레기 코드
-          let user1 = document.getElementById("user1");
-          let user2 = document.getElementById("user2");
-          let user3 = document.getElementById("user3");
-          let userNum1 = document.getElementById("user_num1");
-          let userNum2 = document.getElementById("user_num2");
-          let userNum3 = document.getElementById("user_num3");
-
-          let userNames = [user1, user2, user3];
-          let userNums = [userNum1, userNum2, userNum3];
-          let datas = JSON.stringify(data);
-          let dataString = JSON.parse(datas);
-          let Strings = dataString.split(/[:\s]+/);
-
-          for(let i=0; i<Strings.length; i++){ 
-            if(parseInt(Strings[i])==studentID){
-              continue;
-            }else if(i%2==0){
-              userNums[i].innerText=Strings[i];
-            }else{
-              userNames[i].innerText=Strings[i];
-            } 
-          }
-        })
-      }else{
-        console.log(myRoom[0].date);
-        console.log(x);
-        console.log(myRoom[0].date == x);
-        console.log(parseInt(z[1]) < dateTime.getHours());
-        console.error("error: date error");
+function reviewGUI(studentID, password) {
+  if(drawer.classList.contains("drawer_close")){
+    //12-16 여기부터 작업함
+    const formDate = new FormData();
+    formDate.append("studentID", studentID);
+    formDate.append("password", password);
+    const payload = new URLSearchParams(formDate);
+    fetch('../DataBase/review', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: payload
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      const result = JSON.stringify(json);
+      const obj = JSON.parse(result);
+      const roomInformation = obj.room_information;
+      if(roomInformation == "없음") {
+        return;
+      }
+      drawer.classList.remove("drawer_close");
+      drawer.classList.add("drawer_open");
+      const members = obj.user_information;
+      const title = document.querySelector("#reviewTitle");
+      title.innerHTML = roomInformation.date + " " + roomInformation.time + " " + roomInformation.from + " -> " + roomInformation.to;
+      const docUserArray = document.getElementsByClassName("drawer_lines");
+      for(let i = 0; i < members.length; i++) {
+        const member = members[i];
+        const docUser = docUserArray[i];
+        docUser.style.display = "flex";
+        const userName = docUser.children[0];
+        const studentID = docUser.children[1];
+        userName.innerHTML = member.name;
+        studentID.innerHTML = member.studentID;
       }
     });
+  }
 }
 
 /*function openDrawer() {
