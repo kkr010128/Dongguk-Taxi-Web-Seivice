@@ -22,11 +22,18 @@ socket.addEventListener("message", (event) => {
         document.querySelector(".chat").scrollTo(0, document.querySelector(".chat").scrollHeight);
     }
 });
+	
+let screenHeight = window.innerHeight;
+let halfHeight = screenHeight / 2;
+window.addEventListener("resize", () => {
+    screenHeight = window.innerHeight;
+    halfHeight = screenHeight / 2;
+  });
 
 chatWrap.addEventListener("scroll", function(e) {
     const locationY = document.querySelector(".chat").scrollTop;
     const message = document.querySelector("#message");
-    message.value =  document.querySelector(".chat").scrollHeight + ", " + locationY;
+    message.value =  document.querySelector(".chat").scrollHeight + ", " + locationY + ", " + screenHeight + ", " + halfHeight;
 });
 
 previousMessage.addEventListener("click", function() {
