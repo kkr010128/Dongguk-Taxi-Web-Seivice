@@ -1,7 +1,6 @@
 let pg_v = document.querySelector(".pg_v");
 let pg = document.querySelector(".innerCircle");
 let c = 0;
-const drawer = document.querySelector(".drawer");
 let c1 = -10; // 온도 그라데이션 표현을 위한것
 // let degree = 300; // 이 값 수정하면 온도 바뀜 0~360
 
@@ -118,50 +117,14 @@ function getSchedule(studentID, password) {
         document.getElementById("schedule-text").textContent = 
         myRoom[0].date + " " + myRoom[0].time + " " + myRoom[0].from + " -> " + myRoom[0].to;
       }
-      if(myRoom[0].date == x && (parseInt(z[0]) < dateTime.getHours()) && drawer.classList.contains("drawer_close")){
-        //12-16 여기부터 작업함
-        drawer.classList.remove("drawer_close");
-        drawer.classList.add("drawer_open");
-        let userData = new FormData();
-        userData.append("userID", studentID);
-        userData.append("date", myRoom[0].date + " " + myRoom[0].time);
-
-        fetch('../DataBase/reviewUserName', {
-          method: 'post',
-          body: userData
-        })
-        .then((res)=>res.json())
-        .then((data)=>{
-          //크아아악 눈갱 쓰레기 코드
-          let user1 = document.getElementById("user1");
-          let user2 = document.getElementById("user2");
-          let user3 = document.getElementById("user3");
-          let userNum1 = document.getElementById("user_num1");
-          let userNum2 = document.getElementById("user_num2");
-          let userNum3 = document.getElementById("user_num3");
-
-          let userNames = [user1, user2, user3];
-          let userNums = [userNum1, userNum2, userNum3];
-          let datas = JSON.stringify(data);
-          let dataString = JSON.parse(datas);
-          let Strings = dataString.split(/[:\s]+/);
-
-          for(let i=0; i<Strings.length; i++){ 
-            if(parseInt(Strings[i])==studentID){
-              continue;
-            }else if(i%2==0){
-              userNums[i].innerText=Strings[i];
-            }else{
-              userNames[i].innerText=Strings[i];
-            } 
-          }
-        })
+      if(myRoom[0].date == x && (parseInt(z[0]) < dateTime.getHours())){
+        console.log("create review ok");
+        //window.location.href = "../temperature/temper.html";
       }else{
         console.log(myRoom[0].date);
         console.log(x);
         console.log(myRoom[0].date == x);
         console.log(parseInt(z[1]) < dateTime.getHours());
-        console.error("error: date error");
       }
     });
 }
@@ -173,58 +136,3 @@ function getSchedule(studentID, password) {
 function open_log() {
   window.location.href = "use_log/use_log.html"; // 이용내역 페이지로 이동
 }
-
-
-document.querySelector("#reviewBtn").addEventListener("click", function(){
-  var review = new FormData();
-  var radios = document.getElementsByName("stars");
-  var userNum1 = document.getElementById("user_num1").innerText;
-  var userNum2 = document.getElementById("user_num2").innerText;
-  var userNum3 = document.getElementById("user_num3").innerText;
-  var checkArr = [null, null, null];
-  for (var i = 0; i < radios.length; i++) {
-    if (radios[i].checked) {
-      let x="";
-      if(i<5){
-        x = "user1";
-        checkArr[0] = true;
-      }else if(i>=5 && i<10){
-        x = "user2";
-        checkArr[1] = true;
-      }else if(i>=10 && i<15){
-        x = "user3";
-        checkArr[2] = true;
-      }
-      switch(i%5){
-        case 0:
-          review.append(x, -2.5);
-          break;
-        case 1:
-          review.append(x, -1.0);
-          break;
-        case 2:
-          review.append(x, 0);
-          break;
-        case 3:
-          review.append(x, 1.0);
-          break;
-        case 4:
-          review.append(x, 2.5);
-          break;
-      }
-    }
-  }
-  fetch('../DataBase/uploadReview',{
-    method: 'post',
-    body: review
-  })
-  .then((res)=>res.json())
-  .then((data)=>{
-
-  })
-
-  if(drawer.classList.contains("drawer_open")){
-    drawer.classList.remove("drawer_open");
-    drawer.classList.add("drawer_close");
-  }
-});
