@@ -4,22 +4,35 @@ const login_form = document.querySelector("#login_form");
 
 /**html 로드 시 쿠키 남아있으면 자동 로그인 이벤트 - 미구현 */
 document.addEventListener("DOMContentLoaded", function(){
-    /*if(document.cookie){ //이거 어케 구현하노 ㅋㅋ
-
-    }*/
-
+    const cookie = document.cookie;
+    if(cookie != "") {
+        const cookieSplit = cookie.split("=");
+        login(cookieSplit[0], cookieSplit[1]);
+    }
 });
 
 
 login_form.addEventListener("submit", function(e) {
     e.preventDefault();
     const formData = new FormData(login_form);
-    let userId = formData.get("userId");
+    const userId = formData.get("userId");
+    const password = formData.get("password");
     if(!Number.isInteger(parseInt(userId))) {
         popup.children[1].innerHTML = "아이디는 본인 학번을 입력해주세요."
         popup.classList.add('login_open_popup');
         return; 
     }
+    login(userId, password);
+});
+
+confirmBtn.addEventListener('click', function() {
+    popup.classList.remove('login_open_popup');
+});
+
+function login(studentID, password) {
+    const formData = new FormData();
+    formData.append("userId", studentID);
+    formData.append("password", password);
     const payload = new URLSearchParams(formData);
     fetch('../../../DataBase/login', {
         method: 'POST',
@@ -39,22 +52,16 @@ login_form.addEventListener("submit", function(e) {
             popup.classList.add('login_open_popup');
         }
         else { 
-            location.href = "../home/home.html";
             const userDate = obj.result.success;
+            location.href = "../home/home.html";
             sessionStorage.setItem(userDate.studentID, userDate.password);
-            webViewCallBack();
-            if(isChecked()==true){
-                setCookie(userDate.studentID, userDate.password, 7);
+            if(isChecked()){
+                setCookie(userDate.studentID, userDate.password);
             }
+            // webViewCallBack();
         }
     });
-
-	
-});
-
-confirmBtn.addEventListener('click', function() {
-    popup.classList.remove('login_open_popup');
-});
+}
 
 /**회원가입 페이지로 이동시키는 함수*/
 function gotoSignUp(){
@@ -107,12 +114,14 @@ function isChecked(){
 
 
 /**쿠키값을 세팅*/
-function setCookie (cookieName, cookieValue, expiresHour) {
+function setCookie (cookieName, cookieValue) {
     const expired = new Date();
-    const encodedCookieName = encodeURIComponent(cookieName);
-    const encodedCookieValue = encodeURIComponent(cookieValue);
-    expired.setTime(expired.getTime() + expiresHour * 24 * 60 * 60 * 1000); 
-    document.cookie = `${encodedCookieName}=${encodedCookieValue}; path=/; expires=${expired};`;
+    expired.setFullYear(expired.getFullYear() + 1);
+    let cookie = "";
+    cookie += cookieName + "=";
+    cookie += cookieValue + ";";
+    cookie += "Expires=" + expired.toUTCString();
+    document.cookie = cookie
     //httpOnly 옵션 추가해야 댐 (서버)
 }
 
@@ -130,7 +139,7 @@ function getCookie (cookieName){
             return c.substring(name.length, c.length);
         }
     }
-    return "";
+    return null;
 }
 
 /**쿠키 삭제 - 로그아웃 시*/
