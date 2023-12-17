@@ -3,7 +3,6 @@ const sendBtn = document.querySelector("#send_message");
 const previousMessage = document.querySelector(".previous_message");
 const chattingList = new ArrayList(10);
 const socket = new WebSocket("ws://택시.com:80/DataBase/WebSocket?studentID=" + sessionStorage.key(0) + "&password=" + sessionStorage.getItem(sessionStorage.key(0)));
-const chatWrap = document.querySelector(".chat");
 
 socket.addEventListener("open", (event) => {
 });
@@ -13,29 +12,15 @@ socket.addEventListener("message", (event) => {
     chattingList.addI(0, obj.chat_information[0]);
     const list = new ArrayList(1);
     list.add(obj.chat_information[0]);
-    const maxY = document.querySelector(".chat").scrollHeight-582;
+    const chatWrap = document.querySelector(".chat");
+    const maxY = chatWrap.scrollHeight - (chatWrap.clientHeight+1);
     const message = document.querySelector("#message");
     createChatGUI(list);
-    const locationY = document.querySelector(".chat").scrollTop;
-    message.value =  document.querySelector(".chat").scrollHeight + ", " + maxY + ", " + locationY + ", " + document.querySelector(".chat").scrollTop;
+    const locationY = chatWrap.scrollTop;
+    message.value =  chatWrap.scrollHeight + ", " + maxY + ", " + locationY
     if(locationY >= maxY) {
-        document.querySelector(".chat").scrollTo(0, document.querySelector(".chat").scrollHeight);
+        chatWrap.scrollTo(0, chatWrap.scrollHeight);
     }
-});
-	
-let screenHeight = window.innerHeight;
-let halfHeight = screenHeight / 2;
-let resizeY = 0;
-window.addEventListener("resize", () => {
-    screenHeight = window.innerHeight;
-    halfHeight = screenHeight / 2;
-    resizeY = document.querySelector(".chat").scrollTop;
-  });
-
-chatWrap.addEventListener("scroll", function(e) {
-    const locationY = document.querySelector(".chat").scrollTop;
-    const message = document.querySelector("#message");
-    message.value =  document.querySelector(".chat").scrollHeight + ", " + locationY + ", " + resizeY;
 });
 
 previousMessage.addEventListener("click", function() {
