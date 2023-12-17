@@ -14,11 +14,9 @@ socket.addEventListener("message", (event) => {
     list.add(obj.chat_information[0]);
     const chatWrap = document.querySelector(".chat");
     const maxY = chatWrap.scrollHeight - (chatWrap.clientHeight+1);
-    const message = document.querySelector("#message");
     createChatGUI(list);
     const locationY = chatWrap.scrollTop;
-    message.value =  chatWrap.scrollHeight + ", " + maxY + ", " + locationY
-    if(locationY >= maxY) {
+    if(locationY >= maxY) { //나중에 resize 이벤트가 발생했을때 마지막에 스크롤이였음 그것도 마지막 스크롤로 이동하게
         chatWrap.scrollTo(0, chatWrap.scrollHeight);
     }
 });
