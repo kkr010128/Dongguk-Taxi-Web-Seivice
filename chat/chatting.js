@@ -26,7 +26,7 @@ socket.addEventListener("message", (event) => {
 chatWrap.addEventListener("scroll", function(e) {
     const locationY = document.querySelector(".chat").scrollTop;
     const message = document.querySelector("#message");
-    message.value =  document.querySelector(".chat").scrollHeight + ", " + maxY + ", " + locationY;
+    message.value =  document.querySelector(".chat").scrollHeight + ", " + locationY;
 });
 
 previousMessage.addEventListener("click", function() {
