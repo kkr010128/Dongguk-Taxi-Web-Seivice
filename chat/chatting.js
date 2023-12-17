@@ -25,15 +25,17 @@ socket.addEventListener("message", (event) => {
 	
 let screenHeight = window.innerHeight;
 let halfHeight = screenHeight / 2;
+let resizeY = 0;
 window.addEventListener("resize", () => {
     screenHeight = window.innerHeight;
     halfHeight = screenHeight / 2;
+    resizeY = document.querySelector(".chat").scrollTop;
   });
 
 chatWrap.addEventListener("scroll", function(e) {
     const locationY = document.querySelector(".chat").scrollTop;
     const message = document.querySelector("#message");
-    message.value =  document.querySelector(".chat").scrollHeight + ", " + locationY + ", " + screenHeight + ", " + halfHeight;
+    message.value =  document.querySelector(".chat").scrollHeight + ", " + locationY + ", " + resizeY;
 });
 
 previousMessage.addEventListener("click", function() {
