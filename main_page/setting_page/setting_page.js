@@ -213,6 +213,18 @@ window.onload = function() {
       }
   });
 }
+function logOut() {
+  const expired = new Date();
+  expired.setDate(expired.getDate() - 1);
+  let cookie = "";
+  cookie += sessionStorage.key(0) + "=";
+  cookie += sessionStorage.getItem(sessionStorage.key(0)) + ";";
+  cookie += "path=/;"
+  cookie += "Expires=" + expired.toUTCString();
+  document.cookie = cookie
+  sessionStorage.clear();
+  location.href = "/index.html"
+}
 
 // const homeBar = document.querySelector(".home");
 // homeBar.addEventListener("click", function() {
