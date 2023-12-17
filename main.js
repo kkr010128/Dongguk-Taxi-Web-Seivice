@@ -58,7 +58,7 @@ function login(studentID, password) {
             if(isChecked()){
                 setCookie(userDate.studentID, userDate.password);
             }
-            // webViewCallBack();
+            webViewCallBack();
         }
     });
 }
