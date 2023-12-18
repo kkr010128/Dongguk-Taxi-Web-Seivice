@@ -6,7 +6,6 @@
 
 body {
   font-family: Arial, sans-serif;
-  overflow: hidden;
   margin: 0; /* body의 기본 마진 제거 */
 }
 
