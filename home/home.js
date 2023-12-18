@@ -6,6 +6,8 @@ const reviewBtn = document.querySelector("#reviewBtn");
 let c1 = -10; // 온도 그라데이션 표현을 위한것
 // let degree = 300; // 이 값 수정하면 온도 바뀜 0~360
 
+let reviewRoomNum;
+
 // 30~40 사이 값으로 변환해서 저장. toFixed(1)은 소수점 1자리까지
 // let temper = (30 + (degree / 360) * 10).toFixed(1);
 let temper;
@@ -43,11 +45,6 @@ function animation() {
     }
   }, 1);
 }
-
-reviewBtn.addEventListener("click", function() {
-  drawer.classList.remove("drawer_open");
-  drawer.classList.add("drawer_close");
-});
 
 //스케쥴 코멘트
 // let scheduleTime = 10; // 팟 시간 변수
@@ -128,46 +125,44 @@ function getSchedule(studentID, password) {
 }
 
 function reviewGUI(studentID, password) {
-  if(drawer.classList.contains("drawer_close")){
-    //12-16 여기부터 작업함
-    const formDate = new FormData();
-    formDate.append("studentID", studentID);
-    formDate.append("password", password);
-    const payload = new URLSearchParams(formDate);
-    fetch('../DataBase/review', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: payload
-    })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(json) {
-      const result = JSON.stringify(json);
-      const obj = JSON.parse(result);
-      const roomInformation = obj.room_information;
-      if(roomInformation == "없음") {
-        return;
-      }
-      drawer.classList.remove("drawer_close");
-      drawer.classList.add("drawer_open");
-      const members = obj.user_information;
-      const title = document.querySelector("#reviewTitle");
-      title.innerHTML = roomInformation.date + " " + roomInformation.time + " " + roomInformation.from + " -> " + roomInformation.to;
-      const docUserArray = document.getElementsByClassName("drawer_lines");
-      for(let i = 0; i < members.length; i++) {
-        const member = members[i];
-        const docUser = docUserArray[i];
-        docUser.style.display = "flex";
-        const userName = docUser.children[0];
-        const studentID = docUser.children[1];
-        userName.innerHTML = member.name;
-        studentID.innerHTML = member.studentID;
-      }
-    });
-  }
+  const formDate = new FormData();
+  formDate.append("studentID", studentID);
+  formDate.append("password", password);
+  const payload = new URLSearchParams(formDate);
+  fetch('../DataBase/review', {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: payload
+  })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
+    const result = JSON.stringify(json);
+    const obj = JSON.parse(result);
+    const roomInformation = obj.room_information;
+    if(roomInformation == "없음") {
+      return;
+    }
+    reviewRoomNum = roomInformation.number;
+    drawer.classList.remove("drawer_close");
+    drawer.classList.add("drawer_open");
+    const members = obj.user_information;
+    const title = document.querySelector("#reviewTitle");
+    title.innerHTML = roomInformation.date + " " + roomInformation.time + " " + roomInformation.from + " -> " + roomInformation.to;
+    const docUserArray = document.getElementsByClassName("drawer_lines");
+    for(let i = 0; i < members.length; i++) {
+      const member = members[i];
+      const docUser = docUserArray[i];
+      docUser.style.display = "flex";
+      const userName = docUser.children[0];
+      const studentID = docUser.children[1];
+      userName.innerHTML = member.name;
+      studentID.innerHTML = member.studentID;
+    }
+  });
 }
 
 /*function openDrawer() {
@@ -179,56 +174,39 @@ function open_log() {
 }
 
 
-document.querySelector("#reviewBtn").addEventListener("click", function(){
-  var review = new FormData();
-  var radios = document.getElementsByName("stars");
-  var userNum1 = document.getElementById("user_num1").innerText;
-  var userNum2 = document.getElementById("user_num2").innerText;
-  var userNum3 = document.getElementById("user_num3").innerText;
-  var checkArr = [null, null, null];
-  for (var i = 0; i < radios.length; i++) {
-    if (radios[i].checked) {
-      let x="";
-      if(i<5){
-        x = "user1";
-        checkArr[0] = true;
-      }else if(i>=5 && i<10){
-        x = "user2";
-        checkArr[1] = true;
-      }else if(i>=10 && i<15){
-        x = "user3";
-        checkArr[2] = true;
+reviewBtn.addEventListener("click", function(){
+  var formData = new FormData();
+  const docUserArray = document.getElementsByClassName("drawer_lines");
+  const members = new Array(3);
+  const sender = sessionStorage.key(0);
+  const password = sessionStorage.getItem(sender);
+  formData.append("sender", sender);
+  formData.append("password", password);
+  formData.append("roomNumber" , reviewRoomNum);
+  const stars = document.getElementsByName("stars");
+  for(let i = 0; i < docUserArray.length; i++) {
+    const docUser = docUserArray[i];
+    if(docUser.style.display == "flex") {
+      const studentID = docUser.children[1].innerHTML;
+      const starScore = [-2.5, -1, 0, 1, 2.5];
+      let count = 0;
+      for(let j = i * 5; j < (i+1)*5; j++) {
+        if(stars[j].checked) {
+          count = j%5;
+        }
       }
-      switch(i%5){
-        case 0:
-          review.append(x, -2.5);
-          break;
-        case 1:
-          review.append(x, -1.0);
-          break;
-        case 2:
-          review.append(x, 0);
-          break;
-        case 3:
-          review.append(x, 1.0);
-          break;
-        case 4:
-          review.append(x, 2.5);
-          break;
-      }
+      formData.append(studentID, starScore[count]);
     }
   }
-  fetch('../DataBase/uploadReview',{
+  const payload = new URLSearchParams(formData);
+  fetch('../DataBase/sendReview', {
     method: 'post',
-    body: review
-  })
-  .then((res)=>res.json())
-  .then((data)=>{
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: payload
+  });
 
-  })
-
-  if(drawer.classList.contains("drawer_open")){
-    drawer.classList.remove("drawer_open");
-    drawer.classList.add("drawer_close");
-  }
+  drawer.classList.remove("drawer_open");
+  drawer.classList.add("drawer_close");
 });
