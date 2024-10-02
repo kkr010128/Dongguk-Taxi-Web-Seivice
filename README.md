@@ -1,5 +1,4 @@
-kkr010128@icloud.com
-![제작기]([https://github.com/user-attachments/assets/1915139e-6964-4b27-b1c6-a004e51bf0a3](https://kkr010128.vercel.app/cornerstone1))
+![제작기 하이퍼링크]([https://github.com/user-attachments/assets/1915139e-6964-4b27-b1c6-a004e51bf0a3](https://kkr010128.vercel.app/cornerstone1))
 
 ![슬라이드1](https://github.com/user-attachments/assets/1915139e-6964-4b27-b1c6-a004e51bf0a3)
 ![슬라이드2](https://github.com/user-attachments/assets/23925532-6044-45f9-89e0-a05289af8dbd)
