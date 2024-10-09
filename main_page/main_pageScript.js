@@ -178,7 +178,7 @@ function setMarkers(values, which){
         let header = {
             method: "GET",
             headers: {
-                Authorization: "KakaoAK a6f9e20a12bfdba4e1ef0fc22d616bcc"
+                Authorization: "KakaoAK ${API_KEY}"
             },
         };
         //Ajax 호출
